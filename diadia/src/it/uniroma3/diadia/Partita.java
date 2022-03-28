@@ -1,6 +1,5 @@
 package it.uniroma3.diadia;
 
-
 /**
  * Questa classe modella una partita del gioco
  *
@@ -10,18 +9,15 @@ package it.uniroma3.diadia;
  */
 
 public class Partita {
-
-	static final private int CFU_INIZIALI = 20;
-
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
 	private boolean finita;
-	private int cfu;
+	private Giocatore giocatore;
 	
 	public Partita(){
+		this.giocatore = new Giocatore("Player 1");   //TODO inserire nome da tastiera
 		creaStanze();
 		this.finita = false;
-		this.cfu = CFU_INIZIALI;
 	}
 
     /**
@@ -88,7 +84,7 @@ public class Partita {
 	 * @return vero se partita finita
 	 */
 	public boolean isFinita() {
-		return finita || vinta() || (cfu == 0);
+		return finita || vinta() || (this.giocatore.getCfu() == 0);
 	}
 
 	/**
@@ -98,12 +94,18 @@ public class Partita {
 	public void setFinita() {
 		this.finita = true;
 	}
-
+	
+	/*
+	 * Questi metodi sono necessari se si vuole accedere ai cfu da un oggetto
+	 * istanza partita, rispettando lo scope di giocatore
+	 */
 	public int getCfu() {
-		return this.cfu;
+		return this.giocatore.getCfu();
 	}
 
 	public void setCfu(int cfu) {
-		this.cfu = cfu;		
+		this.giocatore.setCfu(cfu);		
 	}	
+
+
 }
