@@ -7,6 +7,8 @@ import org.junit.Test;
 
 public class StanzaTest {
 	
+	final private String arrayNull[] = null;
+	
 	/*stanze per il test dei metodi riguardanti l'adiacenza*/
 	private Stanza noAdiacenti;
 	private Stanza tutteAdiacenti;
@@ -47,6 +49,10 @@ public class StanzaTest {
 	@Test
 	public void testGetStanzaNoAdiacentiNord() {
 		assertEquals("La stanza ha delle stanze adiacenti", null, noAdiacenti.getStanzaAdiacente("nord"));
+		assertEquals("La stanza ha delle stanze adiacenti", null, noAdiacenti.getStanzaAdiacente("sud"));
+		assertEquals("La stanza ha delle stanze adiacenti", null, noAdiacenti.getStanzaAdiacente("ovest"));
+		assertEquals("La stanza ha delle stanze adiacenti", null, noAdiacenti.getStanzaAdiacente("est"));
+
 	}
 	
 	/* Test di aggiunta di una nuova stanza adiacente su una stanza con già 4 stanze
@@ -97,7 +103,7 @@ public class StanzaTest {
 		assertEquals("La stanza contiene un attrezzo",false, noAttrezzi.hasAttrezzo("Attrezzo1"));
 	}
 	
-	/*Testo se nella stanza "tutteAdiacenti" che attualmente ha 10 attrezzi
+	/*Testo se nella stanza "tuttiAttrezzi" che attualmente ha 10 attrezzi
 	 * il metodo hasAttrezzo("Attrezzo11") ritorna true anche se il limite di 
 	 * attrezzi presenti in una stanza è 10
 	 */
@@ -108,18 +114,30 @@ public class StanzaTest {
 		assertEquals(false, tuttiAttrezzi.hasAttrezzo("Attrezzo11"));
 	}
 	
-	/*Testo se nella stanza "noAttrezzi" il valore ritornato di getAttrezzo()
-	 * sia null
+	/*
+	 * Testo se nella stanza "tuttiAttrezzi" il metodo getAttrezzo ritorna
+	 * l'attrezzo cercato
+	 */
+	public void testGetAttrezzo1() {
+		assertEquals(Attrezzo1, tuttiAttrezzi.getAttrezzo("Attrezzo1"));
+	}
+	
+	/*
+	 * Testo se nella stanza "noAttrezzi" il metodo getAttrezzo ritorna
+	 * null
+	 */
+	public void testGetAttrezzoNellaStanzaVuota() {
+		assertEquals(null, noAttrezzi.getAttrezzo("Attrezzo1"));
+	}
+	
+	/*
+	 * Testo se nella stanza "noAdiacenti" il metodo getDirezioni
+	 * ritorna un array di null
 	 */
 	@Test
-	public void testGetAttrezzo() {
-		assertEquals("C'è un attrezzo nella stanza",null, noAttrezzi.getAttrezzo("Attrezzo1"));
-	}
-	/*
-	@Test
 	public void testGetDirezioni() {
-		fail("Not yet implemented");
-	}*/
+		//da sistemare qua
+		assertArrayEquals(arrayNull, noAdiacenti.getDirezioni());
+	}
 	
-
 }
