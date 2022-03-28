@@ -45,7 +45,7 @@ public class StanzaTest {
 	}
 	/* Test su una stanza senza stanze adiacenti*/
 	@Test
-	public void testGetStanzaNoAdiacenti() {
+	public void testGetStanzaNoAdiacentiNord() {
 		assertEquals("La stanza ha delle stanze adiacenti", null, noAdiacenti.getStanzaAdiacente("nord"));
 	}
 	
@@ -93,7 +93,7 @@ public class StanzaTest {
 	 * hasAttrezzo("Attrezzo1") ritorna false
 	 */
 	@Test
-	public void testHasAttrezzoNellaStanzaNoAdiacenti() {
+	public void testHasAttrezzoNellaStanzaNoAttrezzi() {
 		assertEquals("La stanza contiene un attrezzo",false, noAttrezzi.hasAttrezzo("Attrezzo1"));
 	}
 	
@@ -103,7 +103,7 @@ public class StanzaTest {
 	 */
 
 	@Test
-	public void testHasAttrezzoNellaStanzaTutteAdiacenti() {
+	public void testHasAttrezzoNellaStanzaTuttiAttrezzi() {
 		tuttiAttrezzi.addAttrezzo(Attrezzo11);
 		assertEquals(false, tuttiAttrezzi.hasAttrezzo("Attrezzo11"));
 	}
@@ -115,7 +115,6 @@ public class StanzaTest {
 	public void testGetAttrezzo() {
 		assertEquals("C'è un attrezzo nella stanza",null, noAttrezzi.getAttrezzo("Attrezzo1"));
 	}
-	
 	
 	@Test
 	public void testGetDirezioni() {
