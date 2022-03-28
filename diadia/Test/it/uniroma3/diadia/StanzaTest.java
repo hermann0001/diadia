@@ -7,18 +7,23 @@ import org.junit.Test;
 
 public class StanzaTest {
 	
-	final private String arrayNull[] = null;
+	final private String direzioniVuoto[] = new String[0];
+	final private String direzioni[] = {"nord", "sud", "est","ovest"};
 	
-	/*stanze per il test dei metodi riguardanti l'adiacenza*/
+	/*
+	 * stanze per il test dei metodi riguardanti l'adiacenza
+	 */
 	private Stanza noAdiacenti;
 	private Stanza tutteAdiacenti;
 	private Stanza stanzaNord;
 	private Stanza stanzaSud;
 	private Stanza stanzaEst;
 	private Stanza stanzaOvest;
-	private Stanza stanza5;
+	private Stanza stanzaOverflow;
 	
-	/*Stanze per il test dei metodi riguardanti gli attrezzi*/
+	/*
+	 * Stanze per il test dei metodi riguardanti gli attrezzi
+	 */
 	private Stanza noAttrezzi;
 	private Stanza tuttiAttrezzi;
 	
@@ -45,7 +50,9 @@ public class StanzaTest {
 		tutteAdiacenti.impostaStanzaAdiacente("est", stanzaEst);
 		tutteAdiacenti.impostaStanzaAdiacente("ovest", stanzaOvest);
 	}
-	/* Test su una stanza senza stanze adiacenti*/
+	/* 
+	 * Test su una stanza senza stanze adiacenti
+	 */
 	@Test
 	public void testGetStanzaNoAdiacentiNord() {
 		assertEquals("La stanza ha delle stanze adiacenti", null, noAdiacenti.getStanzaAdiacente("nord"));
@@ -55,13 +62,14 @@ public class StanzaTest {
 
 	}
 	
-	/* Test di aggiunta di una nuova stanza adiacente su una stanza con già 4 stanze
+	/* 
+	 * Test di aggiunta di una nuova stanza adiacente su una stanza con già 4 stanze
 	 * adiacenti esistenti
 	 */
 	@Test
 	public void testGetStanzaTutteAdiacenti() {
-		tutteAdiacenti.impostaStanzaAdiacente("nord", stanza5);
-		assertEquals(stanza5, tutteAdiacenti.getStanzaAdiacente("nord"));
+		tutteAdiacenti.impostaStanzaAdiacente("nord", stanzaOverflow);
+		assertEquals(stanzaOverflow, tutteAdiacenti.getStanzaAdiacente("nord"));
 	}
 	
 	@Before
@@ -81,7 +89,9 @@ public class StanzaTest {
 		Attrezzo10 = new Attrezzo("Attrezzo10", 10);
 		Attrezzo11 = new Attrezzo("Attrezzo11", 11);
 		
-		/*Nella stanza "tutteAdiacenti" sono presenti 10 attrezzi*/
+		/*
+		 * Nella stanza "tutteAdiacenti" sono presenti 10 attrezzi
+		 */
 		tuttiAttrezzi.addAttrezzo(Attrezzo1);
 		tuttiAttrezzi.addAttrezzo(Attrezzo2);
 		tuttiAttrezzi.addAttrezzo(Attrezzo3);
@@ -95,7 +105,8 @@ public class StanzaTest {
 		
 	}
 	
-	/*Testo se nella stanza "noAttrezzi" che attualmente ha 0 attrezzi il metodo 
+	/*
+	 * Testo se nella stanza "noAttrezzi" che attualmente ha 0 attrezzi il metodo 
 	 * hasAttrezzo("Attrezzo1") ritorna false
 	 */
 	@Test
@@ -103,7 +114,8 @@ public class StanzaTest {
 		assertEquals("La stanza contiene un attrezzo",false, noAttrezzi.hasAttrezzo("Attrezzo1"));
 	}
 	
-	/*Testo se nella stanza "tuttiAttrezzi" che attualmente ha 10 attrezzi
+	/* 
+	 * Testo se nella stanza "tuttiAttrezzi" che attualmente ha 10 attrezzi
 	 * il metodo hasAttrezzo("Attrezzo11") ritorna true anche se il limite di 
 	 * attrezzi presenti in una stanza è 10
 	 */
@@ -131,13 +143,21 @@ public class StanzaTest {
 	}
 	
 	/*
-	 * Testo se nella stanza "noAdiacenti" il metodo getDirezioni
-	 * ritorna un array di null
+	 * Testo se nella stanza "noAdiacenti" il metodo getDirezioni()
+	 * ritorna un array vuoto
 	 */
 	@Test
-	public void testGetDirezioni() {
-		//da sistemare qua
-		assertArrayEquals(arrayNull, noAdiacenti.getDirezioni());
+	public void testGetDirezioniSenzaStanzeAdiacenti() {
+		assertArrayEquals(direzioniVuoto, noAdiacenti.getDirezioni());
+	}
+	
+	/*
+	 * Testo se nella stanza "tutteAdiacenti" il metodo getDirezioni()
+	 * ritorna l'array con le 4 direzioni corrispondenti alle 4 stanze adiacenti
+	 */
+	@Test
+	public void testGetDirezioniCon4StanzeAdiacenti() {
+		assertArrayEquals(direzioni, tutteAdiacenti.getDirezioni());
 	}
 	
 }
