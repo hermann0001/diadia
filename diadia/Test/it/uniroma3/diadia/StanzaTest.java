@@ -115,11 +115,11 @@ public class StanzaTest {
 	public void testGetAttrezzo() {
 		assertEquals("C'è un attrezzo nella stanza",null, noAttrezzi.getAttrezzo("Attrezzo1"));
 	}
-	
+	/*
 	@Test
 	public void testGetDirezioni() {
 		fail("Not yet implemented");
-	}
+	}*/
 	
 
 }
