@@ -1,4 +1,6 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.ambienti;
+
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo. Una stanza e' un luogo
@@ -128,9 +130,13 @@ public class Stanza {
 			if (direzione != null)
 				risultato.append(" " + direzione);
 		risultato.append("\nAttrezzi nella stanza: ");
-		for (int i = 0; i <= this.numeroAttrezzi; i++) {
-			risultato.append(this.attrezzi[i] + " ");
-		}
+
+		if (this.numeroAttrezzi != 0) {
+			for (int i = 0; i < this.numeroAttrezzi; i++) {
+				risultato.append(this.attrezzi[i] + " ");
+			}
+		} else
+			risultato.append("Nessuno");
 		return risultato.toString();
 	}
 
@@ -142,13 +148,13 @@ public class Stanza {
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		boolean trovato;
 		trovato = false;
-		
-		if(this.numeroAttrezzi == 0) return false;
-		
+
+		if (this.numeroAttrezzi == 0)
+			return false;
+
 		for (int i = 0; i < this.numeroAttrezzi; i++) {
 			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
 				trovato = true;
-
 		}
 		return trovato;
 	}
@@ -164,9 +170,9 @@ public class Stanza {
 		attrezzoCercato = null;
 		if (this.numeroAttrezzi == 0)
 			return null;
-		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo.getNome().equals(nomeAttrezzo))
-				attrezzoCercato = attrezzo;
+		for (int i = 0; i < this.numeroAttrezzi; i++) {
+			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
+				attrezzoCercato = this.attrezzi[i];
 		}
 		return attrezzoCercato;
 	}
@@ -178,11 +184,12 @@ public class Stanza {
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
 	public boolean removeAttrezzo(String nomeAttrezzo) {
-		if(this.numeroAttrezzi == 0 || !this.hasAttrezzo(nomeAttrezzo)) return false;
+		if (this.numeroAttrezzi == 0)
+			return false;
 
-		for(int i = 0; i < this.numeroAttrezzi; i++) {
-			if(this.attrezzi[i].getNome().equals(nomeAttrezzo)) {
-				this.attrezzi[i] = this.attrezzi[this.numeroAttrezzi-1];
+		for (int i = 0; i < this.numeroAttrezzi; i++) {
+			if (this.attrezzi[i].getNome().equals(nomeAttrezzo)) {
+				this.attrezzi[i] = this.attrezzi[this.numeroAttrezzi - 1];
 				this.numeroAttrezzi--;
 				return true;
 			}
