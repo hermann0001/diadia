@@ -1,4 +1,4 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.giocatore;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,7 @@ public class GiocatoreTest {
 	private Giocatore giocatore;
 
 	@Before
-	public void setUp(){
+	public void setUp() {
 		giocatore = new Giocatore("Player Test");
 	}
 
