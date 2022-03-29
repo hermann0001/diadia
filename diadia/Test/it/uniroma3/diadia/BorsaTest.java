@@ -27,9 +27,9 @@ public class BorsaTest {
 	@Before
 	public void setUp() {
 		borsa1 = new Borsa();
-		borsaPiena = new Borsa(); //borsa con 10 attrezzi
+		borsaPiena = new Borsa(); // borsa con 10 attrezzi
 		borsaVuota = new Borsa(); // borsa senza attrezzi
-		borsaPesante = new Borsa(); //borsa con un peso totale di attrezzi pari a 10
+		borsaPesante = new Borsa(); // borsa con un peso totale di attrezzi pari a 10
 
 		attrezzo1 = new Attrezzo("attrezzo1", 1);
 		attrezzo2 = new Attrezzo("attrezzo2", 0);
@@ -42,11 +42,13 @@ public class BorsaTest {
 		attrezzo9 = new Attrezzo("attrezzo9", 1);
 		attrezzo10 = new Attrezzo("attrezzo10", 1);
 		attrezzo11 = new Attrezzo("attrezzo11", 1);
-		
+
 		attrezzoPesante = new Attrezzo("attrezzoPesante", 11);
-		
+
 		borsa1.addAttrezzo(attrezzo1);
-		
+		borsa1.addAttrezzo(attrezzo2);
+		borsa1.addAttrezzo(attrezzo3);
+
 		borsaPiena.addAttrezzo(attrezzo1);
 		borsaPiena.addAttrezzo(attrezzo2);
 		borsaPiena.addAttrezzo(attrezzo3);
@@ -57,17 +59,28 @@ public class BorsaTest {
 		borsaPiena.addAttrezzo(attrezzo8);
 		borsaPiena.addAttrezzo(attrezzo9);
 		borsaPiena.addAttrezzo(attrezzo10);
-	
 	}
 
 	/*
-	 * Testo se il metodo removeAttrezzo() ritorni correttamente l'attrezzo che si
+	 * Testo se il metodo removeAttrezzo() ,sull'oggetto "borsa1" che attualmente ha
+	 * un 3 attrezzi (attrezzo 1/2/3), ritorni correttamente l'attrezzo che si
 	 * voleva rimuovere
 	 */
 	@Test
-	public void testOutputRemoveAttrezzo() {
+	public void testOutputRemoveAttrezzo1() {
 		assertEquals(attrezzo1, borsa1.removeAttrezzo("attrezzo1"));
 	}
+
+	@Test
+	public void testOutputRemoveAttrezzo2() {
+		assertEquals(attrezzo2, borsa1.removeAttrezzo("attrezzo2"));
+	}
+
+	@Test
+	public void testOutputRemoveAttrezzo3() {
+		assertEquals(attrezzo3, borsa1.removeAttrezzo("attrezzo3"));
+	}
+
 	/*
 	 * Testo se l'attrezzo appena rimosso sia correttamente cancellato anche
 	 * dall'array di attrezzi
@@ -86,16 +99,16 @@ public class BorsaTest {
 	public void testRemoveAttrezzoBorsaVuota() {
 		assertNull(borsaVuota.removeAttrezzo("attrezzo1"));
 	}
-	
+
 	/*
-	 * Testo se addAttrezzo non mi faccia aggiungere un attrezzo in più 
-	 * rispetto al limite totale di 10 attrezzi
+	 * Testo se addAttrezzo non mi faccia aggiungere un attrezzo in più rispetto al
+	 * limite totale di 10 attrezzi
 	 */
 	@Test
 	public void testAddAttrezzoSuNumeroMaxAttrezzi() {
 		assertFalse(borsaPiena.addAttrezzo(attrezzo11));
 	}
-	
+
 	/*
 	 * Testo se all'aggiunta di un oggetto con peso maggiore del peso max = 10
 	 * ricevo false
@@ -104,12 +117,12 @@ public class BorsaTest {
 	public void testAddAttrezzoSuMaxPeso() {
 		assertFalse(borsaPesante.addAttrezzo(attrezzoPesante));
 	}
-	
+
 	@Test
 	public void testGetPesoBorsaVuota() {
 		assertEquals(0, borsaVuota.getPeso());
 	}
-	
+
 	@Test
 	public void testGetPesoBorsaPiena() {
 		assertEquals(9, borsaPiena.getPeso());
