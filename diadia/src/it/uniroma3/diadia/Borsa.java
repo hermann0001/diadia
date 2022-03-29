@@ -1,4 +1,15 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.giocatore;
+
+import it.uniroma3.diadia.attrezzi.Attrezzo;
+
+/**
+ * Questa classe modella una borsa contente gli attrezzi del gioco
+ *
+ * @author docente di POO
+ * @author Hermann Tamilia
+ * @see Attrezzo
+ * @version base
+ */
 
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
@@ -16,6 +27,12 @@ public class Borsa {
 		this.numeroAttrezzi = 0;
 	}
 
+	/**
+	 * Aggiunge un attrezzo alla borsa
+	 * 
+	 * @param attrezzo
+	 * @return boolean
+	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 			return false;
@@ -26,20 +43,35 @@ public class Borsa {
 		return true;
 	}
 
+	/**
+	 * Restituisce il peso massimo della borsa
+	 * 
+	 * @return int
+	 */
 	public int getPesoMax() {
-		return pesoMax;
+		return this.pesoMax;
 	}
 
+	/**
+	 * Restituisce un attrezzo nella borsa
+	 * 
+	 * @param nomeAttrezzo
+	 * @return attrezzo
+	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = null;
 		for (int i = 0; i < this.numeroAttrezzi; i++) {
 			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
-				a = attrezzi[i];
+				a = this.attrezzi[i];
 		}
-
 		return a;
 	}
 
+	/**
+	 * Restituisce il peso attuale della borsa
+	 * 
+	 * @return int
+	 */
 	public int getPeso() {
 		int peso = 0;
 		for (int i = 0; i < this.numeroAttrezzi; i++)
@@ -47,14 +79,31 @@ public class Borsa {
 		return peso;
 	}
 
+	/**
+	 * Restituisce true se la borsa ha 0 attrezzi cioè è vuota, altrimenti false
+	 * 
+	 * @return boolean
+	 */
 	public boolean isEmpty() {
 		return this.numeroAttrezzi == 0;
 	}
 
+	/**
+	 * Ritorna true se nomeAttrezzo è contenuto nella borsa, false altrimenti
+	 * 
+	 * @param nomeAttrezzo
+	 * @return boolean
+	 */
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		return this.getAttrezzo(nomeAttrezzo) != null;
 	}
 
+	/**
+	 * Rimuove un attrezzo dalla borsa
+	 * 
+	 * @param nomeAttrezzo
+	 * @return attrezzo
+	 */
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = this.getAttrezzo(nomeAttrezzo);
 		if (a == null || this.numeroAttrezzi == 0)
