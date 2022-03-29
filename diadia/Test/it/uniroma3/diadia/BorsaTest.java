@@ -1,9 +1,11 @@
-package it.uniroma3.diadia;
+package it.uniroma3.diadia.giocatore;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class BorsaTest {
 
