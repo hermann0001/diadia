@@ -5,50 +5,64 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.ambienti.Stanza;
+
 public class PartitaTest {
 
+	private Partita partita;
+	private Stanza stanzaCorrente;
+	private Stanza stanzaVincente;
+
 	@Before
-	public void setUp(){
+	public void setUp() {
+		this.partita = new Partita();
+		this.stanzaCorrente = new Stanza("stanzaCorrente");
+		this.stanzaVincente = new Stanza("stanzaVincente");
 	}
 
-	@Test
-	public void testGetStanzaVincenteSenzaStanzaVincente() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testGetStanzaVincente() {
-		fail("Not yet implemented");
-	}
+	/* Testo solo i metodi getter, testando cosi implicitamente anche i setter */
 
-	@Test
-	public void testGetStanzaCorrenteSenzaStanze() {
-		fail("Not yet implemented");
-	}
-	
+	/*
+	 * Testo se la stanza corrente ritornata da getStanzaCorrente() sia quella
+	 * appena settata tramite il metodo setStanzaCorrente()
+	 */
 	@Test
 	public void testGetStanzaCorrente() {
-		fail("Not yet implemented");
+		this.partita.setStanzaCorrente(stanzaCorrente);
+		assertEquals(stanzaCorrente, this.partita.getStanzaCorrente());
 	}
 
-	@Test
-	public void testVintaSenzaStanzaVincente() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void testVintaSenzaStanze() {
-		fail("Not yet implemented");
-	}
-
+	/*
+	 * Testo se il metodo vinta() ritorni true al momento in cui la stanza corrente
+	 * coincide con la stanza finale
+	 */
 	@Test
 	public void testVinta() {
-		fail("Not yet implemented");
+		this.partita.setStanzaCorrente(stanzaVincente);
+		this.partita.getLabirinto().setStanzaFinale(stanzaVincente);
+		assertTrue(this.partita.vinta());
 	}
-	
+
+	/*
+	 * Testo se il metodo vinta() ritorni false al momento in cui la stanza corrente
+	 * non coincide con la stanza finale
+	 */
 	@Test
-	public void testIsFinita() {
-		fail("Not yet implemented");
+	public void testPersa() {
+		this.partita.setStanzaCorrente(stanzaCorrente);
+		this.partita.getLabirinto().setStanzaFinale(stanzaVincente);
+		assertFalse(this.partita.vinta());
+	}
+
+	/*
+	 * Testo se il metodo vinta() ritorni false al momento in cui la stanza corrente
+	 * e la stanza finale sono due valori null
+	 */
+	@Test
+	public void testVintaSenzaStanze() {
+		this.partita.setStanzaCorrente(null);
+		this.partita.getLabirinto().setStanzaFinale(null);
+		assertFalse(this.partita.vinta());
 	}
 
 }
