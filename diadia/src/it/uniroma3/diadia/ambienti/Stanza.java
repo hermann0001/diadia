@@ -190,6 +190,7 @@ public class Stanza {
 		for (int i = 0; i < this.numeroAttrezzi; i++) {
 			if (this.attrezzi[i].getNome().equals(nomeAttrezzo)) {
 				this.attrezzi[i] = this.attrezzi[this.numeroAttrezzi - 1];
+				this.attrezzi[this.numeroAttrezzi - 1] = null;
 				this.numeroAttrezzi--;
 				return true;
 			}

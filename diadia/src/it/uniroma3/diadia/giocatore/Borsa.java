@@ -18,7 +18,9 @@ public class Borsa {
 	private int pesoMax;
 
 	public Borsa() {
-		this(DEFAULT_PESO_MAX_BORSA);
+		this.pesoMax = DEFAULT_PESO_MAX_BORSA;
+		this.attrezzi = new Attrezzo[10]; // speriamo che bastino...
+		this.numeroAttrezzi = 0;
 	}
 
 	public Borsa(int pesoMax) {
@@ -112,6 +114,7 @@ public class Borsa {
 		for (int i = 0; i < this.numeroAttrezzi; i++) {
 			if (this.attrezzi[i] == a) {
 				this.attrezzi[i] = this.attrezzi[this.numeroAttrezzi - 1];
+				this.attrezzi[this.numeroAttrezzi - 1] = null;
 				this.numeroAttrezzi--;
 			}
 		}
@@ -123,7 +126,7 @@ public class Borsa {
 		if (!this.isEmpty()) {
 			s.append("Contenuto borsa (" + this.getPeso() + "kg/" + this.getPesoMax() + "kg):");
 			for (int i = 0; i < this.numeroAttrezzi; i++)
-				s.append(attrezzi[i].toString() + " ");
+				s.append(this.attrezzi[i].toString() + " ");
 		} else
 			s.append("Borsa vuota");
 		return s.toString();
