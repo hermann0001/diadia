@@ -26,8 +26,8 @@ public class LabirintoTest {
 	 */
 	@Test
 	public void testGetStanzaFinale() {
-		this.labirintoTest.setStanzaFinale(stanzaFinale);
-		assertEquals(stanzaFinale, this.labirintoTest.getStanzaFinale());
+		this.labirintoTest.setStanzaFinale(this.stanzaFinale);
+		assertEquals(this.stanzaFinale, this.labirintoTest.getStanzaFinale());
 	}
 
 	/*
@@ -36,8 +36,8 @@ public class LabirintoTest {
 	 */
 	@Test
 	public void testGetStanzaIniziale() {
-		this.labirintoTest.setStanzaIniziale(stanzaIniziale);
-		assertEquals(stanzaIniziale, this.labirintoTest.getStanzaIniziale());
+		this.labirintoTest.setStanzaIniziale(this.stanzaIniziale);
+		assertEquals(this.stanzaIniziale, this.labirintoTest.getStanzaIniziale());
 	}
 
 }

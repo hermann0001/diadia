@@ -10,7 +10,7 @@ public class GiocatoreTest {
 
 	@Before
 	public void setUp() {
-		giocatore = new Giocatore("Player Test");
+		this.giocatore = new Giocatore("Player Test");
 	}
 
 	@Test

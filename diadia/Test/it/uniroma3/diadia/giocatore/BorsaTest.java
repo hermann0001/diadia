@@ -9,58 +9,38 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class BorsaTest {
 
+	static final private int NUMERO_MAX_ATTREZZI = 10;
+
 	private Borsa borsa1;
 	private Borsa borsaPiena;
 	private Borsa borsaVuota;
 	private Borsa borsaPesante;
-	private Attrezzo attrezzo1;
-	private Attrezzo attrezzo2;
-	private Attrezzo attrezzo3;
-	private Attrezzo attrezzo4;
-	private Attrezzo attrezzo5;
-	private Attrezzo attrezzo6;
-	private Attrezzo attrezzo7;
-	private Attrezzo attrezzo8;
-	private Attrezzo attrezzo9;
-	private Attrezzo attrezzo10;
-	private Attrezzo attrezzo11;
+	private Attrezzo attrezzi[];
+
+	private Attrezzo attrezzoOverflow;
 	private Attrezzo attrezzoPesante;
 
 	@Before
 	public void setUp() {
-		borsa1 = new Borsa();
-		borsaPiena = new Borsa(); // borsa con 10 attrezzi
-		borsaVuota = new Borsa(); // borsa senza attrezzi
-		borsaPesante = new Borsa(); // borsa con un peso totale di attrezzi pari a 10
+		this.borsa1 = new Borsa();
+		this.borsaPiena = new Borsa(); // borsa con 10 attrezzi
+		this.borsaVuota = new Borsa(); // borsa senza attrezzi
+		this.borsaPesante = new Borsa(); // borsa con un peso totale di attrezzi pari a 10
+		this.attrezzi = new Attrezzo[NUMERO_MAX_ATTREZZI];
 
-		attrezzo1 = new Attrezzo("attrezzo1", 1);
-		attrezzo2 = new Attrezzo("attrezzo2", 0);
-		attrezzo3 = new Attrezzo("attrezzo3", 1);
-		attrezzo4 = new Attrezzo("attrezzo4", 1);
-		attrezzo5 = new Attrezzo("attrezzo5", 1);
-		attrezzo6 = new Attrezzo("attrezzo6", 1);
-		attrezzo7 = new Attrezzo("attrezzo7", 1);
-		attrezzo8 = new Attrezzo("attrezzo8", 1);
-		attrezzo9 = new Attrezzo("attrezzo9", 1);
-		attrezzo10 = new Attrezzo("attrezzo10", 1);
-		attrezzo11 = new Attrezzo("attrezzo11", 1);
+		/* creo 10 attrezzi di peso unitario */
+		for (int i = 0; i < NUMERO_MAX_ATTREZZI; i++)
+			this.attrezzi[i] = new Attrezzo("attrezzo" + i, 1);
 
-		attrezzoPesante = new Attrezzo("attrezzoPesante", 11);
+		this.attrezzoOverflow = new Attrezzo("attrezzo10", 1);
+		this.attrezzoPesante = new Attrezzo("attrezzoPesante", 11);
 
-		borsa1.addAttrezzo(attrezzo1);
-		borsa1.addAttrezzo(attrezzo2);
-		borsa1.addAttrezzo(attrezzo3);
+		this.borsa1.addAttrezzo(this.attrezzi[0]);
+		this.borsa1.addAttrezzo(this.attrezzi[1]);
+		this.borsa1.addAttrezzo(this.attrezzi[2]);
 
-		borsaPiena.addAttrezzo(attrezzo1);
-		borsaPiena.addAttrezzo(attrezzo2);
-		borsaPiena.addAttrezzo(attrezzo3);
-		borsaPiena.addAttrezzo(attrezzo4);
-		borsaPiena.addAttrezzo(attrezzo5);
-		borsaPiena.addAttrezzo(attrezzo6);
-		borsaPiena.addAttrezzo(attrezzo7);
-		borsaPiena.addAttrezzo(attrezzo8);
-		borsaPiena.addAttrezzo(attrezzo9);
-		borsaPiena.addAttrezzo(attrezzo10);
+		for (Attrezzo attrezzo : this.attrezzi)
+			this.borsaPiena.addAttrezzo(attrezzo);
 	}
 
 	/*
@@ -69,18 +49,10 @@ public class BorsaTest {
 	 * voleva rimuovere
 	 */
 	@Test
-	public void testOutputRemoveAttrezzo1() {
-		assertEquals(attrezzo1, borsa1.removeAttrezzo("attrezzo1"));
-	}
-
-	@Test
-	public void testOutputRemoveAttrezzo2() {
-		assertEquals(attrezzo2, borsa1.removeAttrezzo("attrezzo2"));
-	}
-
-	@Test
-	public void testOutputRemoveAttrezzo3() {
-		assertEquals(attrezzo3, borsa1.removeAttrezzo("attrezzo3"));
+	public void testOutputRemoveAttrezziDaBorsa1() {
+		assertEquals(this.attrezzi[0], this.borsa1.removeAttrezzo("attrezzo0"));
+		assertEquals(this.attrezzi[1], this.borsa1.removeAttrezzo("attrezzo1"));
+		assertEquals(this.attrezzi[2], this.borsa1.removeAttrezzo("attrezzo2"));
 	}
 
 	/*
@@ -90,8 +62,8 @@ public class BorsaTest {
 
 	@Test
 	public void testRemoveAttrezzoDaArrayAttrezzi() {
-		borsa1.removeAttrezzo("attrezzo1");
-		assertEquals(false, borsa1.hasAttrezzo("attrezzo1"));
+		this.borsa1.removeAttrezzo("attrezzo0");
+		assertEquals(false, borsa1.hasAttrezzo("attrezzo0"));
 	}
 
 	/*
@@ -99,16 +71,16 @@ public class BorsaTest {
 	 */
 	@Test
 	public void testRemoveAttrezzoBorsaVuota() {
-		assertNull(borsaVuota.removeAttrezzo("attrezzo1"));
+		assertNull(this.borsaVuota.removeAttrezzo("attrezzo0"));
 	}
 
 	/*
-	 * Testo se addAttrezzo non mi faccia aggiungere un attrezzo in più rispetto al
-	 * limite totale di 10 attrezzi
+	 * Testo se addAttrezzo mi impedisca di aggiungere un attrezzo in più rispetto
+	 * al limite totale di 10 attrezzi
 	 */
 	@Test
 	public void testAddAttrezzoSuNumeroMaxAttrezzi() {
-		assertFalse(borsaPiena.addAttrezzo(attrezzo11));
+		assertFalse(this.borsaPiena.addAttrezzo(this.attrezzoOverflow));
 	}
 
 	/*
@@ -117,16 +89,16 @@ public class BorsaTest {
 	 */
 	@Test
 	public void testAddAttrezzoSuMaxPeso() {
-		assertFalse(borsaPesante.addAttrezzo(attrezzoPesante));
+		assertFalse(this.borsaPesante.addAttrezzo(this.attrezzoPesante));
 	}
 
 	@Test
 	public void testGetPesoBorsaVuota() {
-		assertEquals(0, borsaVuota.getPeso());
+		assertEquals(0, this.borsaVuota.getPeso());
 	}
 
 	@Test
 	public void testGetPesoBorsaPiena() {
-		assertEquals(9, borsaPiena.getPeso());
+		assertEquals(10, this.borsaPiena.getPeso());
 	}
 }
