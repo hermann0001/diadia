@@ -127,7 +127,7 @@ public class DiaDia {
 		stanzaCorrente.removeAttrezzo(nomeAttrezzo);
 		if (borsa.addAttrezzo(a) == false)
 			return false;
-		
+
 		this.io.mostraMessaggio("Oggetto preso!");
 
 		return true;
@@ -147,7 +147,7 @@ public class DiaDia {
 		Stanza stanzaCorrente = this.partita.getStanzaCorrente();
 		if (stanzaCorrente.addAttrezzo(a) == false)
 			return false;
-		
+
 		this.io.mostraMessaggio("Oggetto posato!");
 
 		return true;
