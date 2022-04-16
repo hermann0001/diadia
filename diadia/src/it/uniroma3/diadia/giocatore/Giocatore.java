@@ -46,4 +46,22 @@ public class Giocatore {
 	public void setCfu(int cfu) {
 		this.cfu = cfu;
 	}
+	
+	/**
+	 * Ritorna il nome del giocatore
+	 * 
+	 * @return String
+	 */
+	public String getNome() {
+		return this.nome;
+	}
+	
+	/**
+	 * Imposta il nome del giocatore
+	 * 
+	 * @param nome
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 }

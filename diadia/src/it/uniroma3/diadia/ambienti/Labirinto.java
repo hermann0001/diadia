@@ -95,4 +95,22 @@ public class Labirinto {
 	public Stanza getStanzaIniziale() {
 		return this.stanzaIniziale;
 	}
+	
+	/**
+	 * Ritorna il nome del giocatore
+	 * 
+	 * @return String
+	 */
+	public String getNome() {
+		return this.nome;
+	}
+	
+	/**
+	 * Imposta il nome del giocatore
+	 * 
+	 * @param nome
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 }

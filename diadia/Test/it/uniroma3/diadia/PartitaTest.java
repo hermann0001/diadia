@@ -12,10 +12,12 @@ public class PartitaTest {
 	private Partita partita;
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
+	private IOConsole io;
 
 	@Before
 	public void setUp() {
-		this.partita = new Partita();
+		this.io = new IOConsole();
+		this.partita = new Partita(io);
 		this.stanzaCorrente = new Stanza("stanzaCorrente");
 		this.stanzaVincente = new Stanza("stanzaVincente");
 	}

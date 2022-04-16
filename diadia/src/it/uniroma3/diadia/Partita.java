@@ -17,12 +17,14 @@ public class Partita {
 	private Stanza stanzaCorrente;
 	private boolean finita;
 	private Giocatore giocatore;
+	private IOConsole io;
 
-	public Partita() {
+	public Partita(IOConsole io) {
 		this.giocatore = new Giocatore("Player 1"); // TODO inserire nome da tastiera
 		this.labirinto = new Labirinto("Mappa 1"); // TODO inserire nome da tastiera
 		this.finita = false;
 		this.stanzaCorrente = this.labirinto.getStanzaIniziale();
+		this.io = io;
 	}
 
 	/**
@@ -89,5 +91,14 @@ public class Partita {
 	public Giocatore getGiocatore() {
 		return this.giocatore;
 	}
+	
+	public IOConsole getIoconsole() {
+		return this.io;
+	}
 
+	public boolean giocatoreIsVivo() {
+		if(this.getGiocatore().getCfu() > 0)
+			return true;
+		return false;
+	}
 }
