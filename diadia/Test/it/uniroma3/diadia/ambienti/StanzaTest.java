@@ -10,10 +10,10 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaTest {
 
-	final private String direzioni[] = { "nord", "sud", "est", "ovest" };
+	static final private String DIREZIONI[] = { "nord", "sud", "est", "ovest" };
 	static final private int NUMERO_MAX_DIREZIONI = 4;
 	static final private int NUMERO_MAX_ATTREZZI = 10;
-	final private String direzioniVuoto[] = new String[0];
+	private String direzioniVuoto[] = new String[0];
 
 	/*
 	 * stanze per il test dei metodi riguardanti l'adiacenza
@@ -41,7 +41,7 @@ public class StanzaTest {
 
 		// Imposto le 4 stanze adiacenti
 		for (int i = 0; i < NUMERO_MAX_DIREZIONI; i++)
-			this.tutteAdiacenti.impostaStanzaAdiacente(direzioni[i], this.stanzeDirezioni[i]);
+			this.tutteAdiacenti.impostaStanzaAdiacente(DIREZIONI[i], this.stanzeDirezioni[i]);
 	}
 
 	/*
@@ -49,7 +49,7 @@ public class StanzaTest {
 	 */
 	@Test
 	public void testGetStanzaNoAdiacentiNord() {
-		for (String direzione : direzioni)
+		for (String direzione : DIREZIONI)
 			assertEquals("La stanza ha delle stanze adiacenti", null, this.noAdiacenti.getStanzaAdiacente(direzione));
 	}
 
@@ -59,8 +59,8 @@ public class StanzaTest {
 	 */
 	@Test
 	public void testGetStanzaTutteAdiacenti() {
-		this.tutteAdiacenti.impostaStanzaAdiacente(direzioni[0], stanzaOverflow);
-		assertEquals(this.stanzaOverflow, this.tutteAdiacenti.getStanzaAdiacente(direzioni[0]));
+		this.tutteAdiacenti.impostaStanzaAdiacente(DIREZIONI[0], stanzaOverflow);
+		assertEquals(this.stanzaOverflow, this.tutteAdiacenti.getStanzaAdiacente(DIREZIONI[0]));
 	}
 
 	@Before
@@ -133,7 +133,7 @@ public class StanzaTest {
 	 */
 	@Test
 	public void testGetDirezioniCon4StanzeAdiacenti() {
-		assertArrayEquals(direzioni, this.tutteAdiacenti.getDirezioni());
+		assertArrayEquals(DIREZIONI, this.tutteAdiacenti.getDirezioni());
 	}
 
 	/*
