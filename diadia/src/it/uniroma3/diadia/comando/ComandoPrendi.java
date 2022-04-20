@@ -7,7 +7,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 /**
- * Comando: posa
+ * Comando: prendi
  * 
  * @param nomeAttrezzo
  */

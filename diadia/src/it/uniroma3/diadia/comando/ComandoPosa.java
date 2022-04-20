@@ -25,7 +25,6 @@ public class ComandoPosa implements Comando {
 			ioconsole.mostraMessaggio("Quale attrezzo vuoi raccogliere?");
 			return;
 		}
-
 		if (borsa.hasAttrezzo(this.nomeAttrezzo) == false) {
 			ioconsole.mostraMessaggio("L'attrezzo non esiste nella borsa");
 			return;
