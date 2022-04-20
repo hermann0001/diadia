@@ -12,7 +12,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPosaTest {
-	private static final int MAX_PESO = 10;
+	static final private int MAX_PESO = 10;
 	private Stanza stanza;
 	private Attrezzo attrezzo;
 	private ComandoPosa comando;

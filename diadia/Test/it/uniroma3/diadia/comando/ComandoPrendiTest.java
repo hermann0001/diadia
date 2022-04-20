@@ -12,7 +12,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPrendiTest {
-	private static final int MAX_NUM_ATTREZZI = 10;
+	static final private int MAX_NUM_ATTREZZI = 10;
 	private Stanza stanza;
 	private Attrezzo attrezzi[];
 	private Borsa borsa;
