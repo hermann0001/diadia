@@ -12,7 +12,7 @@ public class PartitaTest {
 	private Partita partita;
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
-	private IOConsole io;
+	private IO io;
 
 	@Before
 	public void setUp() {
