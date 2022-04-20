@@ -34,7 +34,7 @@ public class StanzaTest {
 	private Attrezzo attrezzoOverflow;
 
 	@Before
-	public void setUpAdiacenti() throws Exception {
+	public void setUpAdiacenti() {
 		this.noAdiacenti = new Stanza("noAdiacenti"); // stanza senza stanze adiacenti
 		this.tutteAdiacenti = new Stanza("tutteAdiacenti"); // stanza con 4 stanze adiacenti
 		this.stanzeDirezioni = new Stanza[NUMERO_MAX_DIREZIONI];
