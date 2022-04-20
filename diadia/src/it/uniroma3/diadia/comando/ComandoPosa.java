@@ -1,6 +1,6 @@
 package it.uniroma3.diadia.comando;
 
-import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -18,7 +18,7 @@ public class ComandoPosa implements Comando {
 	@Override
 	public void esegui(Partita partita) {
 
-		IOConsole ioconsole = partita.getIoconsole();
+		final IO ioconsole = partita.getIoconsole();
 		Borsa borsa = partita.getGiocatore().getBorsa();
 		
 		if(this.nomeAttrezzo == null) {

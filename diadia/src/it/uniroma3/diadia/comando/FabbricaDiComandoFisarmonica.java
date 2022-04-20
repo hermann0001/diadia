@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 
 public class FabbricaDiComandoFisarmonica implements FabbricaDiComandi {
+	private String nomeComando;
+	private String parametro;
 	
 	@Override
 	public Comando costruisciComando(String istruzione) {
@@ -32,6 +34,16 @@ public class FabbricaDiComandoFisarmonica implements FabbricaDiComandi {
 		else
 			comando = new ComandoNonValido();
 		comando.setParametro(parametro);
+		this.parametro = parametro;
+		this.nomeComando = nomeComando;
 		return comando;
+	}
+	
+	public String getNome() {
+		return this.nomeComando;	
+	}
+	
+	public String getParametro() {
+		return this.parametro;
 	}
 }

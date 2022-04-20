@@ -1,6 +1,6 @@
 package it.uniroma3.diadia.comando;
 
-import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 
@@ -20,7 +20,7 @@ public class ComandoVai implements Comando {
 	public void esegui(Partita partita) {
 		// qui il codice per cambiare stanza ...}}
 		Stanza prossimaStanza = null;
-		IOConsole ioconsole = partita.getIoconsole();
+		IO ioconsole = partita.getIoconsole();
 		if (this.direzione == null) {
 			ioconsole.mostraMessaggio("Dove vuoi andare ?");
 			return;

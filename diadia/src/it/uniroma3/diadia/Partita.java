@@ -17,9 +17,9 @@ public class Partita {
 	private Stanza stanzaCorrente;
 	private boolean finita;
 	private Giocatore giocatore;
-	private IOConsole io;
+	private IO io;
 
-	public Partita(IOConsole io) {
+	public Partita(IO io) {
 		this.giocatore = new Giocatore("Player 1"); // TODO inserire nome da tastiera
 		this.labirinto = new Labirinto("Mappa 1"); // TODO inserire nome da tastiera
 		this.finita = false;
@@ -92,7 +92,7 @@ public class Partita {
 		return this.giocatore;
 	}
 	
-	public IOConsole getIoconsole() {
+	public IO getIoconsole() {
 		return this.io;
 	}
 
