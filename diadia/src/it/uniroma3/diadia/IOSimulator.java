@@ -1,6 +1,6 @@
 package it.uniroma3.diadia;
 
-public class IOSimulator implements IO{
+public class IOSimulator implements IO {
 
 	@Override
 	public void mostraMessaggio(String messaggio) {
@@ -13,5 +13,5 @@ public class IOSimulator implements IO{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }
