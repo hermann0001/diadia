@@ -12,7 +12,6 @@ public class StanzaBuiaTest {
 	
 	private StanzaBuia stanza;
 	private StanzaBuia stanzaVuota;
-	private StanzaBuia stanzaNull;
 	private Attrezzo lanterna;
 	private Attrezzo osso;
 

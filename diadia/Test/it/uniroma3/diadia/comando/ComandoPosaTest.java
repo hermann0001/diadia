@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -17,7 +18,7 @@ public class ComandoPosaTest {
 	private Attrezzo attrezzo;
 	private ComandoPosa comando;
 	private Partita partita;
-	private IOConsole io;
+	private IO io;
 	private Borsa borsa;
 
 	@Before
