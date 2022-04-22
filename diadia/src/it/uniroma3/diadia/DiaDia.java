@@ -16,7 +16,7 @@ import it.uniroma3.diadia.comando.FabbricaDiComandoFisarmonica;
 
 public class DiaDia {
 
-	static final private String MESSAGGIO_BENVENUTO = ""
+	private final static String MESSAGGIO_BENVENUTO = ""
 			+ "Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n"
 			+ "Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\n"
 			+ "I locali sono popolati da strani personaggi, " + "alcuni amici, altri... chissa!\n"
