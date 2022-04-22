@@ -13,6 +13,7 @@ import it.uniroma3.diadia.giocatore.Borsa;
  */
 
 public class ComandoPosa implements Comando {
+	
 	private String nomeAttrezzo;
 
 	@Override
