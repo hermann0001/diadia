@@ -7,14 +7,13 @@ import it.uniroma3.diadia.Partita;
  * Stampa informazioni di aiuto.
  */
 public class ComandoAiuto implements Comando {
-	static final private String[] elencoComandi = { "vai", "aiuto", "fine", "prendi", "posa", "guarda" };
+	public final static String[] ELENCO_COMANDI = { "vai <direzione>", "aiuto", "fine", "prendi <nome attrezzo>", "posa <nome attrezzo>", "guarda" };
 
 	@Override
 	public void esegui(Partita partita) {
 		final IO ioconsole= partita.getIoconsole();
-		for (int i = 0; i < elencoComandi.length; i++)
-			ioconsole.mostraMessaggio(elencoComandi[i] + " ");
-		ioconsole.mostraMessaggio("");
+		for (int i = 0; i < ELENCO_COMANDI.length; i++)
+			ioconsole.mostraMessaggio(ELENCO_COMANDI[i] + " ");
 	}
 
 	@Override

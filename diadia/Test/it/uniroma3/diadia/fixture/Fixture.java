@@ -5,19 +5,33 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.giocatore.Borsa;
 
 public class Fixture {
 	
-	public IOSimulator creaSimulazionePartitaEGioca(String... righeDaLeggere) {
-		IOSimulator io = new IOSimulator(righeDaLeggere);
-		new DiaDia(io).gioca();
+	private DiaDia session;
+	
+	public IOSimulator creaSimulazionePartitaEGioca() {
+		IOSimulator io = new IOSimulator();
+		this.session = new DiaDia(io);
+		this.session.gioca();
 		return io;
 	}
 	
-	public Attrezzo creaAttrezzoEAggiungiStanza(Stanza stanzaDaRiempire, String nomeAttrezzo, int peso) {
+	public Attrezzo creaAttrezzoEAggiungiStanza(Stanza corrente, String nomeAttrezzo, int peso) {
 		Attrezzo attrezzo = new Attrezzo(nomeAttrezzo, peso);
-		stanzaDaRiempire.addAttrezzo(attrezzo);
+		corrente.addAttrezzo(attrezzo);
 		return attrezzo;
+	}
+	
+	public Attrezzo creaAttrezzoEAggiungiBorsa(Borsa borsa, String nomeAttrezzo, int peso) {
+		Attrezzo attrezzo = new Attrezzo(nomeAttrezzo, peso);
+		borsa.addAttrezzo(attrezzo);
+		return attrezzo;
+	}
+	
+	public DiaDia getSession() {
+		return this.session;
 	}
 
 }

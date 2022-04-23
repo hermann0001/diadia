@@ -11,18 +11,11 @@ public class ComandoGuarda implements Comando {
 		final IO ioconsole = partita.getIoconsole();
 		Stanza corrente = partita.getStanzaCorrente();
 
-		ioconsole.mostraMessaggio(corrente.getNome());
 		ioconsole.mostraMessaggio(corrente.getDescrizione());
 
 		ioconsole.mostraMessaggio("Mappa:" + partita.getLabirinto().getNome());
 		ioconsole.mostraMessaggio("Giocatore:" + partita.getGiocatore().getNome());
 		ioconsole.mostraMessaggio("CFU:" + partita.getGiocatore().getCfu());
-
-		if (partita.isFinita())
-			ioconsole.mostraMessaggio("Partita finita");
-		else
-			ioconsole.mostraMessaggio("Partita in corso");
-
 	}
 
 	@Override

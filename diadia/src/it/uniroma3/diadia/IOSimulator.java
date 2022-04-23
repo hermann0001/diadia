@@ -4,16 +4,14 @@ public class IOSimulator implements IO {
 	
 	private String righeDaLeggere[];
 	private String messaggiProdotti[];
-	private int indiceRigheDaLeggere;
+	private int indiceRigheLette;
 	private int indiceMessaggiProdotti;
-	private int indiceMessaggiStampati;
 
-	public IOSimulator(String... righeDaLeggere) {
-		this.indiceRigheDaLeggere = 0;
-		this.righeDaLeggere = righeDaLeggere;
+	public IOSimulator() {
+		this.righeDaLeggere = new String[100];
 		this.messaggiProdotti = new String[100];
+		this.indiceRigheLette = 0;
 		this.indiceMessaggiProdotti = 0;
-		this.indiceMessaggiStampati = 0;
 	}
 	
 	@Override
@@ -24,18 +22,24 @@ public class IOSimulator implements IO {
 
 	@Override
 	public String leggiRiga() {
-		String rigaLetta = this.righeDaLeggere[this.indiceRigheDaLeggere];
-		this.indiceRigheDaLeggere++;
+		String rigaLetta = this.righeDaLeggere[this.indiceRigheLette];
+		this.indiceRigheLette++;
 		return rigaLetta;
 	}
 	
+	public void setInput(String... righeDaLeggere) {
+		this.righeDaLeggere = righeDaLeggere;
+	}
+	
 	public String nextMessaggio() {
-		String next = this.messaggiProdotti[this.indiceMessaggiStampati];
-		this.indiceMessaggiStampati++;
+		String next = this.messaggiProdotti[this.indiceMessaggiProdotti];
+		this.indiceMessaggiProdotti++;
 		return next;
 	}
 	
 	public boolean hasNextMessaggio() {
-		return this.indiceMessaggiStampati < this.indiceMessaggiProdotti;
+		if(this.messaggiProdotti[this.indiceMessaggiProdotti + 1] == null)
+			return false;
+		return true;
 	}
 }

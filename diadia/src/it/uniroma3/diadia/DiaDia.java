@@ -16,7 +16,7 @@ import it.uniroma3.diadia.comando.FabbricaDiComandoFisarmonica;
 
 public class DiaDia {
 
-	private final static String MESSAGGIO_BENVENUTO = ""
+	public final static String MESSAGGIO_BENVENUTO = ""
 			+ "Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n"
 			+ "Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\n"
 			+ "I locali sono popolati da strani personaggi, " + "alcuni amici, altri... chissa!\n"
@@ -64,5 +64,9 @@ public class DiaDia {
 		IO console = new IOConsole();
 		DiaDia gioco = new DiaDia(console);
 		gioco.gioca();
+	}
+
+	public Partita getPartita() {
+		return this.partita;
 	}
 }
