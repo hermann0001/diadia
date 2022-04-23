@@ -16,6 +16,10 @@ import it.uniroma3.diadia.comando.FabbricaDiComandoFisarmonica;
 
 public class DiaDia {
 
+	public static final String SCONFITTA = "Hai esaurito i CFU...";
+
+	public static final String VITTORIA = "Hai vinto!";
+
 	public final static String MESSAGGIO_BENVENUTO = ""
 			+ "Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n"
 			+ "Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\n"
@@ -54,9 +58,9 @@ public class DiaDia {
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita); 
 		if (this.partita.vinta())
-			this.io.mostraMessaggio("Hai vinto!");
+			this.io.mostraMessaggio(VITTORIA);
 		if (!this.partita.giocatoreIsVivo())
-			this.io.mostraMessaggio("Hai esaurito i CFU...");
+			this.io.mostraMessaggio(SCONFITTA);
 		return this.partita.isFinita();
 	}
 

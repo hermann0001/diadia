@@ -14,8 +14,8 @@ import it.uniroma3.diadia.giocatore.Borsa;
 public class ComandoPrendi implements Comando {
 
 	public static final String ATTREZZO_NULL = "Quale attrezzo vuoi raccogliere?";
-	public static final String ATTREZZO_NON_IN_STANZA = "L'attrezzo non esiste nella stanza";
-	public static final String OGGETTO_PRESO = "Oggetto preso!";
+	public static final String ATTREZZO_NON_PRESENTE = "L'attrezzo non esiste nella stanza";
+	public static final String ATTREZZO_PRESO = "Oggetto preso!";
 	private String nomeAttrezzo;
 
 	@Override
@@ -29,7 +29,7 @@ public class ComandoPrendi implements Comando {
 
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		if (stanzaCorrente.hasAttrezzo(this.nomeAttrezzo) == false) {
-			ioconsole.mostraMessaggio(ATTREZZO_NON_IN_STANZA);
+			ioconsole.mostraMessaggio(ATTREZZO_NON_PRESENTE);
 			return;
 		}
 
@@ -40,7 +40,7 @@ public class ComandoPrendi implements Comando {
 			ioconsole.mostraMessaggio("Qualcosa è andato storto!");
 			return;
 		}
-		ioconsole.mostraMessaggio(OGGETTO_PRESO);
+		ioconsole.mostraMessaggio(ATTREZZO_PRESO);
 		return;
 	}
 	
