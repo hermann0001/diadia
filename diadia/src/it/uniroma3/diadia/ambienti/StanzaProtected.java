@@ -107,7 +107,8 @@ public class StanzaProtected {
 	 * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		if(attrezzo == null) return false;
+		if (attrezzo == null)
+			return false;
 		if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
 			this.attrezzi[numeroAttrezzi] = attrezzo;
 			this.numeroAttrezzi++;

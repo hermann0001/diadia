@@ -40,7 +40,7 @@ public class ComandoPosaTest {
 		assertFalse(this.partita.getGiocatore().getBorsa().hasAttrezzo("spada"));
 		assertTrue(this.partita.getStanzaCorrente().hasAttrezzo("spada"));
 	}
-	
+
 	@Test
 	public void testPosaAttrezzoNullo() {
 		this.attrezzo = null;
@@ -50,10 +50,10 @@ public class ComandoPosaTest {
 		assertFalse(this.partita.getGiocatore().getBorsa().hasAttrezzo("spada"));
 		assertFalse(this.partita.getStanzaCorrente().hasAttrezzo("spada"));
 	}
-	
+
 	@Test
 	public void testPrendiAttrezzoBorsaPiena() {
-		this.attrezzo = new Attrezzo("martello", MAX_PESO+1);
+		this.attrezzo = new Attrezzo("martello", MAX_PESO + 1);
 		this.comando.setParametro("martello");
 		this.borsa.addAttrezzo(attrezzo);
 		this.comando.esegui(this.partita);

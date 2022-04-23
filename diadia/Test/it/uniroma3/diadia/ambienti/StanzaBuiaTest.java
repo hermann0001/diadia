@@ -9,7 +9,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaBuiaTest {
 	static final private String MESSAGGIO_OSCURATO = "qui c'è un buio pesto";
-	
+
 	private StanzaBuia stanza;
 	private StanzaBuia stanzaVuota;
 	private Attrezzo lanterna;
@@ -29,7 +29,7 @@ public class StanzaBuiaTest {
 		assertEquals(MESSAGGIO_OSCURATO, this.stanza.getDescrizione());
 		assertEquals(MESSAGGIO_OSCURATO, this.stanzaVuota.getDescrizione());
 	}
-	
+
 	@Test
 	public void testGetDescrizioneChiara() {
 		this.stanza.addAttrezzo(lanterna);

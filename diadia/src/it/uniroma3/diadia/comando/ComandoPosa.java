@@ -13,7 +13,7 @@ import it.uniroma3.diadia.giocatore.Borsa;
  */
 
 public class ComandoPosa implements Comando {
-	
+
 	public static final String ATTREZZO_NULL = "Quale attrezzo vuoi raccogliere?";
 	public static final String ATTREZZO_NON_PRESENTE = "L'attrezzo non esiste nella borsa";
 	public static final String ATTREZZO_POSATO = "Oggetto posato!";
@@ -24,8 +24,8 @@ public class ComandoPosa implements Comando {
 
 		final IO ioconsole = partita.getIoconsole();
 		Borsa borsa = partita.getGiocatore().getBorsa();
-		
-		if(this.nomeAttrezzo == null) {
+
+		if (this.nomeAttrezzo == null) {
 			ioconsole.mostraMessaggio(ATTREZZO_NULL);
 			return;
 		}

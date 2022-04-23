@@ -41,7 +41,7 @@ public class ComandoPrendiTest {
 		assertTrue(this.partita.getGiocatore().getBorsa().hasAttrezzo("spada"));
 		assertFalse(this.partita.getStanzaCorrente().hasAttrezzo("spada"));
 	}
-	
+
 	@Test
 	public void testPrendiAttrezzoNullo() {
 		this.attrezzi[0] = null;
@@ -52,13 +52,13 @@ public class ComandoPrendiTest {
 		assertFalse(this.partita.getGiocatore().getBorsa().hasAttrezzo("spada"));
 		assertFalse(this.partita.getStanzaCorrente().hasAttrezzo("spada"));
 	}
-	
+
 	@Test
 	public void testPrendiAttrezzoBorsaPiena() {
-		for(int i = 0; i < MAX_NUM_ATTREZZI; i++){
-			this.attrezzi[i] = new Attrezzo("Attrezzo"+(i+1),0);
+		for (int i = 0; i < MAX_NUM_ATTREZZI; i++) {
+			this.attrezzi[i] = new Attrezzo("Attrezzo" + (i + 1), 0);
 			this.borsa.addAttrezzo(this.attrezzi[i]);
-			}
+		}
 		Attrezzo overflow = new Attrezzo("overflow", 0);
 		this.partita.setStanzaCorrente(this.stanza);
 		this.comando.setParametro("overflow");

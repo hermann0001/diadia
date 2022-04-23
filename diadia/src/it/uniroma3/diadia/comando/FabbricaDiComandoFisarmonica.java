@@ -2,11 +2,10 @@ package it.uniroma3.diadia.comando;
 
 import java.util.Scanner;
 
-
 public class FabbricaDiComandoFisarmonica implements FabbricaDiComandi {
 	private String nomeComando;
 	private String parametro;
-	
+
 	@Override
 	public Comando costruisciComando(String istruzione) {
 		Scanner scannerDiParole = new Scanner(istruzione);
@@ -38,11 +37,11 @@ public class FabbricaDiComandoFisarmonica implements FabbricaDiComandi {
 		this.nomeComando = nomeComando;
 		return comando;
 	}
-	
+
 	public String getNome() {
-		return this.nomeComando;	
+		return this.nomeComando;
 	}
-	
+
 	public String getParametro() {
 		return this.parametro;
 	}

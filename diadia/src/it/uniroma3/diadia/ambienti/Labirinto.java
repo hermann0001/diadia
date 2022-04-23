@@ -95,7 +95,7 @@ public class Labirinto {
 	public Stanza getStanzaIniziale() {
 		return this.stanzaIniziale;
 	}
-	
+
 	/**
 	 * Ritorna il nome del giocatore
 	 * 
@@ -104,7 +104,7 @@ public class Labirinto {
 	public String getNome() {
 		return this.nome;
 	}
-	
+
 	/**
 	 * Imposta il nome del giocatore
 	 * 

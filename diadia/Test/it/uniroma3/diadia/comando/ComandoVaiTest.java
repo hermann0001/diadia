@@ -15,7 +15,7 @@ import it.uniroma3.diadia.fixture.Fixture;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoVaiTest {
-	
+
 	private Stanza partenza;
 	private ComandoVai vai;
 	private Partita partita;
@@ -36,7 +36,7 @@ public class ComandoVaiTest {
 		this.vai.esegui(this.partita);
 		assertEquals(this.partenza, this.partita.getStanzaCorrente());
 	}
-	
+
 	@Test
 	public void testVaiDirezioneEsistente() {
 		Stanza destinazione = new Stanza("destinazione");
@@ -45,7 +45,7 @@ public class ComandoVaiTest {
 		this.vai.esegui(this.partita);
 		assertEquals(destinazione, this.partita.getStanzaCorrente());
 	}
-	
+
 	@Test
 	public void testVaiStanzaInesistente() {
 		Stanza destinazione = new Stanza("destinazione");
@@ -54,19 +54,19 @@ public class ComandoVaiTest {
 		this.vai.esegui(this.partita);
 		assertEquals(this.partenza, this.partita.getStanzaCorrente());
 	}
-	
+
 	@Test
 	public void testDirezioneIsSbagliata() {
 		this.vai.setParametro("sinistra");
 		this.vai.esegui(this.partita);
 		assertFalse(this.vai.direzioneIsCorretta());
 	}
-	
+
 	@Test
 	public void testDirezioneIsCorretta() {
 		this.vai.setParametro("est");
 		this.vai.esegui(this.partita);
 		assertTrue(this.vai.direzioneIsCorretta());
 	}
-	
+
 }

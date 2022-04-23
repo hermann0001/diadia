@@ -21,8 +21,8 @@ public class ComandoPrendi implements Comando {
 	@Override
 	public void esegui(Partita partita) {
 		final IO ioconsole = partita.getIoconsole();
-		
-		if(this.nomeAttrezzo == null) {
+
+		if (this.nomeAttrezzo == null) {
 			ioconsole.mostraMessaggio(ATTREZZO_NULL);
 			return;
 		}
@@ -43,7 +43,7 @@ public class ComandoPrendi implements Comando {
 		ioconsole.mostraMessaggio(ATTREZZO_PRESO);
 		return;
 	}
-	
+
 	@Override
 	public void setParametro(String parametro) {
 		this.nomeAttrezzo = parametro;

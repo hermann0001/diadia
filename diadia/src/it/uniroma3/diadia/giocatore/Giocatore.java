@@ -46,7 +46,7 @@ public class Giocatore {
 	public void setCfu(int cfu) {
 		this.cfu = cfu;
 	}
-	
+
 	/**
 	 * Ritorna il nome del giocatore
 	 * 
@@ -55,7 +55,7 @@ public class Giocatore {
 	public String getNome() {
 		return this.nome;
 	}
-	
+
 	/**
 	 * Imposta il nome del giocatore
 	 * 

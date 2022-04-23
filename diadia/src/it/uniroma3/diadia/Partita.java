@@ -91,7 +91,7 @@ public class Partita {
 	public Giocatore getGiocatore() {
 		return this.giocatore;
 	}
-	
+
 	public IO getIoconsole() {
 		return this.io;
 	}

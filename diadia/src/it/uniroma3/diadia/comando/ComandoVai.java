@@ -27,30 +27,29 @@ public class ComandoVai implements Comando {
 			ioconsole.mostraMessaggio(DIREZIONE_NULL);
 			return;
 		}
-		
-		if(!direzioneIsCorretta()){
+
+		if (!direzioneIsCorretta()) {
 			ioconsole.mostraMessaggio(DIREZIONE_INESISTENTE);
 			return;
 		}
-		
-		
+
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		prossimaStanza = stanzaCorrente.getStanzaAdiacente(direzione);
 		if (prossimaStanza == null) {
 			ioconsole.mostraMessaggio(DIREZIONE_INESISTENTE);
 			return;
-		} 
+		}
 		partita.setStanzaCorrente(prossimaStanza);
 		ioconsole.mostraMessaggio(partita.getStanzaCorrente().getNome());
-		
+
 		int cfu = partita.getGiocatore().getCfu();
 		cfu--;
 		partita.getGiocatore().setCfu(cfu);
 	}
 
 	public boolean direzioneIsCorretta() {
-		return this.direzione.equals("sud") || this.direzione.equals("nord") ||
-				this.direzione.equals("est") || this.direzione.equals("ovest");
+		return this.direzione.equals("sud") || this.direzione.equals("nord") || this.direzione.equals("est")
+				|| this.direzione.equals("ovest");
 	}
 
 	@Override

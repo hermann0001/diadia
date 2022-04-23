@@ -1,7 +1,7 @@
 package it.uniroma3.diadia;
 
 public class IOSimulator implements IO {
-	
+
 	private String righeDaLeggere[];
 	private String messaggiProdotti[];
 	private int indiceRigheLette;
@@ -15,7 +15,7 @@ public class IOSimulator implements IO {
 		this.indiceMessaggiProdotti = 0;
 		this.indiceMessaggiStampati = 0;
 	}
-	
+
 	@Override
 	public void mostraMessaggio(String messaggio) {
 		this.messaggiProdotti[this.indiceMessaggiProdotti] = messaggio;
@@ -28,17 +28,17 @@ public class IOSimulator implements IO {
 		this.indiceRigheLette++;
 		return rigaLetta;
 	}
-	
+
 	public void setInput(String... righeDaLeggere) {
 		this.righeDaLeggere = righeDaLeggere;
 	}
-	
+
 	public String nextMessaggio() {
 		String next = this.messaggiProdotti[this.indiceMessaggiStampati];
 		this.indiceMessaggiStampati++;
 		return next;
 	}
-	
+
 	public boolean hasNextMessaggio() {
 		return this.indiceMessaggiStampati < this.indiceMessaggiProdotti;
 	}
