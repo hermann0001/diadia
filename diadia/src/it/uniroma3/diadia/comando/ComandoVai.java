@@ -6,6 +6,8 @@ import it.uniroma3.diadia.ambienti.Stanza;
 
 public class ComandoVai implements Comando {
 
+	public static final String DIREZIONE_NULL = "Dove vuoi andare ?";
+	public static final String DIREZIONE_INESISTENTE = "Direzione inesistente";
 	private String direzione;
 
 	/*
@@ -22,21 +24,33 @@ public class ComandoVai implements Comando {
 		Stanza prossimaStanza = null;
 		IO ioconsole = partita.getIoconsole();
 		if (this.direzione == null) {
-			ioconsole.mostraMessaggio("Dove vuoi andare ?");
+			ioconsole.mostraMessaggio(DIREZIONE_NULL);
 			return;
 		}
-
+		
+		if(!direzioneIsCorretta()){
+			ioconsole.mostraMessaggio(DIREZIONE_INESISTENTE);
+			return;
+		}
+		
+		
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		prossimaStanza = stanzaCorrente.getStanzaAdiacente(direzione);
 		if (prossimaStanza == null) {
-			ioconsole.mostraMessaggio("Direzione inesistente");
+			ioconsole.mostraMessaggio(DIREZIONE_INESISTENTE);
 			return;
 		} 
 		partita.setStanzaCorrente(prossimaStanza);
 		ioconsole.mostraMessaggio(partita.getStanzaCorrente().getNome());
 		
 		int cfu = partita.getGiocatore().getCfu();
-		partita.getGiocatore().setCfu(cfu--);
+		cfu--;
+		partita.getGiocatore().setCfu(cfu);
+	}
+
+	public boolean direzioneIsCorretta() {
+		return this.direzione.equals("sud") || this.direzione.equals("nord") ||
+				this.direzione.equals("est") || this.direzione.equals("ovest");
 	}
 
 	@Override
