@@ -47,7 +47,7 @@ public class ComandoVaiTest {
 	}
 	
 	@Test
-	public void testVaiDirezioneSbagliata() {
+	public void testVaiStanzaInesistente() {
 		Stanza destinazione = new Stanza("destinazione");
 		this.partenza.impostaStanzaAdiacente("nord", destinazione);
 		this.vai.setParametro("est");
@@ -56,18 +56,17 @@ public class ComandoVaiTest {
 	}
 	
 	@Test
-	public void testPartitaAutomaticaComandoVai() {
-		String comandi[] = {"vai sud", "fine"};
-		Fixture fixture = new Fixture();
-		IOSimulator io = fixture.creaSimulazionePartitaEGioca(comandi);
-		assertTrue(io.hasNextMessaggio());
-		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.nextMessaggio());
-		assertTrue(io.hasNextMessaggio());
-		assertContains("Aula N10", io.nextMessaggio());
-		assertEquals(ComandoFine.MESSAGGIO_FINE, io.nextMessaggio());
+	public void testDirezioneIsSbagliata() {
+		this.vai.setParametro("sinistra");
+		this.vai.esegui(this.partita);
+		assertFalse(this.vai.direzioneIsCorretta());
 	}
 	
-	public void assertContains(String expected, String interaRiga) {
-		assertTrue(interaRiga.contains(expected));
+	@Test
+	public void testDirezioneIsCorretta() {
+		this.vai.setParametro("est");
+		this.vai.esegui(this.partita);
+		assertTrue(this.vai.direzioneIsCorretta());
 	}
+	
 }
