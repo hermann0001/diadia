@@ -9,7 +9,7 @@ import it.uniroma3.diadia.Partita;
  * "vai" e parametro "nord").
  *
  * @author docente di POO
- * @version base
+ * @version hw2
  */
 
 public interface Comando {

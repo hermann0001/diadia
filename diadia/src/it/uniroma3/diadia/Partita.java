@@ -7,9 +7,11 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 /**
  * Questa classe modella una partita del gioco
  *
- * @author docente di POO
+ * @author Hermann Tamilia
  * @see Stanza
- * @version base
+ * @see Labrinto
+ * @see Giocatore
+ * @version hw2
  */
 
 public class Partita {

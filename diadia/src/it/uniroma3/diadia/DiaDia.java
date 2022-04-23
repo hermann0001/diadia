@@ -11,7 +11,7 @@ import it.uniroma3.diadia.comando.FabbricaDiComandoFisarmonica;
  *
  * @author docente di POO (da un'idea di Michael Kolling and David J. Barnes)
  * 
- * @version base
+ * @version hw1
  */
 
 public class DiaDia {
@@ -69,7 +69,11 @@ public class DiaDia {
 		DiaDia gioco = new DiaDia(console);
 		gioco.gioca();
 	}
-
+	
+	/**
+	 * Ritorna un riferimento alla partita in corso
+	 * @return Partita
+	 */
 	public Partita getPartita() {
 		return this.partita;
 	}

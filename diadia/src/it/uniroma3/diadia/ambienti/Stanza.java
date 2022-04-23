@@ -7,9 +7,9 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * fisico nel gioco. E' collegata ad altre stanze attraverso delle uscite. Ogni
  * uscita e' associata ad una direzione.
  * 
- * @author docente di POO
+ * @author Hermann Tamilia
  * @see Attrezzo
- * @version base
+ * @version hw2
  */
 
 public class Stanza {

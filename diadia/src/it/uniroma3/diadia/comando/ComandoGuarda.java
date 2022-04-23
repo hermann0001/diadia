@@ -4,6 +4,15 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 
+
+/**
+ * Comando: guarda
+ * Ottiene informazioni sullo stato della partita
+ * 
+ * @author Hermann Tamilia
+ * @see Comando
+ * @version hw2
+ */
 public class ComandoGuarda implements Comando {
 
 	@Override

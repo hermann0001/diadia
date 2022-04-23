@@ -9,7 +9,10 @@ import it.uniroma3.diadia.giocatore.Borsa;
 /**
  * Comando: posa
  * 
- * @param nomeAttrezzo
+ * @author Hermann Tamilia
+ * @see Comando
+ * @version hw2
+ * @param nomeAttrezzo attrezzo da posare
  */
 
 public class ComandoPosa implements Comando {

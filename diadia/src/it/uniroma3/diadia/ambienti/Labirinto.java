@@ -8,7 +8,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * @author Hermann Tamilia
  * @see Partita
  * @see Stanza
- * @version base
+ * @version hw2
  */
 
 public class Labirinto {

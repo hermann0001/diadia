@@ -4,6 +4,15 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 
+/**
+ * Comando: vai
+ * permette di muoversi nella mappa
+ * 
+ * @author Hermann Tamilia
+ * @see Comando
+ * @version hw2
+ * @param direzione
+ */
 public class ComandoVai implements Comando {
 
 	public static final String DIREZIONE_NULL = "Dove vuoi andare ?";

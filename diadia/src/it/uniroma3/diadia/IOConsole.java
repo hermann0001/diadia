@@ -2,6 +2,14 @@ package it.uniroma3.diadia;
 
 import java.util.Scanner;
 
+/**
+ * Implementazione dell'interfaccia IO. IOConsole è una classe che contiene tutti
+ * i metodi per l'interazione con l'utente.
+ * 
+ * @author Hermann Tamilia
+ * @version hw2
+ */
+
 public class IOConsole implements IO {
 
 	@Override

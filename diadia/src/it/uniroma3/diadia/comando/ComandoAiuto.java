@@ -4,7 +4,12 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
 /**
+ * Comando: aiuto
  * Stampa informazioni di aiuto.
+ * 
+ * @author Hermann Tamilia
+ * @see Comando
+ * @version hw2
  */
 public class ComandoAiuto implements Comando {
 	public final static String[] ELENCO_COMANDI = { "vai <direzione>", "aiuto", "fine", "prendi <nome attrezzo>",

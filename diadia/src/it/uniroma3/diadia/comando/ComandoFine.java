@@ -4,7 +4,12 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
 /**
- * Comando "Fine".
+ * Comando: fine
+ * Termina la partita
+ * 
+ * @author Hermann Tamilia
+ * @see Comando
+ * @version hw2
  */
 
 public class ComandoFine implements Comando {

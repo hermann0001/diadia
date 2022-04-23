@@ -1,5 +1,14 @@
 package it.uniroma3.diadia.ambienti;
 
+/**
+ * La stanza bloccata è un particolare sottotipo di stanza che possiede una direzione
+ * bloccata che può essere sbloccata solo da un particolare attrezzo
+ * 
+ * @author Hermann Tamilia
+ * @see Stanza
+ * @version hw2
+ */
+
 public class StanzaBloccata extends Stanza {
 	private String direzioneBloccata;
 	private String attrezzoSbloccaDirezione;

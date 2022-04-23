@@ -8,8 +8,12 @@ import it.uniroma3.diadia.giocatore.Borsa;
 
 /**
  * Comando: prendi
+ * prende un attrezzo da una stanza
  * 
- * @param nomeAttrezzo
+ * @param nomeAttrezzo attrezzo da prendere
+ * @author Hermann Tamilia
+ * @see Comando
+ * @version hw2
  */
 public class ComandoPrendi implements Comando {
 

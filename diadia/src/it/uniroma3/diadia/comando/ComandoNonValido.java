@@ -2,6 +2,13 @@ package it.uniroma3.diadia.comando;
 
 import it.uniroma3.diadia.Partita;
 
+/**
+ * gestisce il caso in cui si inserisca un comando non valido
+ * 
+ * @author Hermann Tamilia
+ * @see Comando
+ * @version hw2
+ */
 public class ComandoNonValido implements Comando {
 
 	public static final String COMANDO_NON_VALIDO = "Comando non valido";
