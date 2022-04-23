@@ -6,12 +6,14 @@ public class IOSimulator implements IO {
 	private String messaggiProdotti[];
 	private int indiceRigheLette;
 	private int indiceMessaggiProdotti;
+	private int indiceMessaggiStampati;
 
 	public IOSimulator() {
 		this.righeDaLeggere = new String[100];
 		this.messaggiProdotti = new String[100];
 		this.indiceRigheLette = 0;
 		this.indiceMessaggiProdotti = 0;
+		this.indiceMessaggiStampati = 0;
 	}
 	
 	@Override
@@ -32,14 +34,12 @@ public class IOSimulator implements IO {
 	}
 	
 	public String nextMessaggio() {
-		String next = this.messaggiProdotti[this.indiceMessaggiProdotti];
-		this.indiceMessaggiProdotti++;
+		String next = this.messaggiProdotti[this.indiceMessaggiStampati];
+		this.indiceMessaggiStampati++;
 		return next;
 	}
 	
 	public boolean hasNextMessaggio() {
-		if(this.messaggiProdotti[this.indiceMessaggiProdotti + 1] == null)
-			return false;
-		return true;
+		return this.indiceMessaggiStampati < this.indiceMessaggiProdotti;
 	}
 }

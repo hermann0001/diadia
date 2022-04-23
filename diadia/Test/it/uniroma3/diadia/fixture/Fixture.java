@@ -14,7 +14,6 @@ public class Fixture {
 	public IOSimulator creaSimulazionePartitaEGioca() {
 		IOSimulator io = new IOSimulator();
 		this.session = new DiaDia(io);
-		this.session.gioca();
 		return io;
 	}
 	
