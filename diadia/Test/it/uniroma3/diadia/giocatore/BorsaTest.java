@@ -9,8 +9,6 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class BorsaTest {
 
-	static final private int NUMERO_MAX_ATTREZZI = 10;
-
 	private Borsa borsa1;
 	private Borsa borsaPiena;
 	private Borsa borsaVuota;
@@ -26,10 +24,10 @@ public class BorsaTest {
 		this.borsaPiena = new Borsa(); // borsa con 10 attrezzi
 		this.borsaVuota = new Borsa(); // borsa senza attrezzi
 		this.borsaPesante = new Borsa(); // borsa con un peso totale di attrezzi pari a 10
-		this.attrezzi = new Attrezzo[NUMERO_MAX_ATTREZZI];
+		this.attrezzi = new Attrezzo[10];
 
 		/* creo 10 attrezzi di peso unitario */
-		for (int i = 0; i < NUMERO_MAX_ATTREZZI; i++)
+		for (int i = 0; i < 10; i++)
 			this.attrezzi[i] = new Attrezzo("attrezzo" + i, 1);
 
 		this.attrezzoOverflow = new Attrezzo("attrezzo10", 1);

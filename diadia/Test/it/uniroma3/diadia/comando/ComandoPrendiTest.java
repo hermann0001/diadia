@@ -13,7 +13,10 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPrendiTest {
-	static final private int MAX_NUM_ATTREZZI = 10;
+	/*Aggiornamento hw3: non c'è più il vincolo di 10 attrezzi sulla borsa
+	 * ma mantengo comunque la costante MAX_NUM_ATTREZZI per comodità
+	 */
+	static final private int MAX_NUM_ATTREZZI = 10; 
 	private Stanza stanza;
 	private Attrezzo attrezzi[];
 	private Borsa borsa;
@@ -54,12 +57,12 @@ public class ComandoPrendiTest {
 	}
 
 	@Test
-	public void testPrendiAttrezzoBorsaPiena() {
+	public void testPrendiAttrezzoBorsaPesante() {
 		for (int i = 0; i < MAX_NUM_ATTREZZI; i++) {
-			this.attrezzi[i] = new Attrezzo("Attrezzo" + (i + 1), 0);
+			this.attrezzi[i] = new Attrezzo("Attrezzo" + (i + 1), 1);
 			this.borsa.addAttrezzo(this.attrezzi[i]);
 		}
-		Attrezzo overflow = new Attrezzo("overflow", 0);
+		Attrezzo overflow = new Attrezzo("overflow", 10);
 		this.partita.setStanzaCorrente(this.stanza);
 		this.comando.setParametro("overflow");
 		this.borsa.addAttrezzo(overflow);

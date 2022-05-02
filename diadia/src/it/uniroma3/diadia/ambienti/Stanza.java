@@ -1,5 +1,8 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
@@ -18,7 +21,7 @@ public class Stanza {
 	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
 
 	private String nome;
-	private Attrezzo[] attrezzi; // solo la prima parte dell'array è non nulla
+	private Set<Attrezzo> attrezzi; 
 	private int numeroAttrezzi; // contatore di riempimento dell'array per una rappresentazione compatta
 	private Stanza[] stanzeAdiacenti;
 	private int numeroStanzeAdiacenti;
@@ -35,7 +38,7 @@ public class Stanza {
 		this.numeroAttrezzi = 0;
 		this.direzioni = new String[NUMERO_MASSIMO_DIREZIONI];
 		this.stanzeAdiacenti = new Stanza[NUMERO_MASSIMO_DIREZIONI];
-		this.attrezzi = new Attrezzo[NUMERO_MASSIMO_ATTREZZI];
+		this.attrezzi = new HashSet<Attrezzo>();
 	}
 
 	/**
@@ -95,7 +98,7 @@ public class Stanza {
 	 * 
 	 * @return la collezione di attrezzi nella stanza.
 	 */
-	public Attrezzo[] getAttrezzi() {
+	public Set<Attrezzo> getAttrezzi() {
 		return this.attrezzi;
 	}
 
@@ -109,7 +112,7 @@ public class Stanza {
 		if (attrezzo == null)
 			return false;
 		if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
-			this.attrezzi[numeroAttrezzi] = attrezzo;
+			this.attrezzi.add(attrezzo);
 			this.numeroAttrezzi++;
 			return true;
 		} else {
@@ -133,8 +136,8 @@ public class Stanza {
 		risultato.append("\nAttrezzi nella stanza: ");
 
 		if (this.numeroAttrezzi != 0) {
-			for (int i = 0; i < this.numeroAttrezzi; i++) {
-				risultato.append(this.attrezzi[i] + " ");
+			for (Attrezzo a : this.attrezzi) {
+				risultato.append(a.toString() + " ");
 			}
 		} else
 			risultato.append("Nessuno");
@@ -153,8 +156,8 @@ public class Stanza {
 		if (this.numeroAttrezzi == 0)
 			return false;
 
-		for (int i = 0; i < this.numeroAttrezzi; i++) {
-			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
+		for (Attrezzo a : this.attrezzi) {
+			if (a.getNome().equals(nomeAttrezzo))
 				trovato = true;
 		}
 		return trovato;
@@ -171,9 +174,9 @@ public class Stanza {
 		attrezzoCercato = null;
 		if (this.numeroAttrezzi == 0)
 			return null;
-		for (int i = 0; i < this.numeroAttrezzi; i++) {
-			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
-				attrezzoCercato = this.attrezzi[i];
+		for (Attrezzo a : this.attrezzi) {
+			if (a.getNome().equals(nomeAttrezzo))
+				attrezzoCercato = a;
 		}
 		return attrezzoCercato;
 	}
@@ -188,11 +191,9 @@ public class Stanza {
 		if (this.numeroAttrezzi == 0)
 			return false;
 
-		for (int i = 0; i < this.numeroAttrezzi; i++) {
-			if (this.attrezzi[i].getNome().equals(nomeAttrezzo)) {
-				this.attrezzi[i] = this.attrezzi[this.numeroAttrezzi - 1];
-				this.attrezzi[this.numeroAttrezzi - 1] = null;
-				this.numeroAttrezzi--;
+		for (Attrezzo a : this.attrezzi) {
+			if (a.getNome().equals(nomeAttrezzo)) {
+				this.attrezzi.remove(a);
 				return true;
 			}
 		}
