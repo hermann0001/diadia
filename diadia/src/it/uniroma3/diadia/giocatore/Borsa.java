@@ -3,6 +3,7 @@ package it.uniroma3.diadia.giocatore;
 import java.util.*;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.attrezzi.ComparatorePerPesoPerNome;
 
 /**
  * Questa classe modella una borsa contente gli attrezzi del gioco
@@ -15,9 +16,6 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
-	/*è preferibile l'implementazione tramite mappe, perché per rimuovere un attrezzo ho bisogno
-	 * di scorrere la lista a differenza delle mappe dove posso rimuoverlo senza iterazioni grazie
-	 * alla chiave nomeAttrezzo*/
 	private List<Attrezzo> attrezzi;						
 	private int pesoMax;
 
@@ -116,6 +114,10 @@ public class Borsa {
 			return this.attrezzi.remove(indice);
 		return null;
 	}
+	
+	public List<Attrezzo> getAttrezzi() {
+		return this.attrezzi;
+	}
 
 	public String toString() {
 		StringBuilder s = new StringBuilder();
@@ -127,4 +129,15 @@ public class Borsa {
 			s.append("Borsa vuota");
 		return s.toString();
 	}
+	
+	
+	List<Attrezzo> getContenutoOrdinatoPerPeso(){
+		List <Attrezzo> list = new ArrayList<>(this.attrezzi);
+		list.sort(new ComparatorePerPesoPerNome());
+		return list;
+	}
+	
+//	SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
+//		
+//	}
 }
