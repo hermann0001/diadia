@@ -139,9 +139,7 @@ public class Stanza {
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
 	public boolean removeAttrezzo(String nomeAttrezzo) {
-		if (this.attrezzi.remove(nomeAttrezzo) == null)
-			return false;
-		return true;
+		return (this.attrezzi.remove(nomeAttrezzo) != null);
 	}
 
 	public Collection<Stanza> getAdiacenze() {
@@ -151,10 +149,7 @@ public class Stanza {
 	@Override
 	public boolean equals(Object o) {
 		Stanza that = (Stanza) o;
-		if (this.getNome() == that.getNome())
-			return true;
-		else
-			return false;
+		return (this.getNome() == that.getNome());
 	}
 
 	@Override

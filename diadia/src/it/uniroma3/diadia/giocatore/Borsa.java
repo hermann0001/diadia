@@ -63,8 +63,7 @@ public class Borsa {
 	 * @return attrezzo
 	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		Attrezzo attrezzoDaCercare = new Attrezzo(nomeAttrezzo, 0);
-		int indice = this.attrezzi.indexOf(attrezzoDaCercare);
+		int indice = this.attrezzi.indexOf(new Attrezzo(nomeAttrezzo, 0));
 		if(indice != -1)
 			return this.attrezzi.get(indice);
 
@@ -99,7 +98,7 @@ public class Borsa {
 	 * @return boolean
 	 */
 	public boolean hasAttrezzo(String nomeAttrezzo) {
-		return this.getAttrezzo(nomeAttrezzo) != null;
+		return (this.getAttrezzo(nomeAttrezzo) != null);
 	}
 
 	/**
@@ -112,8 +111,7 @@ public class Borsa {
 		if (this.attrezzi.size() == 0)
 			return null;
 		
-		Attrezzo attrezzoDaRimuovere = new Attrezzo(nomeAttrezzo,0);
-		int indice = this.attrezzi.indexOf(attrezzoDaRimuovere);
+		int indice = this.attrezzi.indexOf(new Attrezzo(nomeAttrezzo,0));
 		if(indice != -1)
 			return this.attrezzi.remove(indice);
 		return null;
