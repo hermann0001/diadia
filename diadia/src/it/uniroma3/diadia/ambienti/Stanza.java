@@ -16,11 +16,11 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Stanza {
 
-	static final private int NUMERO_MASSIMO_ATTREZZI = 10;
+	static final public int NUMERO_MASSIMO_ATTREZZI = 10;
 
 	private String nome;
-	private Map<String, Attrezzo> attrezzi; 
-	private Map<String,Stanza> stanzeAdiacenti;
+	private Map<String, Attrezzo> attrezzi;
+	private Map<String, Stanza> stanzeAdiacenti;
 
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -92,7 +92,7 @@ public class Stanza {
 		if (this.attrezzi.size() < NUMERO_MASSIMO_ATTREZZI) {
 			this.attrezzi.put(attrezzo.getNome(), attrezzo);
 			return true;
-			}
+		}
 		return false;
 	}
 
@@ -108,8 +108,8 @@ public class Stanza {
 		risultato.append("\nUscite: ");
 		risultato.append(this.stanzeAdiacenti.keySet());
 		risultato.append("\nAttrezzi nella stanza: ");
-		risultato.append(this.attrezzi.values().toString()+" ");
-		
+		risultato.append(this.attrezzi.values().toString() + " ");
+
 		return risultato.toString();
 	}
 
@@ -119,7 +119,7 @@ public class Stanza {
 	 * @return true se l'attrezzo esiste nella stanza, false altrimenti.
 	 */
 	public boolean hasAttrezzo(String nomeAttrezzo) {
-		if(this.attrezzi.get(nomeAttrezzo) == null)
+		if (this.attrezzi.get(nomeAttrezzo) == null)
 			return false;
 		return true;
 	}
@@ -140,8 +140,8 @@ public class Stanza {
 	 * @param nomeAttrezzo
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
-	public boolean removeAttrezzo(String nomeAttrezzo) {		
-		if(this.attrezzi.remove(nomeAttrezzo) == null)
+	public boolean removeAttrezzo(String nomeAttrezzo) {
+		if (this.attrezzi.remove(nomeAttrezzo) == null)
 			return false;
 		return true;
 	}
@@ -149,16 +149,16 @@ public class Stanza {
 	public Collection<Stanza> getAdiacenze() {
 		return this.stanzeAdiacenti.values();
 	}
-	
-	@Override 
+
+	@Override
 	public boolean equals(Object o) {
-		Stanza that = (Stanza)o;
-		if(this.getNome()==that.getNome())
+		Stanza that = (Stanza) o;
+		if (this.getNome() == that.getNome())
 			return true;
 		else
 			return false;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return this.nome.hashCode();
