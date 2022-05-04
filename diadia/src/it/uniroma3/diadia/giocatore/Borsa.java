@@ -1,7 +1,6 @@
 package it.uniroma3.diadia.giocatore;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -16,20 +15,17 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
-	private Set<Attrezzo> attrezzi;
-	private int numeroAttrezzi;
+	private List<Attrezzo> attrezzi;
 	private int pesoMax;
 
 	public Borsa() {
 		this.pesoMax = DEFAULT_PESO_MAX_BORSA;
-		this.attrezzi = new HashSet<Attrezzo>();
-		this.numeroAttrezzi = 0;
+		this.attrezzi = new ArrayList<Attrezzo>();
 	}
 
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
-		this.attrezzi = new HashSet<Attrezzo>(); // speriamo che bastino...
-		this.numeroAttrezzi = 0;
+		this.attrezzi = new ArrayList<Attrezzo>();
 	}
 
 	/**
@@ -39,12 +35,12 @@ public class Borsa {
 	 * @return boolean
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		if(attrezzo == null) return false;
+		if (attrezzo == null)
+			return false;
 		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 			return false;
-		
+
 		this.attrezzi.add(attrezzo);
-		this.numeroAttrezzi++;
 		return true;
 	}
 
@@ -64,10 +60,10 @@ public class Borsa {
 	 * @return attrezzo
 	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		for (Attrezzo a : this.attrezzi) {
-			if (a.getNome().equals(nomeAttrezzo))
-				 return a;
-		}
+		for (Attrezzo attrezzo : this.attrezzi)
+			if (attrezzo != null && attrezzo.getNome().equals(nomeAttrezzo))
+				return attrezzo;
+
 		return null;
 	}
 
@@ -78,7 +74,7 @@ public class Borsa {
 	 */
 	public int getPeso() {
 		int peso = 0;
-		for (Attrezzo a : this.attrezzi)
+		for(Attrezzo a : this.attrezzi)
 			peso += a.getPeso();
 		return peso;
 	}
@@ -89,7 +85,7 @@ public class Borsa {
 	 * @return boolean
 	 */
 	public boolean isEmpty() {
-		return this.numeroAttrezzi == 0;
+		return this.attrezzi.size() == 0;
 	}
 
 	/**
@@ -109,12 +105,12 @@ public class Borsa {
 	 * @return attrezzo
 	 */
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
-		if(this.numeroAttrezzi == 0) return null;
+		if (this.attrezzi.size() == 0)
+			return null;
 
 		for (Attrezzo attrezzo : this.attrezzi) {
 			if (attrezzo.getNome().equals(nomeAttrezzo)) {
 				this.attrezzi.remove(attrezzo);
-				this.numeroAttrezzi--;
 				return attrezzo;
 			}
 		}

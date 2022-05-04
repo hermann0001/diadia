@@ -26,6 +26,7 @@ public class StanzaTest {
 	private Stanza tutteAdiacenti;
 	private Stanza stanzeDirezioni[];
 	private Stanza stanzaOverflow;
+	private Stanza noDoppioni;
 
 	/*
 	 * Stanze per il test dei metodi riguardanti gli attrezzi
@@ -78,6 +79,7 @@ public class StanzaTest {
 		this.unSoloAttrezzo = new Stanza("unSoloAttrezzo");
 		this.attrezzi = new Attrezzo[NUMERO_MAX_ATTREZZI];
 		this.attrezzoOverflow = new Attrezzo("Attrezzo10", 10);
+		this.noDoppioni = new Stanza("noDoppioni");
 
 		for (int i = 0; i < NUMERO_MAX_ATTREZZI; i++)
 			this.attrezzi[i] = new Attrezzo("Attrezzo" + i, i);
@@ -174,5 +176,12 @@ public class StanzaTest {
 		this.unSoloAttrezzo.removeAttrezzo("Attrezzo0");
 		assertFalse(this.unSoloAttrezzo.hasAttrezzo("Attrezzo0"));
 	}
-
+	
+	@Test
+	public void testNoAttrezziDuplicati() {
+		this.noDoppioni.addAttrezzo(this.attrezzi[0]);
+		this.noDoppioni.addAttrezzo(this.attrezzi[0]);
+		
+		assertEquals(1, this.noDoppioni.getAttrezzi().size());
+	}
 }

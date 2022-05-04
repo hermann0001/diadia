@@ -158,5 +158,10 @@ public class Stanza {
 		else
 			return false;
 	}
+	
+	@Override
+	public int hashCode() {
+		return this.nome.hashCode();
+	}
 
 }
