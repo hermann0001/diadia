@@ -41,7 +41,8 @@ public class StanzaProtected {
 	 *                  parametro.
 	 */
 	public void impostaStanzaAdiacente(String direzione, StanzaProtected stanza) {
-		this.stanzeAdiacenti.put(direzione, stanza);
+		if((stanza != null) && (!this.nome.equals(stanza.getNome())))
+			this.stanzeAdiacenti.put(direzione, stanza);
 	}
 
 	/**
