@@ -3,6 +3,10 @@ package it.uniroma3.diadia.ambienti;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +17,7 @@ public class StanzaTest {
 	static final private String DIREZIONI[] = { "nord", "sud", "est", "ovest" };
 	static final private int NUMERO_MAX_DIREZIONI = 4;
 	static final private int NUMERO_MAX_ATTREZZI = 10;
-	private String direzioniVuoto[] = new String[0];
+	private String direzioniVuoto[] = {null, null, null, null};
 
 	/*
 	 * stanze per il test dei metodi riguardanti l'adiacenza
@@ -38,6 +42,10 @@ public class StanzaTest {
 		this.noAdiacenti = new Stanza("noAdiacenti"); // stanza senza stanze adiacenti
 		this.tutteAdiacenti = new Stanza("tutteAdiacenti"); // stanza con 4 stanze adiacenti
 		this.stanzeDirezioni = new Stanza[NUMERO_MAX_DIREZIONI];
+		
+		//Creo le 4 stanze
+		for(int i = 0; i < NUMERO_MAX_DIREZIONI; i++)
+			this.stanzeDirezioni[i] = new Stanza("Stanza " + DIREZIONI[i]);
 
 		// Imposto le 4 stanze adiacenti
 		for (int i = 0; i < NUMERO_MAX_DIREZIONI; i++)
@@ -119,21 +127,25 @@ public class StanzaTest {
 	}
 
 	/*
-	 * Testo se nella stanza "noAdiacenti" il metodo getDirezioni() ritorna un array
+	 * Testo se nella stanza "noAdiacenti" il metodo getAdiacenze() ritorna un array
 	 * vuoto
 	 */
 	@Test
-	public void testGetDirezioniSenzaStanzeAdiacenti() {
-		assertArrayEquals(direzioniVuoto, this.noAdiacenti.getDirezioni());
+	public void testGetAdiacenzeSenzaStanzeAdiacenti() {
+		Stanza[] a = new Stanza[4];
+		this.noAdiacenti.getAdiacenze().toArray(a);
+		assertArrayEquals(direzioniVuoto, a);
 	}
 
 	/*
-	 * Testo se nella stanza "tutteAdiacenti" il metodo getDirezioni() ritorna
+	 * Testo se nella stanza "tutteAdiacenti" il metodo getAdiacenze() ritorna
 	 * l'array con le 4 direzioni corrispondenti alle 4 stanze adiacenti
 	 */
 	@Test
-	public void testGetDirezioniCon4StanzeAdiacenti() {
-		assertArrayEquals(DIREZIONI, this.tutteAdiacenti.getDirezioni());
+	public void testGetAdiacenzeCon4StanzeAdiacenti() {
+		Stanza[] a = new Stanza[4];
+		this.tutteAdiacenti.getAdiacenze().toArray(a);
+		assertArrayEquals(this.stanzeDirezioni, a);
 	}
 
 	/*
