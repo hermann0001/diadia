@@ -43,6 +43,7 @@ public class StanzaTest {
 		this.noAdiacenti = new Stanza("noAdiacenti"); // stanza senza stanze adiacenti
 		this.tutteAdiacenti = new Stanza("tutteAdiacenti"); // stanza con 4 stanze adiacenti
 		this.stanzeDirezioni = new Stanza[NUMERO_MAX_DIREZIONI];
+		this.stanzaOverflow = new Stanza("overflow");
 		
 		//Creo le 4 stanze
 		for(int i = 0; i < NUMERO_MAX_DIREZIONI; i++)
@@ -51,6 +52,8 @@ public class StanzaTest {
 		// Imposto le 4 stanze adiacenti
 		for (int i = 0; i < NUMERO_MAX_DIREZIONI; i++)
 			this.tutteAdiacenti.impostaStanzaAdiacente(DIREZIONI[i], this.stanzeDirezioni[i]);
+	
+	
 	}
 
 	/*
@@ -70,6 +73,13 @@ public class StanzaTest {
 	public void testGetStanzaTutteAdiacenti() {
 		this.tutteAdiacenti.impostaStanzaAdiacente(DIREZIONI[0], stanzaOverflow);
 		assertEquals(this.stanzaOverflow, this.tutteAdiacenti.getStanzaAdiacente(DIREZIONI[0]));
+	}
+	
+	@Test
+	public void testSeStessaComeAdiacente() {
+		Stanza seStessa = new Stanza("seStessa");
+		seStessa.impostaStanzaAdiacente("sud", seStessa);
+		assertEquals(0, seStessa.getAdiacenze().size());
 	}
 
 	@Before
