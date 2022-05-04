@@ -15,7 +15,10 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
-	private List<Attrezzo> attrezzi;
+	/*è preferibile l'implementazione tramite mappe, perché per rimuovere un attrezzo ho bisogno
+	 * di scorrere la lista a differenza delle mappe dove posso rimuoverlo senza iterazioni grazie
+	 * alla chiave nomeAttrezzo*/
+	private List<Attrezzo> attrezzi;						
 	private int pesoMax;
 
 	public Borsa() {
@@ -60,9 +63,10 @@ public class Borsa {
 	 * @return attrezzo
 	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		for (Attrezzo attrezzo : this.attrezzi)
-			if (attrezzo != null && attrezzo.getNome().equals(nomeAttrezzo))
-				return attrezzo;
+		Attrezzo attrezzoDaCercare = new Attrezzo(nomeAttrezzo, 0);
+		int indice = this.attrezzi.indexOf(attrezzoDaCercare);
+		if(indice != -1)
+			return this.attrezzi.get(indice);
 
 		return null;
 	}
@@ -107,13 +111,11 @@ public class Borsa {
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
 		if (this.attrezzi.size() == 0)
 			return null;
-
-		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo.getNome().equals(nomeAttrezzo)) {
-				this.attrezzi.remove(attrezzo);
-				return attrezzo;
-			}
-		}
+		
+		Attrezzo attrezzoDaRimuovere = new Attrezzo(nomeAttrezzo,0);
+		int indice = this.attrezzi.indexOf(attrezzoDaRimuovere);
+		if(indice != -1)
+			return this.attrezzi.remove(indice);
 		return null;
 	}
 

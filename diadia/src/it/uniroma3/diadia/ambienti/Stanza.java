@@ -119,9 +119,7 @@ public class Stanza {
 	 * @return true se l'attrezzo esiste nella stanza, false altrimenti.
 	 */
 	public boolean hasAttrezzo(String nomeAttrezzo) {
-		if (this.attrezzi.get(nomeAttrezzo) == null)
-			return false;
-		return true;
+		return this.attrezzi.containsKey(nomeAttrezzo);
 	}
 
 	/**
