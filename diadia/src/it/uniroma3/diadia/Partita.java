@@ -22,8 +22,16 @@ public class Partita {
 	private IO io;
 
 	public Partita(IO io) {
-		this.giocatore = new Giocatore("Player 1"); // TODO inserire nome da tastiera
-		this.labirinto = new Labirinto("Mappa 1"); // TODO inserire nome da tastiera
+		this.giocatore = new Giocatore("Player 1");
+		this.labirinto = new Labirinto("Mappa 1"); 
+		this.finita = false;
+		this.stanzaCorrente = this.labirinto.getStanzaIniziale();
+		this.io = io;
+	}
+	
+	public Partita(IO io, Labirinto labirinto) {
+		this.giocatore = new Giocatore("Player 1"); 
+		this.labirinto = labirinto; 
 		this.finita = false;
 		this.stanzaCorrente = this.labirinto.getStanzaIniziale();
 		this.io = io;
@@ -54,6 +62,10 @@ public class Partita {
 	 */
 	public Labirinto getLabirinto() {
 		return this.labirinto;
+	}
+	
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto = labirinto;
 	}
 
 	/**
