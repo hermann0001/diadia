@@ -1,9 +1,7 @@
 package it.uniroma3.diadia.fixture;
 
 import it.uniroma3.diadia.DiaDia;
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOSimulator;
-import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
