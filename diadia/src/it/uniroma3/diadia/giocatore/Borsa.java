@@ -123,9 +123,10 @@ public class Borsa {
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 		if (!this.isEmpty()) {
-			s.append("Contenuto borsa (" + this.getPeso() + "kg/" + this.getPesoMax() + "kg):");
-			for (Attrezzo a : this.attrezzi)
-				s.append(a.toString() + " ");
+			List<Attrezzo> attrezziOrdinati = this.getContenutoOrdinatoPerPeso();
+			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
+			for(Attrezzo a : attrezziOrdinati)
+				s.append(a.toString());
 		} else
 			s.append("Borsa vuota");
 		return s.toString();
@@ -148,13 +149,16 @@ public class Borsa {
 		Map<Integer, Set<Attrezzo>> mappa = new HashMap<>();
 		
 		for(Attrezzo a : this.attrezzi) {
+			int peso = a.getPeso();
 			if(a != null) {
-				if(mappa.containsKey(a.getPeso()))
-					mappa.get(a.getPeso()).add(a);
-				else {
+				if(mappa.containsKey(peso)) {
+					Set<Attrezzo> setAttrezziDelloStessoPeso = mappa.get(peso);
+					setAttrezziDelloStessoPeso.add(a);
+				} else {
+					//Non ho mai visto questo peso
 					Set<Attrezzo> attrezziSet = new HashSet<>();
 					attrezziSet.add(a);
-					mappa.put(a.getPeso(), attrezziSet);
+					mappa.put(peso, attrezziSet);
 				}
 			}
 		}
@@ -166,7 +170,4 @@ public class Borsa {
 		setAttrezzi.addAll(this.attrezzi);
 		return setAttrezzi;
 	}
-	
-	
-	
 }

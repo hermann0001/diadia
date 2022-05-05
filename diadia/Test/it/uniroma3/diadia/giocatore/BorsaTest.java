@@ -160,7 +160,7 @@ public class BorsaTest {
 	 * contenente solo quell'elemento
 	 */
 	@Test
-	public void testGetContenutoOrdinatoSingleton() {
+	public void testGetContenutoOrdinatoPerPesoSingleton() {
 		Attrezzo a1 = new Attrezzo("clava", 2);
 		this.borsaSort.addAttrezzo(a1);
 
@@ -172,10 +172,172 @@ public class BorsaTest {
 	 * lista vuota
 	 */
 	@Test
-	public void testGetContenutoOrdinatoListaVuota() {
+	public void testGetContenutoOrdinatoPerPesoVuoto() {
 		assertTrue(this.borsaSort.getAttrezzi().isEmpty());
 		assertEquals(Arrays.asList(), this.borsaSort.getContenutoOrdinatoPerPeso());
 	}
+	
+	/*
+	 * Test se il metodo getSortedSetOrdinatoPerPeso() ritorni correttamente un insieme
+	 * di due attrezzi anche se hanno stesso peso ma nome diverso
+	 */
+	@Test
+	public void testGetSortedSetOrdinatoPerPesoConStessoPesoNomeDiverso() {
+		Attrezzo attrezzo1 = new Attrezzo("clava", 2);
+		Attrezzo attrezzoStessoPesoNomeDiverso = new Attrezzo("spada", 2);
+		this.borsaSort.addAttrezzo(attrezzo1);
+		this.borsaSort.addAttrezzo(attrezzoStessoPesoNomeDiverso);
+		Collections.shuffle(this.borsaSort.getAttrezzi());
+		Set<Attrezzo> insiemeAttrezziOrdinati = new HashSet<>(Arrays.asList(attrezzo1, attrezzoStessoPesoNomeDiverso));
+		
+		assertEquals(2, this.borsaSort.getSortedSetOrdinatoPerPeso().size());
+		assertEquals(insiemeAttrezziOrdinati, this.borsaSort.getSortedSetOrdinatoPerPeso());
+	}
+	
+	/*
+	 * Testo se il metodo getContenutoOrdinatoPerNome() ritorni un insieme correttamente ordinato
+	 */
+	@Test
+	public void testGetContenutoOrdinatoPerNome() {
+		Attrezzo attrezzo1 = new Attrezzo("clava", 2);
+		Attrezzo attrezzo2 = new Attrezzo("spada", 3);
+		this.borsaSort.addAttrezzo(attrezzo1);
+		this.borsaSort.addAttrezzo(attrezzo2);
+		Collections.shuffle(this.borsaSort.getAttrezzi());
+		Set<Attrezzo> insiemeOrdinatoPerNome = new HashSet<>(Arrays.asList(attrezzo1, attrezzo2));
+
+		assertEquals(insiemeOrdinatoPerNome, this.borsaSort.getContenutoOrdinatoPerNome());
+	}
+	
+	/*
+	 * Testo se il metodo getContenutoOrdinatoPerNome() con attrezzi con lo 
+	 *  stesso nome, ritorni un insieme contente un solo elemento
+	 */
+	@Test
+	public void testGetContenutoOrdinatoPerNomeStessoNome() {
+		Attrezzo attrezzo1 = new Attrezzo("clava", 2);
+		Attrezzo attrezzo2 = new Attrezzo("clava", 2);
+		this.borsaSort.addAttrezzo(attrezzo1);
+		this.borsaSort.addAttrezzo(attrezzo2);
+		Collections.shuffle(this.borsaSort.getAttrezzi());
+		Set<Attrezzo> insiemeOrdinatoPerNome = new HashSet<>(Arrays.asList(attrezzo1));
+		
+		assertEquals(1, this.borsaSort.getContenutoOrdinatoPerNome().size());
+		assertEquals(insiemeOrdinatoPerNome, this.borsaSort.getContenutoOrdinatoPerNome());
+	}
+	
+	/*
+	 * Testo se il metodo getContenutoOrdinatoPerNome() su un singoletto, ritorni un insieme
+	 * contenente solo quell'elemento
+	 */
+	@Test
+	public void testGetContenutoOrdinatoPerNomeSingleton() {
+		Attrezzo a1 = new Attrezzo("clava", 2);
+		this.borsaSort.addAttrezzo(a1);
+		Set<Attrezzo> insiemeOrdinatoPerNome = new HashSet<>(Arrays.asList(a1));
+		
+		assertEquals(insiemeOrdinatoPerNome, this.borsaSort.getContenutoOrdinatoPerNome());
+	}
+	
+	/*
+	 * Testo se il metodo getContenutoOrdinatoPerNome() su un insieme vuoto ritorni un
+	 * insieme vuoto
+	 */
+	@Test
+	public void testGetContenutoOrdinatoPerNomeVuoto() {
+		Set<Attrezzo> insiemeOrdinatoPerNome = new HashSet<>();
+		assertTrue(this.borsaSort.getAttrezzi().isEmpty());
+		assertEquals(insiemeOrdinatoPerNome, this.borsaSort.getContenutoOrdinatoPerNome());
+	}
+	
+	/*
+	 * Testo se il metodo getContenutoRaggruppatoPerPeso() ritorni una mappa raggruppata correttamente
+	 */
+	@Test
+	public void testgetContenutoRaggruppatoPerPeso() {
+		Attrezzo attrezzo1 = new Attrezzo("clava", 2);
+		Attrezzo attrezzo2 = new Attrezzo("spada", 3);
+		this.borsaSort.addAttrezzo(attrezzo1);
+		this.borsaSort.addAttrezzo(attrezzo2);
+		
+		Map<Integer, Set<Attrezzo>> mappaRaggruppataPerPeso = new HashMap<>();
+		mappaRaggruppataPerPeso.put(attrezzo1.getPeso(), new HashSet<>(Arrays.asList(attrezzo1)));
+		mappaRaggruppataPerPeso.put(attrezzo2.getPeso(), new HashSet<>(Arrays.asList(attrezzo2)));
+
+		assertEquals(mappaRaggruppataPerPeso, this.borsaSort.getContenutoRaggruppatoPerPeso());
+	}
+	
+	/*
+	 * Testo se il metodo getContenutoRaggruppatoPerPeso() su un solo elemento ritorni
+	 * una mappa contenete un sola coppia chiave-valore
+	 */
+	@Test
+	public void testgetContenutoRaggruppatoPerPesoSingleton() {
+		Attrezzo attrezzo1 = new Attrezzo("clava", 2);
+		this.borsaSort.addAttrezzo(attrezzo1);
+		
+		Map<Integer, Set<Attrezzo>> mappaRaggruppataPerPeso = new HashMap<>();
+		mappaRaggruppataPerPeso.put(attrezzo1.getPeso(), new HashSet<>(Arrays.asList(attrezzo1)));
+
+		assertEquals(mappaRaggruppataPerPeso, this.borsaSort.getContenutoRaggruppatoPerPeso());
+	}
+	
+	/*
+	 * Testo se il metodo getContenutoRaggruppatoPerPeso() su un mappa vuota ritorni una mappa vuota
+	 */
+	@Test
+	public void testgetContenutoRaggruppatoPerPesoVuoto() {
+		Map<Integer, Set<Attrezzo>> mappaRaggruppataPerPeso = new HashMap<>();
+		
+		assertTrue(this.borsaSort.getAttrezzi().isEmpty());
+		assertEquals(mappaRaggruppataPerPeso, this.borsaSort.getContenutoRaggruppatoPerPeso());
+	}
+	
+	/*
+	 * Testo se il metodo getContenutoRaggruppatoPerPeso() con due attrezzi con stesso peso e nome 
+	 * diverso ritorni una mappa contente un solo valore chiave-valore con valore pari a un set
+	 * di due elementi
+	 */
+	@Test
+	public void testgetContenutoRaggruppatoPerPesoConStessoPesoNomiDiversi() {
+		Attrezzo attrezzo1 = new Attrezzo("clava", 2);
+		Attrezzo attrezzo2 = new Attrezzo("spada", 2);
+		this.borsaSort.addAttrezzo(attrezzo1);
+		this.borsaSort.addAttrezzo(attrezzo2);
+		
+		Map<Integer, Set<Attrezzo>> mappaRaggruppataPerPeso = new HashMap<>();
+		mappaRaggruppataPerPeso.put(attrezzo1.getPeso(), new HashSet<>(Arrays.asList(attrezzo1, attrezzo2)));
+
+		assertEquals(mappaRaggruppataPerPeso, this.borsaSort.getContenutoRaggruppatoPerPeso());
+	}
+	
+	/*
+	 * Testo se il metodo getContenutoRaggruppatoPerPeso() con due attrezzi con stesso peso e stesso
+	 * nome ritorni una mappa contente un solo valore chiave-valore con valore pari a un set di un solo
+	 * elemento
+	 */
+	@Test
+	public void testgetContenutoRaggruppatoPerPesoConStessoPesoStessoNome() {
+		Attrezzo attrezzo1 = new Attrezzo("clava", 2);
+		Attrezzo attrezzo2 = new Attrezzo("clava", 2);
+		this.borsaSort.addAttrezzo(attrezzo1);
+		this.borsaSort.addAttrezzo(attrezzo2);
+		
+		Map<Integer, Set<Attrezzo>> mappaRaggruppataPerPeso = new HashMap<>();
+		mappaRaggruppataPerPeso.put(attrezzo1.getPeso(), new HashSet<>(Arrays.asList(attrezzo1)));
+
+		assertEquals(mappaRaggruppataPerPeso, this.borsaSort.getContenutoRaggruppatoPerPeso());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	 * Testo se il metodo getContenutoOrdinatoPerPeso() su un caso
@@ -201,5 +363,63 @@ public class BorsaTest {
 
 		assertEquals(Arrays.asList(attrezzo6, attrezzo1, attrezzo5, attrezzo2, attrezzo3, 
 				attrezzo4, attrezzo7), this.borsaSort.getContenutoOrdinatoPerPeso());
+	}
+	
+	/*
+	 * Testo se il metodo getContenutoOrdinatoPerPeso() su un caso
+	 * più esteso con più attrezzi differenti ritorni un insieme ordinata
+	 */
+	@Test
+	public void testGetContenutoOrdinatoPerNomeCasoEsteso() {
+		Attrezzo attrezzo1 = new Attrezzo("clava", 2);	//2
+		Attrezzo attrezzo2 = new Attrezzo("spada", 3);	//4
+		Attrezzo attrezzo3 = new Attrezzo("spranga", 3);//5
+		Attrezzo attrezzo4 = new Attrezzo("osso", 5);	//6
+		Attrezzo attrezzo5 = new Attrezzo("spada", 2);	//3
+		Attrezzo attrezzo6 = new Attrezzo("chiave", 1);	//1
+		Attrezzo attrezzo7 = new Attrezzo("lanterna", 8);//7
+		this.borsaSort.addAttrezzo(attrezzo1);
+		this.borsaSort.addAttrezzo(attrezzo2);
+		this.borsaSort.addAttrezzo(attrezzo3);
+		this.borsaSort.addAttrezzo(attrezzo4);
+		this.borsaSort.addAttrezzo(attrezzo5);
+		this.borsaSort.addAttrezzo(attrezzo6);
+		this.borsaSort.addAttrezzo(attrezzo7);
+		Collections.shuffle(this.borsaSort.getAttrezzi());
+		Set<Attrezzo> insiemeOrdinatoPerNome = new HashSet<>(Arrays.asList(attrezzo6, 
+				attrezzo1, attrezzo5, attrezzo2, attrezzo3, attrezzo4, attrezzo7));
+
+		assertEquals(insiemeOrdinatoPerNome, this.borsaSort.getContenutoOrdinatoPerNome());
+	}
+	
+	/*
+	 * Testo se il metodo getContenutoRaggruppatoPerPeso() su un caso esteso con vari attrezzi
+	 * differenti ritorni una mappa correttamente raggruppata
+	 */
+	@Test
+	public void testgetContenutoRaggruppatoPerPesoCasoEsteso() {
+		Attrezzo attrezzo1 = new Attrezzo("clava", 2);	//2 - set(attrezzo1, attrezzo5)
+		Attrezzo attrezzo2 = new Attrezzo("spada", 3);	//3 - set(attrezzo2, attrezzo3)
+		Attrezzo attrezzo3 = new Attrezzo("spranga", 3);
+		Attrezzo attrezzo4 = new Attrezzo("osso", 5);	//5 - set(attrezzo4)
+		Attrezzo attrezzo5 = new Attrezzo("spada", 2);	
+		Attrezzo attrezzo6 = new Attrezzo("chiave", 1);	//1 - set(attrezzo6)
+		Attrezzo attrezzo7 = new Attrezzo("lanterna", 8);//8 - set(attrezzo7)
+		this.borsaSort.addAttrezzo(attrezzo1);
+		this.borsaSort.addAttrezzo(attrezzo2);
+		this.borsaSort.addAttrezzo(attrezzo3);
+		this.borsaSort.addAttrezzo(attrezzo4);
+		this.borsaSort.addAttrezzo(attrezzo5);
+		this.borsaSort.addAttrezzo(attrezzo6);
+		this.borsaSort.addAttrezzo(attrezzo7);
+		
+		Map<Integer, Set<Attrezzo>> mappaRaggruppataPerPeso = new HashMap<>();
+		mappaRaggruppataPerPeso.put(attrezzo1.getPeso(), new HashSet<>(Arrays.asList(attrezzo1, attrezzo5)));
+		mappaRaggruppataPerPeso.put(attrezzo2.getPeso(), new HashSet<>(Arrays.asList(attrezzo2, attrezzo3)));
+		mappaRaggruppataPerPeso.put(attrezzo4.getPeso(), new HashSet<>(Arrays.asList(attrezzo4)));
+		mappaRaggruppataPerPeso.put(attrezzo6.getPeso(), new HashSet<>(Arrays.asList(attrezzo6)));
+		mappaRaggruppataPerPeso.put(attrezzo7.getPeso(), new HashSet<>(Arrays.asList(attrezzo7)));
+		
+		assertEquals(mappaRaggruppataPerPeso, this.borsaSort.getContenutoRaggruppatoPerPeso());
 	}
 }

@@ -3,6 +3,7 @@ package it.uniroma3.diadia.comando;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.giocatore.Borsa;
 
 
 /**
@@ -18,9 +19,11 @@ public class ComandoGuarda implements Comando {
 	@Override
 	public void esegui(Partita partita) {
 		final IO ioconsole = partita.getIoconsole();
-		Stanza corrente = partita.getStanzaCorrente();
+		Stanza stanzaCorrente = partita.getStanzaCorrente();
+		Borsa borsaCorrente = partita.getGiocatore().getBorsa();
 
-		ioconsole.mostraMessaggio(corrente.getDescrizione());
+		ioconsole.mostraMessaggio(stanzaCorrente.getDescrizione());
+		ioconsole.mostraMessaggio(borsaCorrente.toString());
 
 		ioconsole.mostraMessaggio("Mappa:" + partita.getLabirinto().getNome());
 		ioconsole.mostraMessaggio("Giocatore:" + partita.getGiocatore().getNome());

@@ -85,6 +85,7 @@ public class IOSimulatorTest {
 
 		Partita partita = this.session.getPartita();
 		String outputStanza = partita.getStanzaCorrente().getDescrizione();
+		String outputBorsa = partita.getGiocatore().getBorsa().toString();
 		String nomeMappa = partita.getLabirinto().getNome();
 		String nomeGiocatore = partita.getGiocatore().getNome();
 		int cfu = partita.getGiocatore().getCfu();
@@ -93,6 +94,8 @@ public class IOSimulatorTest {
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(outputStanza, io.nextMessaggio());
+		assertTrue(io.hasNextMessaggio());
+		assertEquals(outputBorsa, io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
 		assertEquals("Mappa:" + nomeMappa, io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
@@ -304,6 +307,7 @@ public class IOSimulatorTest {
 
 		Partita partita = this.session.getPartita();
 		String outputStanza = partita.getStanzaCorrente().getDescrizione();
+		String outputBorsa = partita.getGiocatore().getBorsa().toString();
 		String nomeMappa = partita.getLabirinto().getNome();
 		String nomeGiocatore = partita.getGiocatore().getNome();
 		int cfu = partita.getGiocatore().getCfu();
@@ -325,6 +329,8 @@ public class IOSimulatorTest {
 		/* guarda */
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(outputStanza, io.nextMessaggio());
+		assertTrue(io.hasNextMessaggio());
+		assertEquals(outputBorsa, io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
 		assertEquals("Mappa:" + nomeMappa, io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
