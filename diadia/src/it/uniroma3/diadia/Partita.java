@@ -74,10 +74,10 @@ public class Partita {
 	 * @return vero se partita vinta
 	 */
 	public boolean vinta() {
-		if (this.labirinto.getStanzaFinale() == null)
+		if (this.labirinto.getStanzaVincente() == null)
 			return false;
 
-		return this.getStanzaCorrente() == this.labirinto.getStanzaFinale();
+		return this.getStanzaCorrente() == this.labirinto.getStanzaVincente();
 	}
 
 	/**

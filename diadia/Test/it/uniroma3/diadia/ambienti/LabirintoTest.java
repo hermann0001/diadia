@@ -25,9 +25,9 @@ public class LabirintoTest {
 	 * settata tramite il metodo setStanzaFinale()
 	 */
 	@Test
-	public void testGetStanzaFinale() {
-		this.labirintoTest.setStanzaFinale(this.stanzaFinale);
-		assertEquals(this.stanzaFinale, this.labirintoTest.getStanzaFinale());
+	public void testGetStanzaVincente() {
+		this.labirintoTest.setStanzaVincente(this.stanzaFinale);
+		assertEquals(this.stanzaFinale, this.labirintoTest.getStanzaVincente());
 	}
 
 	/*

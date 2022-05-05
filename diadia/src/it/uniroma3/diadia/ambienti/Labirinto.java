@@ -13,9 +13,13 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Labirinto {
 	private Stanza stanzaIniziale; // stanza di entrata
-	private Stanza stanzaFinale; // stanza di uscita
+	private Stanza stanzaVincente; // stanza di uscita
 	String nome; // nome del labirinto
 
+	public Labirinto() {
+		this.nome = "vuoto";
+	}
+	
 	public Labirinto(String nome) {
 		this.nome = nome;
 		this.creaStanze();
@@ -57,16 +61,16 @@ public class Labirinto {
 
 		// il gioco comincia nell'atrio
 		this.stanzaIniziale = atrio;
-		this.stanzaFinale = biblioteca;
+		this.stanzaVincente = biblioteca;
 	}
 
 	/**
 	 * Imposta la stanza finale/vincente
 	 * 
-	 * @param stanzaFinale
+	 * @param stanzaVincente
 	 */
-	public void setStanzaFinale(Stanza stanzaFinale) {
-		this.stanzaFinale = stanzaFinale;
+	public void setStanzaVincente(Stanza stanzaVincente) {
+		this.stanzaVincente = stanzaVincente;
 	}
 
 	/**
@@ -74,8 +78,8 @@ public class Labirinto {
 	 *
 	 * @return stanzaFinale
 	 */
-	public Stanza getStanzaFinale() {
-		return stanzaFinale;
+	public Stanza getStanzaVincente() {
+		return stanzaVincente;
 	}
 
 	/**

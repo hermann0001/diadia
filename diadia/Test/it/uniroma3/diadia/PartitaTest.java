@@ -41,7 +41,7 @@ public class PartitaTest {
 	@Test
 	public void testVinta() {
 		this.partita.setStanzaCorrente(stanzaVincente);
-		this.partita.getLabirinto().setStanzaFinale(stanzaVincente);
+		this.partita.getLabirinto().setStanzaVincente(stanzaVincente);
 		assertTrue(this.partita.vinta());
 	}
 
@@ -52,7 +52,7 @@ public class PartitaTest {
 	@Test
 	public void testPersa() {
 		this.partita.setStanzaCorrente(stanzaCorrente);
-		this.partita.getLabirinto().setStanzaFinale(stanzaVincente);
+		this.partita.getLabirinto().setStanzaVincente(stanzaVincente);
 		assertFalse(this.partita.vinta());
 	}
 
@@ -63,7 +63,7 @@ public class PartitaTest {
 	@Test
 	public void testVintaSenzaStanze() {
 		this.partita.setStanzaCorrente(null);
-		this.partita.getLabirinto().setStanzaFinale(null);
+		this.partita.getLabirinto().setStanzaVincente(null);
 		assertFalse(this.partita.vinta());
 	}
 
