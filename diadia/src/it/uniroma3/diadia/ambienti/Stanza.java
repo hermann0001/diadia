@@ -41,7 +41,8 @@ public class Stanza {
 	 *                  parametro.
 	 */
 	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-		
+		if(!direzioneIsCorretta(direzione))
+			return;
 		if((stanza != null) && (!this.nome.equals(stanza.getNome())))
 				this.stanzeAdiacenti.put(direzione, stanza);
 	}
@@ -157,6 +158,12 @@ public class Stanza {
 	@Override
 	public int hashCode() {
 		return this.nome.hashCode();
+	}
+	
+	//metodo che controlla se la direzione inserita sia corretta
+	public boolean direzioneIsCorretta(String direzione) {
+		return direzione.equals("sud") || direzione.equals("nord") || direzione.equals("est")
+				|| direzione.equals("ovest");
 	}
 
 }

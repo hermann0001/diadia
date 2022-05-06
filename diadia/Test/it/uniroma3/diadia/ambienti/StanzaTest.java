@@ -81,6 +81,16 @@ public class StanzaTest {
 		seStessa.impostaStanzaAdiacente("sud", seStessa);
 		assertEquals(0, seStessa.getAdiacenze().size());
 	}
+	
+	@Test
+	public void testImpostaAdiacenteParametroErrato() {
+		Stanza centrale = new Stanza("centrale");
+		Stanza adiacente = new Stanza("adiacente");
+		String direzione = "sud-ovest";
+		centrale.impostaStanzaAdiacente(direzione, adiacente);
+		
+		assertNull(centrale.getStanzaAdiacente(direzione));
+	}
 
 	@Before
 	public void setUpAttrezzi() {
