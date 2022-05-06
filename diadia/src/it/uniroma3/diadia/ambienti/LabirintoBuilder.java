@@ -116,9 +116,6 @@ public class LabirintoBuilder{
 		return this;
 	}
 	
-	
-
-	
 	//metodi che servono principalmente per i test
 	
 	public Stanza getStanza(String nomeStanza) {

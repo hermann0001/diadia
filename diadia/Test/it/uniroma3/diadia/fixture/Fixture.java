@@ -2,6 +2,7 @@ package it.uniroma3.diadia.fixture;
 
 import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.IOSimulator;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
@@ -9,10 +10,12 @@ import it.uniroma3.diadia.giocatore.Borsa;
 public class Fixture {
 
 	private DiaDia session;
+	private Labirinto labirinto;
 
 	public IOSimulator creaSimulazionePartitaEGioca() {
+		this.labirinto = DiaDia.creaMappaPredefinita();
 		IOSimulator io = new IOSimulator();
-		this.session = new DiaDia(io);
+		this.session = new DiaDia(io, this.labirinto);
 		return io;
 	}
 

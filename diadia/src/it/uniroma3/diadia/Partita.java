@@ -21,14 +21,6 @@ public class Partita {
 	private Giocatore giocatore;
 	private IO io;
 
-	public Partita(IO io) {
-		this.giocatore = new Giocatore("Player 1");
-		this.labirinto = new Labirinto("Mappa 1"); 
-		this.finita = false;
-		this.stanzaCorrente = this.labirinto.getStanzaIniziale();
-		this.io = io;
-	}
-	
 	public Partita(IO io, Labirinto labirinto) {
 		this.giocatore = new Giocatore("Player 1"); 
 		this.labirinto = labirinto; 
@@ -36,6 +28,13 @@ public class Partita {
 		this.stanzaCorrente = this.labirinto.getStanzaIniziale();
 		this.io = io;
 	}
+
+	public Partita(IO io) {
+		this.giocatore = new Giocatore("Player 1"); 
+		this.labirinto = DiaDia.creaMappaPredefinita(); 
+		this.finita = false;
+		this.stanzaCorrente = this.labirinto.getStanzaIniziale();
+		this.io = io;	}
 
 	/**
 	 * Imposta stanzaCorrente come stanza corrente

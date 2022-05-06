@@ -11,13 +11,6 @@ public class LabirintoTest {
 	private Stanza stanzaFinale;
 	private Stanza stanzaIniziale;
 
-	@Before
-	public void setUp() {
-		this.stanzaFinale = new Stanza("Test1");
-		this.stanzaIniziale = new Stanza("Test2");
-		this.labirintoTest = new Labirinto("MappaTest");
-	}
-
 	/* Testo solo i metodi getter, testando cosi implicitamente anche i setter */
 
 	/*
@@ -26,8 +19,8 @@ public class LabirintoTest {
 	 */
 	@Test
 	public void testGetStanzaVincente() {
-		this.labirintoTest.setStanzaVincente(this.stanzaFinale);
-		assertEquals(this.stanzaFinale, this.labirintoTest.getStanzaVincente());
+		this.labirintoTest = new LabirintoBuilder().addStanzaVincente("Test1").getLabirinto();
+		assertEquals("Test1", this.labirintoTest.getStanzaVincente().getNome());
 	}
 
 	/*
@@ -36,8 +29,55 @@ public class LabirintoTest {
 	 */
 	@Test
 	public void testGetStanzaIniziale() {
-		this.labirintoTest.setStanzaIniziale(this.stanzaIniziale);
-		assertEquals(this.stanzaIniziale, this.labirintoTest.getStanzaIniziale());
+		this.labirintoTest = new LabirintoBuilder().addStanzaIniziale("Test1").getLabirinto();
+		assertEquals("Test1", this.labirintoTest.getStanzaIniziale().getNome());
 	}
-
+	
+	@Test
+	public void testMonolocale() {
+		LabirintoBuilder costruttore = new LabirintoBuilder();
+		this.labirintoTest = costruttore
+				.addStanzaIniziale("ingresso")
+				.addStanzaVincente("ingresso")
+				.getLabirinto();
+		
+		assertEquals("ingresso", this.labirintoTest.getStanzaIniziale().getNome());
+		assertEquals("ingresso", this.labirintoTest.getStanzaVincente().getNome());
+	}
+	
+	@Test
+	public void testBilocale() {
+		LabirintoBuilder costruttore = new LabirintoBuilder();
+		this.labirintoTest = costruttore
+				.addStanzaIniziale("salotto")
+				.addStanzaVincente("camera")
+				.addAttrezzo("letto", 10)
+				.addAdiacenze("salotto", "nord", "camera")
+				.getLabirinto();
+		
+		assertEquals("salotto", this.labirintoTest.getStanzaIniziale().getNome());
+		assertEquals("camera", this.labirintoTest.getStanzaVincente().getNome());
+		assertEquals("letto", costruttore.getStanza("camera").getAttrezzo("letto").getNome());
+		assertEquals("camera", costruttore.getStanza("salotto").getStanzaAdiacente("nord").getNome());
+	}
+	
+	@Test
+	public void testTrilocale() {
+		LabirintoBuilder costruttore = new LabirintoBuilder();
+		this.labirintoTest = costruttore
+				.addStanzaIniziale("salotto")
+				.addStanza("cucina")
+				.addAttrezzo("pentola", 1)
+				.addStanzaVincente("camera")
+				.addAdiacenze("salotto", "nord", "cucina")
+				.addAdiacenze("cucina", "est", "camera")
+				.getLabirinto();
+		
+		assertEquals("salotto", this.labirintoTest.getStanzaIniziale().getNome());
+		assertEquals("cucina", costruttore.getStanza("cucina").getNome());
+		assertEquals("pentola", costruttore.getStanza("cucina").getAttrezzo("pentola").getNome());
+		assertEquals("camera", this.labirintoTest.getStanzaVincente().getNome());
+		assertEquals("cucina", costruttore.getStanza("salotto").getStanzaAdiacente("nord").getNome());
+		assertEquals("camera", costruttore.getStanza("cucina").getStanzaAdiacente("est").getNome());
+	}
 }
