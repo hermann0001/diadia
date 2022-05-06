@@ -8,6 +8,8 @@ import org.junit.Test;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class ComandoVaiTest {
@@ -19,40 +21,31 @@ public class ComandoVaiTest {
 
 	@Before
 	public void setUp() {
+		Labirinto labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("partenza")
+				.addAdiacenze("partenza", "nord", "destinazione")
+				.getLabirinto();
 		this.vai = new ComandoVai();
 		this.io = new IOConsole();
-		this.partita = new Partita(this.io);
-		this.partenza = new Stanza("partenza");
-		this.partita.setStanzaCorrente(this.partenza);
+		this.partita = new Partita(this.io, labirinto);
 	}
 
 	@Test
 	public void testVaiDirezioneInesistente() {
+		this.vai.setParametro("sud");
+		this.vai.esegui(this.partita);
+		assertEquals("partenza", this.partita.getStanzaCorrente().getNome());
+	}
+
+	@Test
+	public void testVaiDirezioneEsistente() {		
 		this.vai.setParametro("nord");
 		this.vai.esegui(this.partita);
-		assertEquals(this.partenza, this.partita.getStanzaCorrente());
+		assertEquals("destinazione", this.partita.getStanzaCorrente().getNome());
 	}
 
 	@Test
-	public void testVaiDirezioneEsistente() {
-		Stanza destinazione = new Stanza("destinazione");
-		this.partenza.impostaStanzaAdiacente("nord", destinazione);
-		this.vai.setParametro("nord");
-		this.vai.esegui(this.partita);
-		assertEquals(destinazione, this.partita.getStanzaCorrente());
-	}
-
-	@Test
-	public void testVaiStanzaInesistente() {
-		Stanza destinazione = new Stanza("destinazione");
-		this.partenza.impostaStanzaAdiacente("nord", destinazione);
-		this.vai.setParametro("est");
-		this.vai.esegui(this.partita);
-		assertEquals(this.partenza, this.partita.getStanzaCorrente());
-	}
-
-	@Test
-	public void testDirezioneIsSbagliata() {
+	public void testDirezioneSbagliata() {
 		this.vai.setParametro("sinistra");
 		this.vai.esegui(this.partita);
 		assertFalse(this.vai.direzioneIsCorretta());
@@ -64,5 +57,5 @@ public class ComandoVaiTest {
 		this.vai.esegui(this.partita);
 		assertTrue(this.vai.direzioneIsCorretta());
 	}
-
+	
 }
