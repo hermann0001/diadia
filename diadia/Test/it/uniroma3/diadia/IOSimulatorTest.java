@@ -25,7 +25,7 @@ public class IOSimulatorTest {
 	@Before
 	public void setUp() {
 		this.simulazione = new Fixture();
-		this.io = this.simulazione.creaSimulazionePartitaEGioca();
+		this.io = this.simulazione.creaSimulazionePartitaPredefinitaEGioca();
 		this.session = this.simulazione.getSession();
 	}
 

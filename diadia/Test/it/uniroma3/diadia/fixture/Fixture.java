@@ -12,7 +12,7 @@ public class Fixture {
 	private DiaDia session;
 	private Labirinto labirinto;
 
-	public IOSimulator creaSimulazionePartitaEGioca() {
+	public IOSimulator creaSimulazionePartitaPredefinitaEGioca() {
 		this.labirinto = DiaDia.creaMappaPredefinita();
 		IOSimulator io = new IOSimulator();
 		this.session = new DiaDia(io, this.labirinto);
