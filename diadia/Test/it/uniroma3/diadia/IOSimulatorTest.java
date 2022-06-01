@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comando.ComandoAiuto;
 import it.uniroma3.diadia.comando.ComandoFine;
 import it.uniroma3.diadia.comando.ComandoNonValido;

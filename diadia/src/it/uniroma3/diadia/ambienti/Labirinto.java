@@ -12,7 +12,7 @@ package it.uniroma3.diadia.ambienti;
 public class Labirinto {
 	private Stanza stanzaIniziale; // stanza di entrata
 	private Stanza stanzaVincente; // stanza di uscita
-	String nome; // nome del labirinto
+	private String nome; // nome del labirinto
 	
 	/**
 	 * Imposta la stanza finale/vincente
