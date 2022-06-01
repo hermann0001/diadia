@@ -3,10 +3,6 @@ package it.uniroma3.diadia.ambienti;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 import org.junit.Before;
 import org.junit.Test;
 

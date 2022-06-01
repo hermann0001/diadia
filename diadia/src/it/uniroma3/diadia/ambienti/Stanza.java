@@ -3,6 +3,7 @@ package it.uniroma3.diadia.ambienti;
 import java.util.*;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo. Una stanza e' un luogo
@@ -21,6 +22,7 @@ public class Stanza {
 	private String nome;
 	private Map<String, Attrezzo> attrezzi;
 	private Map<String, Stanza> stanzeAdiacenti;
+	private AbstractPersonaggio personaggio;
 
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -41,10 +43,10 @@ public class Stanza {
 	 *                  parametro.
 	 */
 	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-		if(!direzioneIsCorretta(direzione))
+		if (!direzioneIsCorretta(direzione))
 			return;
-		if((stanza != null) && (!this.nome.equals(stanza.getNome())))
-				this.stanzeAdiacenti.put(direzione, stanza);
+		if ((stanza != null) && (!this.nome.equals(stanza.getNome())))
+			this.stanzeAdiacenti.put(direzione, stanza);
 	}
 
 	/**
@@ -159,11 +161,19 @@ public class Stanza {
 	public int hashCode() {
 		return this.nome.hashCode();
 	}
-	
-	//metodo che controlla se la direzione inserita sia corretta
+
+	// metodo che controlla se la direzione inserita sia corretta
 	public boolean direzioneIsCorretta(String direzione) {
 		return direzione.equals("sud") || direzione.equals("nord") || direzione.equals("est")
 				|| direzione.equals("ovest");
+	}
+
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+
+	public AbstractPersonaggio getPersonaggio() {
+		return this.personaggio;
 	}
 
 }
