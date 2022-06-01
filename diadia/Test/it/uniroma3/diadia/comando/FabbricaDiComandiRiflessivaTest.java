@@ -5,57 +5,75 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FabbricaDiComandoFisarmonicaTest {
-	private final static String ISTRUZIONI[] = { "aiuto", "fine", "vai", "guarda", "posa", "prendi" };
-	private final static String DIREZIONI[] = { "nord", "sud", "est", "ovest" };
-
-	FabbricaDiComandoFisarmonica factory;
-	Comando comandoDaEseguire;
-
+public class FabbricaDiComandiRiflessivaTest {	
+	
+	private FabbricaDiComandiRiflessiva factory;
+	
 	@Before
 	public void setUp() {
-		this.factory = new FabbricaDiComandoFisarmonica();
+		this.factory = new FabbricaDiComandiRiflessiva();
 	}
 
 	@Test
 	public void testCostruisciComandoAiuto() {
-		this.comandoDaEseguire = this.factory.costruisciComando(ISTRUZIONI[0]);
-		assertEquals(ISTRUZIONI[0], this.factory.getNome());
+		assertSame(ComandoAiuto.class, this.factory.costruisciComando("aiuto").getClass());
 	}
 
 	@Test
 	public void testCostruisciComandoFine() {
-		this.comandoDaEseguire = this.factory.costruisciComando(ISTRUZIONI[1]);
-		assertEquals(ISTRUZIONI[1], this.factory.getNome());
+		assertSame(ComandoFine.class, this.factory.costruisciComando("fine").getClass());
 	}
 
 	@Test
 	public void testCostruisciComandoVai() {
-		for (String direzione : DIREZIONI) {
-			this.comandoDaEseguire = this.factory.costruisciComando(ISTRUZIONI[2] + " " + direzione);
-			assertEquals(ISTRUZIONI[2], this.factory.getNome());
-			assertEquals(direzione, this.factory.getParametro());
-		}
+		assertSame(ComandoVai.class, this.factory.costruisciComando("vai sud").getClass());
+
 	}
 
 	@Test
 	public void testCostruisciComandoGuarda() {
-		this.comandoDaEseguire = this.factory.costruisciComando(ISTRUZIONI[3]);
-		assertEquals(ISTRUZIONI[3], this.factory.getNome());
+		assertSame(ComandoGuarda.class, this.factory.costruisciComando("guarda").getClass());
+
 	}
 
 	@Test
 	public void testCostruisciComandoPosa() {
-		this.comandoDaEseguire = this.factory.costruisciComando(ISTRUZIONI[4] + " osso");
-		assertEquals(ISTRUZIONI[4], this.factory.getNome());
-		assertEquals("osso", this.factory.getParametro());
+		assertSame(ComandoPosa.class, this.factory.costruisciComando("posa").getClass());
+
 	}
 
 	@Test
 	public void testCostruisciComandoPrendi() {
-		this.comandoDaEseguire = this.factory.costruisciComando(ISTRUZIONI[5] + " osso");
-		assertEquals(ISTRUZIONI[5], this.factory.getNome());
-		assertEquals("osso", this.factory.getParametro());
+		assertSame(ComandoPrendi.class, this.factory.costruisciComando("prendi").getClass());
 	}
+	
+	@Test
+	public void testCostruisciComandoVuoto() {
+		assertSame(ComandoNonValido.class, this.factory.costruisciComando("Inesistente").getClass());
+	}
+	
+	@Test
+	public void testCostruisciComando_classNotFound() {
+		assertSame(ComandoNonValido.class, this.factory.costruisciComando("Inesistente").getClass());
+		assertSame(ClassNotFoundException.class, ((ComandoNonValido) this.factory.costruisciComando("Inesistente")).getException().getClass());
+	}
+	
+	@Test
+	public void testCostruisciComando_IllegalInstatiation() {
+		assertSame(ComandoNonValido.class, this.factory.costruisciComando("noCostruttoreNoArgs").getClass());
+		assertSame(InstantiationException.class, ((ComandoNonValido) this.factory.costruisciComando("noCostruttoreNoArgs")).getException().getClass());
+	}
+	
+	@Test
+	public void testCostruisciComando_IllegalAccess() {
+		assertSame(ComandoNonValido.class, this.factory.costruisciComando("noAccess").getClass());
+		assertSame(IllegalAccessException.class, ((ComandoNonValido) this.factory.costruisciComando("noAccess")).getException().getClass());
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void testCostruisciComando_null() {
+		this.factory.costruisciComando(null);
+	}
+	
 
 }
