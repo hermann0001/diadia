@@ -9,20 +9,24 @@ import it.uniroma3.diadia.Partita;
  * @see Comando
  * @version hw2
  */
-public class ComandoNonValido implements Comando {
-
+public class ComandoNonValido extends AbstractComando {
+	
+	private ReflectiveOperationException exception;
 	public static final String COMANDO_NON_VALIDO = "Comando non valido";
+	
+	public ComandoNonValido(ReflectiveOperationException e) {
+		super("nonValido");
+		this.exception = e;
+	}
 
+	
+	public ReflectiveOperationException getException() {
+		return this.exception;
+	}
+	
 	@Override
 	public void esegui(Partita partita) {
 		partita.getIoconsole().mostraMessaggio(COMANDO_NON_VALIDO);
 
 	}
-
-	@Override
-	public void setParametro(String parametro) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

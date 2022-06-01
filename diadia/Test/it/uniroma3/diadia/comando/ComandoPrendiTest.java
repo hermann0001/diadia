@@ -20,7 +20,7 @@ public class ComandoPrendiTest {
 	private Stanza stanza;
 	private Attrezzo attrezzi[];
 	private Borsa borsa;
-	private ComandoPrendi comando;
+	private AbstractComando comando;
 	private Partita partita;
 	private IO io;
 

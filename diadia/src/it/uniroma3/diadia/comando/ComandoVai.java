@@ -1,6 +1,5 @@
 package it.uniroma3.diadia.comando;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 
@@ -13,15 +12,19 @@ import it.uniroma3.diadia.ambienti.Stanza;
  * @version hw2
  * @param direzione
  */
-public class ComandoVai implements Comando {
+public class ComandoVai extends AbstractComando {
 
 	public static final String DIREZIONE_NULL = "Dove vuoi andare ?";
 	public static final String DIREZIONE_INESISTENTE = "Direzione inesistente";
 	private String direzione;
-
-	/*
-	 * esecuzione del comando
-	 */
+	
+	protected ComandoVai() {
+		super("vai");
+	}
+	
+	public ComandoVai(String direzione) {
+		super("vai", direzione);
+	}
 
 	/**
 	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra e ne stampa il
@@ -29,27 +32,29 @@ public class ComandoVai implements Comando {
 	 */
 	@Override
 	public void esegui(Partita partita) {
+		this.direzione = super.getParametro();
+		this.io = partita.getIoconsole();
+		
 		// qui il codice per cambiare stanza ...}}
 		Stanza prossimaStanza = null;
-		IO ioconsole = partita.getIoconsole();
 		if (this.direzione == null) {
-			ioconsole.mostraMessaggio(DIREZIONE_NULL);
+			this.io.mostraMessaggio(DIREZIONE_NULL);
 			return;
 		}
 
 		if (!direzioneIsCorretta()) {
-			ioconsole.mostraMessaggio(DIREZIONE_INESISTENTE);
+			this.io.mostraMessaggio(DIREZIONE_INESISTENTE);
 			return;
 		}
 
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		prossimaStanza = stanzaCorrente.getStanzaAdiacente(direzione);
 		if (prossimaStanza == null) {
-			ioconsole.mostraMessaggio(DIREZIONE_INESISTENTE);
+			this.io.mostraMessaggio(DIREZIONE_INESISTENTE);
 			return;
 		}
 		partita.setStanzaCorrente(prossimaStanza);
-		ioconsole.mostraMessaggio(partita.getStanzaCorrente().getNome());
+		this.io.mostraMessaggio(partita.getStanzaCorrente().getNome());
 
 		int cfu = partita.getGiocatore().getCfu();
 		cfu--;
@@ -59,10 +64,5 @@ public class ComandoVai implements Comando {
 	public boolean direzioneIsCorretta() {
 		return this.direzione.equals("sud") || this.direzione.equals("nord") || this.direzione.equals("est")
 				|| this.direzione.equals("ovest");
-	}
-
-	@Override
-	public void setParametro(String parametro) {
-		this.direzione = parametro;
 	}
 }

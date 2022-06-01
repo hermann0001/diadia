@@ -1,6 +1,5 @@
 package it.uniroma3.diadia.comando;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -15,25 +14,33 @@ import it.uniroma3.diadia.giocatore.Borsa;
  * @see Comando
  * @version hw2
  */
-public class ComandoPrendi implements Comando {
-
+public class ComandoPrendi extends AbstractComando {
+	
 	public static final String ATTREZZO_NULL = "Quale attrezzo vuoi raccogliere?";
 	public static final String ATTREZZO_NON_PRESENTE = "L'attrezzo non esiste nella stanza";
 	public static final String ATTREZZO_PRESO = "Oggetto preso!";
 	private String nomeAttrezzo;
 
+	public ComandoPrendi() {
+		super("prendi");
+	}
+	
+	public ComandoPrendi(String nomeAttrezzo) {
+		super("prendi", nomeAttrezzo);
+	}
+
 	@Override
 	public void esegui(Partita partita) {
-		final IO ioconsole = partita.getIoconsole();
-
+		this.nomeAttrezzo = super.getParametro();
+		this.io = partita.getIoconsole();
 		if (this.nomeAttrezzo == null) {
-			ioconsole.mostraMessaggio(ATTREZZO_NULL);
+			this.io.mostraMessaggio(ATTREZZO_NULL);
 			return;
 		}
 
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		if (stanzaCorrente.hasAttrezzo(this.nomeAttrezzo) == false) {
-			ioconsole.mostraMessaggio(ATTREZZO_NON_PRESENTE);
+			this.io.mostraMessaggio(ATTREZZO_NON_PRESENTE);
 			return;
 		}
 
@@ -41,15 +48,10 @@ public class ComandoPrendi implements Comando {
 		Attrezzo a = stanzaCorrente.getAttrezzo(this.nomeAttrezzo);
 		stanzaCorrente.removeAttrezzo(this.nomeAttrezzo);
 		if (borsa.addAttrezzo(a) == false) {
-			ioconsole.mostraMessaggio("Qualcosa è andato storto!");
+			this.io.mostraMessaggio("Qualcosa è andato storto!");
 			return;
 		}
-		ioconsole.mostraMessaggio(ATTREZZO_PRESO);
+		this.io.mostraMessaggio(ATTREZZO_PRESO);
 		return;
-	}
-
-	@Override
-	public void setParametro(String parametro) {
-		this.nomeAttrezzo = parametro;
 	}
 }
