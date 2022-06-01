@@ -15,7 +15,7 @@ public class ComandoAiuto extends AbstractComando {
 		super("aiuto");
 	}
 
-	final public static String[] ELENCO_COMANDI = {"aiuto, vai, guarda, posa, prendi, fine"};
+	final public static String[] ELENCO_COMANDI = {"aiuto", "vai", "guarda", "posa", "prendi", "saluta", "interagisci", "regala", "fine"};
 	
 	@Override
 	public void esegui(Partita partita) {

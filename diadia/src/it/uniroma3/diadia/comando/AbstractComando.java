@@ -16,15 +16,24 @@ public abstract class AbstractComando {
 	
 	private String nome;
 	private String parametro;
+	private String messaggio;
 	protected IO io;
-
+	
 	protected AbstractComando(String nome, String parametro) {
 		this.nome = nome;
 		this.parametro = parametro;
-		
 	}
 	
 	protected AbstractComando(String nome) {
+		this.nome = nome;
+	}
+	
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	
@@ -35,7 +44,14 @@ public abstract class AbstractComando {
 	public void setParametro(String parametro) {
 		this.parametro = parametro;
 	}
-
 	
+	public String getMessaggio() {
+		return messaggio;
+	}
+	
+	public void setMessaggio(String messaggio) {
+		this.messaggio = messaggio;
+	}
+
 	public abstract void esegui(Partita partita);
 }
