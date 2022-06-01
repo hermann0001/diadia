@@ -16,7 +16,9 @@ public class ComandoRegala extends AbstractComando {
 	public ComandoRegala() {
 		super("reala");
 	}
-
+	
+	
+	/* regala attrezzo scelto da tastiera*/
 	@Override
 	public void esegui(Partita partita) {
 		final IO io = partita.getIoconsole();
