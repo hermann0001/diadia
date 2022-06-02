@@ -2,4 +2,4 @@ Stanze: biblioteca, N10, N11
 Inizio: N10
 Vincente: N11
 Attrezzi: martello 5 biblioteca, pinza 2 N10
-Uscite: biblioteca nord N10, biblioteca sud N11
+Uscite: biblioteca nord N10, biblioteca sud N11, N10 sud biblioteca

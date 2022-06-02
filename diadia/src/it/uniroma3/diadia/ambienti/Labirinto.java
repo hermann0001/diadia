@@ -18,16 +18,16 @@ public class Labirinto {
 	private Stanza stanzaVincente; // stanza di uscita
 	private String nome; // nome del labirinto
 	
-	public Labirinto() {
-		
-	}
-	
-	public Labirinto(String nomeFile) throws FileNotFoundException, FormatoFileNonValidoException {
-		CaricatoreLabirinto c = new CaricatoreLabirinto(nomeFile);
-		c.carica();
-		this.stanzaIniziale = c.getStanzaIniziale();
-		this.stanzaVincente = c.getStanzaVincente();
-	}
+//	public Labirinto() {
+//		
+//	}
+//	
+//	public Labirinto(String nomeFile) throws FileNotFoundException, FormatoFileNonValidoException {
+//		CaricatoreLabirinto c = new CaricatoreLabirinto(nomeFile);
+//		c.carica();
+//		this.stanzaIniziale = c.getStanzaIniziale();
+//		this.stanzaVincente = c.getStanzaVincente();
+//	}
 
 	/**
 	 * Imposta la stanza finale/vincente
