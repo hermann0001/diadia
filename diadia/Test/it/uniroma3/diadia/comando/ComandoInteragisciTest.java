@@ -17,6 +17,7 @@ import it.uniroma3.diadia.personaggi.Mago;
 import it.uniroma3.diadia.personaggi.Strega;
 
 public class ComandoInteragisciTest {
+	private static final String CIBO_PREF_CANE = "osso";
 	private static final String PRES_STREGA = "Ciao sono la strega Anna";
 	private static final String NOME_STREGA = "Anna";
 	private static final String PRES_MAGO = "Ciao sono il mago Peppe";
@@ -58,7 +59,7 @@ public class ComandoInteragisciTest {
 	
 	@Test
 	public void testInteragisciCane() {
-		this.personaggio = new Cane(NOME_CANE, PRES_CANE);
+		this.personaggio = new Cane(NOME_CANE, PRES_CANE, CIBO_PREF_CANE);
 		this.partita.getStanzaCorrente().setPersonaggio(personaggio);
 		int cfuPrimaMorso = this.partita.getGiocatore().getCfu();
 		this.comandoInteragisci.esegui(this.partita);

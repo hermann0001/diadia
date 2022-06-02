@@ -19,34 +19,35 @@ public class Strega extends AbstractPersonaggio {
 	@Override
 	public String agisci(Partita partita) {
 		Stanza corrente = partita.getStanzaCorrente();
-		if (this.haSalutato()) {
-			for(Stanza s : corrente.getAdiacenze()) {
-				if(s.getAttrezzi().size() > corrente.getAttrezzi().size())
+		if (super.haSalutato()) {
+			for (Stanza s : corrente.getAdiacenze()) {
+				if (s.getAttrezzi().size() > corrente.getAttrezzi().size())
 					corrente = s;
 			}
 		} else {
-			for(Stanza s : corrente.getAdiacenze()) {
-				if(s.getAttrezzi().size() < corrente.getAttrezzi().size())
+			for (Stanza s : corrente.getAdiacenze()) {
+				if (s.getAttrezzi().size() < corrente.getAttrezzi().size())
 					corrente = s;
 			}
 		}
-		
+
 		partita.setStanzaCorrente(corrente);
 		final String messaggio = MESSAGGIO_INTERAGISCI + partita.getStanzaCorrente().getNome();
 		return messaggio;
 	}
 
 	@Override
-	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
-		if(attrezzo == null) return ATTREZZO_NON_VALIDO;
-		this.setAttrezzo(attrezzo);
+	public String riceviRegalo(Attrezzo regalo, Partita partita) {
+		if (regalo == null)
+			return ATTREZZO_NON_VALIDO;
+		this.setAttrezzo(regalo);
 		return MESSAGGIO_REGALO;
 	}
-	
+
 	public void setAttrezzo(Attrezzo attrezzo) {
 		this.attrezzo = attrezzo;
 	}
-	
+
 	public Attrezzo getAttrezzo() {
 		return this.attrezzo;
 	}
