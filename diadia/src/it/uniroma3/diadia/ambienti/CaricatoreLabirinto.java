@@ -76,15 +76,16 @@ public class CaricatoreLabirinto {
 
 	private void leggiECreaStanze() throws FormatoFileNonValidoException  {
 		String nomiStanze = this.leggiRigaCheCominciaPer(STANZE_MARKER);
-		for(String nomeStanza : separaStringheAlleVirgole(nomiStanze))
+		for(String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
 			this.builder.addStanza(nomeStanza);
+		}
 	}
 
 	private List<String> separaStringheAlleVirgole(String string) {
 		List<String> result = new LinkedList<>();
 		Scanner scanner = new Scanner(string);
-		scanner.useDelimiter(",");
-		try (Scanner scannerDiParole = scanner) {
+		Scanner scannerDiParole = scanner.useDelimiter(",");
+		while(scannerDiParole.hasNext()) {
 			result.add(scannerDiParole.next());
 		}
 		return result;
@@ -92,8 +93,7 @@ public class CaricatoreLabirinto {
 
 
 	private void leggiInizialeEvincente() throws FormatoFileNonValidoException {
-		String nomeStanzaIniziale = null;
-		nomeStanzaIniziale = this.leggiRigaCheCominciaPer(STANZA_INIZIALE_MARKER);
+		String nomeStanzaIniziale = this.leggiRigaCheCominciaPer(STANZA_INIZIALE_MARKER);
 		check(this.isStanzaValida(nomeStanzaIniziale), nomeStanzaIniziale +" non definita");
 		String nomeStanzaVincente = this.leggiRigaCheCominciaPer(STANZA_VINCENTE_MARKER);
 		check(this.isStanzaValida(nomeStanzaVincente), nomeStanzaVincente + " non definita");
@@ -135,7 +135,8 @@ public class CaricatoreLabirinto {
 
 	private boolean isStanzaValida(String nomeStanza) {
 //		return this.nome2stanza.containsKey(nomeStanza);
-		return this.builder.getStanza(nomeStanza) != null;
+		Stanza stanza = this.builder.getStanza(nomeStanza);
+		return stanza != null;
 	}
 
 	private void leggiEImpostaUscite() throws FormatoFileNonValidoException {
