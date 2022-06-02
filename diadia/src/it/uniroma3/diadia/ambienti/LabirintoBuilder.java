@@ -73,6 +73,24 @@ public class LabirintoBuilder{
 		this.ultimaStanzaInserita.addAttrezzo(attrezzoDaAggiungere);
 		return this;
 	}
+	
+	/**
+	 * versione sovraccarica di addAttrezzo che specifica anche la stanza
+	 * 
+	 * @version hw4
+	 */
+	public LabirintoBuilder addAttrezzo(String nomeAttrezzo, int peso, String nomeStanza) {
+		if(nomeAttrezzo.equals(""))
+			nomeAttrezzo = DEFAULT_NOME_NON_VALIDO;
+		Attrezzo attrezzoDaAggiungere = new Attrezzo(nomeAttrezzo, peso);
+		if(nomeStanza.equals(""))
+			nomeStanza = DEFAULT_NOME_NON_VALIDO;
+		if(!this.stanzeDelLabirinto.containsKey(nomeStanza))
+			this.addStanza(nomeStanza);
+		
+		this.getStanza(nomeStanza).addAttrezzo(attrezzoDaAggiungere);
+		return this;
+	}
 
 	public Labirinto getLabirinto() {
 		return this.labirintoCreato;

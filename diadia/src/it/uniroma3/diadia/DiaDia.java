@@ -71,34 +71,30 @@ public class DiaDia {
 		Labirinto labirinto = creaMappaPredefinita();
 		labirinto.setNome("Predefinito");
 		DiaDia gioco = new DiaDia(console, labirinto);
-		gioco.gioca();
+		try {
+			gioco.gioca();
+		} catch(Exception e) {
+			console.mostraMessaggio("Errore inaspettato...");
+		}
 	}
-	
+
 	/**
 	 * Ritorna un riferimento alla partita in corso
+	 * 
 	 * @return Partita
 	 */
 	public Partita getPartita() {
 		return this.partita;
 	}
-	
+
 	static public Labirinto creaMappaPredefinita() {
-		return new LabirintoBuilder()
-				.addStanzaIniziale("Atrio")
-				.addAttrezzo("osso", 1)
-				.addStanzaVincente("Biblioteca")
-				.addAdiacenze("Atrio", "nord", "Biblioteca")
-				.addAdiacenze("Atrio", "est", "Aula N11")
-				.addAdiacenze("Atrio", "sud", "Aula N10")
-				.addAdiacenze("Atrio", "ovest", "Laboratorio")
-				.addAdiacenze("Aula N11", "est", "Laboratorio")
-				.addAdiacenze("Aula N11", "ovest", "Atrio")
-				.addAdiacenze("Aula N10", "nord", "Atrio")
-				.addAdiacenze("Aula N10", "est", "Aula N11")
-				.addAdiacenze("Aula N10", "ovest", "Laboratorio")
-				.addAdiacenze("Laboratorio", "est", "Atrio")
-				.addAdiacenze("Laboratorio", "ovest", "Aula N11")
-				.addAdiacenze("Biblioteca", "sud", "Atrio")
+		return new LabirintoBuilder().addStanzaIniziale("Atrio").addAttrezzo("osso", 1).addStanzaVincente("Biblioteca")
+				.addAdiacenze("Atrio", "nord", "Biblioteca").addAdiacenze("Atrio", "est", "Aula N11")
+				.addAdiacenze("Atrio", "sud", "Aula N10").addAdiacenze("Atrio", "ovest", "Laboratorio")
+				.addAdiacenze("Aula N11", "est", "Laboratorio").addAdiacenze("Aula N11", "ovest", "Atrio")
+				.addAdiacenze("Aula N10", "nord", "Atrio").addAdiacenze("Aula N10", "est", "Aula N11")
+				.addAdiacenze("Aula N10", "ovest", "Laboratorio").addAdiacenze("Laboratorio", "est", "Atrio")
+				.addAdiacenze("Laboratorio", "ovest", "Aula N11").addAdiacenze("Biblioteca", "sud", "Atrio")
 				.getLabirinto();
 	}
 }
