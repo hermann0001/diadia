@@ -12,7 +12,7 @@ public class Giocatore {
 	private String nome;
 	private int cfu;
 	private Borsa borsa;
-	static final private int CFU_INIZIALI = 20;
+	private static final int CFU_INIZIALI = 20;
 
 	public Giocatore(String nome) {
 		this.nome = nome;

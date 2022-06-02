@@ -20,7 +20,7 @@ public class ComandoAiuto extends AbstractComando {
 	@Override
 	public void esegui(Partita partita) {
 		this.io = partita.getIoconsole();
-		for (int i = 0; i < ELENCO_COMANDI.length; i++)
-			this.io.mostraMessaggio(ELENCO_COMANDI[i] + " ");
+		for (String comando : ELENCO_COMANDI)
+			this.io.mostraMessaggio(comando + " ");
 	}
 }
