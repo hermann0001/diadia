@@ -8,15 +8,28 @@ public abstract class AbstractPersonaggio {
 	private String nome;
 	private String presentazione;
 	private boolean haSalutato;
+	private Attrezzo attrezzo;
 
 	public AbstractPersonaggio(String nome, String presentaz) {
 		this.nome = nome;
 		this.presentazione = presentaz;
 		this.haSalutato = false;
 	}
+	
+	public String getPresentazione() {
+		return presentazione;
+	}
 
 	public String getNome() {
 		return this.nome;
+	}
+
+	public Attrezzo getAttrezzo() {
+		return attrezzo;
+	}
+
+	public void setAttrezzo(Attrezzo attrezzo) {
+		this.attrezzo = attrezzo;
 	}
 
 	public boolean haSalutato() {

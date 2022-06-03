@@ -9,11 +9,9 @@ public class Strega extends AbstractPersonaggio {
 	public static final String MESSAGGIO_INTERAGISCI = "Sei stato magicamente spostato alla stanza ";
 	public static final String MESSAGGIO_REGALO = "Grazie per il regalo... AHAHAHAH";
 	public static final String ATTREZZO_NON_VALIDO = "attrezzo non valido";
-	private Attrezzo attrezzo;
 
 	public Strega(String nome, String presentaz) {
 		super(nome, presentaz);
-		this.attrezzo = null;
 	}
 
 	@Override
@@ -42,13 +40,5 @@ public class Strega extends AbstractPersonaggio {
 			return ATTREZZO_NON_VALIDO;
 		this.setAttrezzo(regalo);
 		return MESSAGGIO_REGALO;
-	}
-
-	public void setAttrezzo(Attrezzo attrezzo) {
-		this.attrezzo = attrezzo;
-	}
-
-	public Attrezzo getAttrezzo() {
-		return this.attrezzo;
 	}
 }

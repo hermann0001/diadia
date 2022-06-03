@@ -175,5 +175,4 @@ public class Stanza {
 	public AbstractPersonaggio getPersonaggio() {
 		return this.personaggio;
 	}
-
 }
