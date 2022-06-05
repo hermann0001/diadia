@@ -15,10 +15,16 @@ public class Mago extends AbstractPersonaggio {
 		super(nome, presentazione);
 		super.setAttrezzo(attrezzo);
 	}
-
+	
+	/**
+	 * un mago possiede un attrezzo che può donare
+	 * 
+	 * @param partita
+	 * @return messaggio
+	 */
 	@Override
 	public String agisci(Partita partita) {
-		String msg;
+		String msg = null;
 		Attrezzo attrezzo = super.getAttrezzo();
 		if (attrezzo != null) {
 			partita.getStanzaCorrente().addAttrezzo(attrezzo);
@@ -29,7 +35,13 @@ public class Mago extends AbstractPersonaggio {
 		}
 		return msg;
 	}
-
+	
+	
+	/**
+	 * un mago riceve un regalo, gli dimezza il peso e lo lascia cadere nella stanza
+	 * @param attrezzo, partita
+	 * @return string messaggio
+	 */
 	@Override
 	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
 		if (attrezzo == null)
