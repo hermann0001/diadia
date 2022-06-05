@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.giocatore;
 
+import it.uniroma3.diadia.ConfigurazioniIniziali;
+
 /**
  * Questa classe modella un giocatore
  *
@@ -12,7 +14,7 @@ public class Giocatore {
 	private String nome;
 	private int cfu;
 	private Borsa borsa;
-	private static final int CFU_INIZIALI = 20;
+	private static final int CFU_INIZIALI = ConfigurazioniIniziali.getCFU();
 
 	public Giocatore(String nome) {
 		this.nome = nome;
