@@ -53,6 +53,6 @@ public abstract class AbstractPersonaggio {
 
 	@Override
 	public String toString() {
-		return this.getNome();
+		return this.getNome() + "\n" + this.getPresentazione();
 	}
 }
