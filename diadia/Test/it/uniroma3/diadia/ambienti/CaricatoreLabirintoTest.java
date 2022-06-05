@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
 import static org.junit.Assert.*;
+import static it.uniroma3.diadia.Direzione.*;
 
 import java.io.FileNotFoundException;
 import java.io.StringReader;
@@ -109,7 +110,7 @@ public class CaricatoreLabirintoTest {
 		assertEquals("N10", this.labirinto.getStanzaIniziale().getNome());
 		assertEquals("N11", this.labirinto.getStanzaVincente().getNome());
 		assertEquals("pinza", this.labirinto.getStanzaIniziale().getAttrezzo("pinza").getNome());
-		assertEquals("biblioteca", this.labirinto.getStanzaIniziale().getStanzaAdiacente("sud").getNome());
+		assertEquals("biblioteca", this.labirinto.getStanzaIniziale().getStanzaAdiacente(SUD).getNome());
 	}
 	
 	@Test
@@ -129,7 +130,7 @@ public class CaricatoreLabirintoTest {
 		
 		assertEquals("biblioteca", this.labirinto.getStanzaIniziale().getNome());
 		assertEquals("atrio", this.labirinto.getStanzaVincente().getNome());
-		assertEquals("atrio", this.labirinto.getStanzaIniziale().getStanzaAdiacente("est").getNome());
+		assertEquals("atrio", this.labirinto.getStanzaIniziale().getStanzaAdiacente(EST).getNome());
 
 	}
 	
@@ -141,7 +142,7 @@ public class CaricatoreLabirintoTest {
 		
 		assertEquals("osso", this.labirinto.getStanzaVincente().getAttrezzo("osso").getNome());
 		assertEquals(3, this.labirinto.getStanzaVincente().getAttrezzo("osso").getPeso());
-		assertEquals("atrio", this.labirinto.getStanzaIniziale().getStanzaAdiacente("sud").getNome());
+		assertEquals("atrio", this.labirinto.getStanzaIniziale().getStanzaAdiacente(SUD).getNome());
 	}
 	
 	@Test

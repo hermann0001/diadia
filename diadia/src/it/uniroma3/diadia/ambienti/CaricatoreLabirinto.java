@@ -3,6 +3,7 @@ package it.uniroma3.diadia.ambienti;
 import java.io.*;
 import java.util.*;
 
+import it.uniroma3.diadia.Direzione;
 import it.uniroma3.diadia.eccezioni.FormatoFileNonValidoException;
 
 public class CaricatoreLabirinto {
@@ -80,7 +81,9 @@ public class CaricatoreLabirinto {
 //	private Stanza stanzaVincente;
 
 	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
-		this(new FileReader(nomeFile));
+		String filePath = new File("").getAbsolutePath();
+		this.reader = new LineNumberReader(new FileReader(filePath + "/resources/testLabirinto.txt"));
+		this.builder = new LabirintoBuilder();
 	}
 
 	public CaricatoreLabirinto(Reader reader) throws FileNotFoundException {
@@ -185,7 +188,14 @@ public class CaricatoreLabirinto {
 						msgTerminazionePrecoce("Il suo attrezzo sbloccante " + nomeAttrezzoSblocco + "."));
 				nomeAttrezzoSblocco = scannerLinea.next();
 			}
-			this.builder.addStanzaBloccata(nomeStanzaBloccata, nomeDirezioneBloccata, nomeAttrezzoSblocco);
+			Direzione dir = null;
+			try {
+				dir = Direzione.valueOf(nomeDirezioneBloccata.toUpperCase());
+			}catch(IllegalArgumentException e) {
+				check(false, "Direzioe non valida "+ nomeDirezioneBloccata);
+			}
+			
+			this.builder.addStanzaBloccata(nomeStanzaBloccata, dir, nomeAttrezzoSblocco);
 		}
 	}
 
@@ -214,10 +224,9 @@ public class CaricatoreLabirinto {
 		check(this.isStanzaValida(nomeStanzaIniziale), nomeStanzaIniziale + " non definita");
 		String nomeStanzaVincente = this.leggiRigaCheCominciaPer(STANZA_VINCENTE_MARKER);
 		check(this.isStanzaValida(nomeStanzaVincente), nomeStanzaVincente + " non definita");
+		
 		this.builder.addStanzaIniziale(nomeStanzaIniziale);
-		// this.stanzaIniziale = this.builder.getStanza(nomeStanzaVincente);
 		this.builder.addStanzaVincente(nomeStanzaVincente);
-		// this.stanzaVincente = this.builder.getStanza(nomeStanzaVincente);
 	}
 
 	private void leggiECollocaAttrezzi() throws FormatoFileNonValidoException {
@@ -373,20 +382,26 @@ public class CaricatoreLabirinto {
 
 		for (String specificaUscita : separaStringheAlleVirgole(specificheUscite)) {
 			String stanzaPartenza = null;
-			String dir = null;
+			String nomeDirezione = null;
 			String stanzaDestinazione = null;
 			try (Scanner scannerDiLinea = new Scanner(specificaUscita)) {
 				check(scannerDiLinea.hasNext(), msgTerminazionePrecoce("le uscite di una stanza."));
 				stanzaPartenza = scannerDiLinea.next();
 				check(scannerDiLinea.hasNext(),
 						msgTerminazionePrecoce("la direzione di una uscita della stanza " + stanzaPartenza));
-				dir = scannerDiLinea.next();
+				nomeDirezione = scannerDiLinea.next();
 				check(scannerDiLinea.hasNext(), msgTerminazionePrecoce(
-						"la destinazione di una uscita della stanza " + stanzaPartenza + " nella direzione " + dir));
+						"la destinazione di una uscita della stanza " + stanzaPartenza + " nella direzione " + nomeDirezione));
 				stanzaDestinazione = scannerDiLinea.next();
-
-				impostaUscita(stanzaPartenza, dir, stanzaDestinazione);
 			}
+			Direzione dir = null;
+			try {
+				dir = Direzione.valueOf(nomeDirezione.toUpperCase());
+			}catch(IllegalArgumentException e) {
+				check(false, "Direzioe non valida "+ nomeDirezione);
+			}
+			
+			impostaUscita(stanzaPartenza, dir, stanzaDestinazione);
 		}
 	}
 
@@ -394,7 +409,7 @@ public class CaricatoreLabirinto {
 		return "Terminazione precoce del file prima di leggere " + msg;
 	}
 
-	private void impostaUscita(String stanzaDa, String dir, String nomeA) throws FormatoFileNonValidoException {
+	private void impostaUscita(String stanzaDa, Direzione dir, String nomeA) throws FormatoFileNonValidoException {
 		check(isStanzaValida(stanzaDa), "Stanza di partenza sconosciuta " + dir);
 		check(isStanzaValida(nomeA), "Stanza di destinazione sconosciuta " + dir);
 		this.builder.addAdiacenze(stanzaDa, dir, nomeA);
