@@ -2,6 +2,7 @@ package it.uniroma3.diadia.ambienti;
 
 import java.util.*;
 
+import it.uniroma3.diadia.Direzione;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 import it.uniroma3.diadia.personaggi.Cane;
@@ -56,7 +57,7 @@ public class LabirintoBuilder {
 		return this;
 	}
 
-	public LabirintoBuilder addAdiacenze(String stanzaEsistente, String direzione, String stanzaDaAggiungere) {
+	public LabirintoBuilder addAdiacenze(String stanzaEsistente, Direzione direzione, String stanzaDaAggiungere) {
 		if (stanzaEsistente.equals(""))
 			stanzaEsistente = DEFAULT_NOME_NON_VALIDO;
 		if (!this.stanzeDelLabirinto.containsKey(stanzaEsistente))
@@ -70,6 +71,8 @@ public class LabirintoBuilder {
 		Stanza s2 = this.stanzeDelLabirinto.get(stanzaDaAggiungere);
 
 		s1.impostaStanzaAdiacente(direzione, s2);
+		s2.impostaStanzaAdiacente(direzione.opposta(), s1);
+
 		return this;
 	}
 
@@ -154,7 +157,7 @@ public class LabirintoBuilder {
 		return this;
 	}
 
-	public LabirintoBuilder addStanzaBloccata(String stanza, String direzioneBloccata, String nomeAttrezzoSbloccante) {
+	public LabirintoBuilder addStanzaBloccata(String stanza, Direzione direzioneBloccata, String nomeAttrezzoSbloccante) {
 		if (stanza.equals(""))
 			stanza = DEFAULT_NOME_NON_VALIDO;
 		

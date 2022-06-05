@@ -2,6 +2,7 @@ package it.uniroma3.diadia.ambienti;
 
 import java.util.*;
 
+import it.uniroma3.diadia.Direzione;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
@@ -21,7 +22,7 @@ public class Stanza {
 
 	private String nome;
 	private Map<String, Attrezzo> attrezzi;
-	private Map<String, Stanza> stanzeAdiacenti;
+	private Map<Direzione, Stanza> stanzeAdiacenti;
 	private AbstractPersonaggio personaggio;
 
 	/**
@@ -42,9 +43,7 @@ public class Stanza {
 	 * @param stanza    stanza adiacente nella direzione indicata dal primo
 	 *                  parametro.
 	 */
-	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-		if (!direzioneIsCorretta(direzione))
-			return;
+	final public void impostaStanzaAdiacente(Direzione direzione, Stanza stanza) {
 		if ((stanza != null) && (!this.nome.equals(stanza.getNome())))
 			this.stanzeAdiacenti.put(direzione, stanza);
 	}
@@ -54,7 +53,7 @@ public class Stanza {
 	 * 
 	 * @param direzione
 	 */
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		return this.stanzeAdiacenti.get(direzione);
 	}
 
@@ -107,6 +106,7 @@ public class Stanza {
 	 * 
 	 * @return la rappresentazione stringa
 	 */
+	@Override
 	public String toString() {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append(this.nome);
@@ -147,7 +147,7 @@ public class Stanza {
 		return (this.attrezzi.remove(nomeAttrezzo) != null);
 	}
 
-	public Collection<Stanza> getAdiacenze() {
+	final public Collection<Stanza> getAdiacenze() {
 		return this.stanzeAdiacenti.values();
 	}
 
@@ -160,12 +160,6 @@ public class Stanza {
 	@Override
 	public int hashCode() {
 		return this.nome.hashCode();
-	}
-
-	// metodo che controlla se la direzione inserita sia corretta
-	public boolean direzioneIsCorretta(String direzione) {
-		return direzione.equals("sud") || direzione.equals("nord") || direzione.equals("est")
-				|| direzione.equals("ovest");
 	}
 
 	public void setPersonaggio(AbstractPersonaggio personaggio) {

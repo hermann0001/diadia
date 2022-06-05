@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
+import it.uniroma3.diadia.Direzione;
+
 /**
  * La stanza bloccata è un particolare sottotipo di stanza che possiede una direzione
  * bloccata che può essere sbloccata solo da un particolare attrezzo
@@ -10,10 +12,10 @@ package it.uniroma3.diadia.ambienti;
  */
 
 public class StanzaBloccata extends Stanza {
-	private String direzioneBloccata;
+	private Direzione direzioneBloccata;
 	private String attrezzoSbloccaDirezione;
 
-	public StanzaBloccata(String nome, String direzioneBloccata, String attrezzoSbloccaDirezione) {
+	public StanzaBloccata(String nome, Direzione direzioneBloccata, String attrezzoSbloccaDirezione) {
 		super(nome);
 		this.direzioneBloccata = direzioneBloccata;
 		this.attrezzoSbloccaDirezione = attrezzoSbloccaDirezione;
@@ -29,8 +31,9 @@ public class StanzaBloccata extends Stanza {
 		}
 		return toString();
 	}
-
-	public Stanza getStanzaAdiacente(String direzione) {
+	
+	@Override
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		if (!this.hasAttrezzo(this.attrezzoSbloccaDirezione))
 			return this;
 

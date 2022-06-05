@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.comando;
 
 import static org.junit.Assert.*;
+import static it.uniroma3.diadia.Direzione.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class ComandoVaiTest {
 	@Before
 	public void setUp() {
 		Labirinto labirinto = new LabirintoBuilder().addStanzaIniziale("partenza")
-				.addAdiacenze("partenza", "nord", "destinazione").getLabirinto();
+				.addAdiacenze("partenza", NORD, "destinazione").getLabirinto();
 		this.vai = new ComandoVai();
 		this.io = new IOConsole();
 		this.partita = new Partita(this.io, labirinto);

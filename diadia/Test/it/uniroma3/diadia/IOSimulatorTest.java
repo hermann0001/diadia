@@ -223,12 +223,13 @@ public class IOSimulatorTest {
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
-		assertEquals(ComandoVai.DIREZIONE_INESISTENTE, io.nextMessaggio());
+		assertEquals(ComandoVai.DIREZIONE_NULL, io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(ComandoFine.MESSAGGIO_FINE, io.nextMessaggio());
 		assertFalse(io.hasNextMessaggio());
 	}
-
+	
+	@Test
 	public void testSimulazioneComandoVaiSenzaParametro() {
 		String righeDaLeggere[] = { "vai", "fine" };
 		this.io.setInput(righeDaLeggere);
@@ -242,7 +243,8 @@ public class IOSimulatorTest {
 		assertEquals(ComandoFine.MESSAGGIO_FINE, io.nextMessaggio());
 		assertFalse(io.hasNextMessaggio());
 	}
-
+	
+	@Test
 	public void testSimulazioneDoppioComandoVai() {
 		String righeDaLeggere[] = { "vai sud", "vai est", "fine" };
 		this.io.setInput(righeDaLeggere);

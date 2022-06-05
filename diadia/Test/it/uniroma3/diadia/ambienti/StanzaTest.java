@@ -2,24 +2,24 @@ package it.uniroma3.diadia.ambienti;
 
 import static org.junit.Assert.*;
 
+import java.util.*;
+
+import static it.uniroma3.diadia.Direzione.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.Direzione;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaTest {
-
-	static final private String DIREZIONI[] = { "nord", "sud", "est", "ovest" };
-	static final private int NUMERO_MAX_DIREZIONI = 4;
-	static final private int NUMERO_MAX_ATTREZZI = 10;
-	private String direzioniVuoto[] = {null, null, null, null};
 
 	/*
 	 * stanze per il test dei metodi riguardanti l'adiacenza
 	 */
 	private Stanza noAdiacenti;
 	private Stanza tutteAdiacenti;
-	private Stanza stanzeDirezioni[];
+	private Map<Direzione, Stanza> direzione2stanza;
 	private Stanza stanzaOverflow;
 	private Stanza noDoppioni;
 
@@ -30,25 +30,22 @@ public class StanzaTest {
 	private Stanza tuttiAttrezzi;
 	private Stanza unSoloAttrezzo;
 
-	private Attrezzo attrezzi[];
+	private List<Attrezzo> attrezzi;
 	private Attrezzo attrezzoOverflow;
 
 	@Before
 	public void setUpAdiacenti() {
 		this.noAdiacenti = new Stanza("noAdiacenti"); // stanza senza stanze adiacenti
 		this.tutteAdiacenti = new Stanza("tutteAdiacenti"); // stanza con 4 stanze adiacenti
-		this.stanzeDirezioni = new Stanza[NUMERO_MAX_DIREZIONI];
-		this.stanzaOverflow = new Stanza("overflow");
+		this.direzione2stanza = new HashMap<>();
 		
-		//Creo le 4 stanze
-		for(int i = 0; i < NUMERO_MAX_DIREZIONI; i++)
-			this.stanzeDirezioni[i] = new Stanza("Stanza " + DIREZIONI[i]);
+		this.stanzaOverflow = new Stanza("overflow");
 
 		// Imposto le 4 stanze adiacenti
-		for (int i = 0; i < NUMERO_MAX_DIREZIONI; i++)
-			this.tutteAdiacenti.impostaStanzaAdiacente(DIREZIONI[i], this.stanzeDirezioni[i]);
-	
-	
+		for (Direzione d : Direzione.values()) {
+			this.direzione2stanza.put(d, new Stanza("Stanza " + d));
+			this.tutteAdiacenti.impostaStanzaAdiacente(d, this.direzione2stanza.get(d));
+		}
 	}
 
 	/*
@@ -56,8 +53,8 @@ public class StanzaTest {
 	 */
 	@Test
 	public void testGetStanzaNoAdiacentiNord() {
-		for (String direzione : DIREZIONI)
-			assertEquals("La stanza ha delle stanze adiacenti", null, this.noAdiacenti.getStanzaAdiacente(direzione));
+		for (Direzione d : Direzione.values())
+			assertEquals("La stanza ha delle stanze adiacenti", null, this.noAdiacenti.getStanzaAdiacente(d));
 	}
 
 	/*
@@ -66,22 +63,22 @@ public class StanzaTest {
 	 */
 	@Test
 	public void testGetStanzaTutteAdiacenti() {
-		this.tutteAdiacenti.impostaStanzaAdiacente(DIREZIONI[0], stanzaOverflow);
-		assertEquals(this.stanzaOverflow, this.tutteAdiacenti.getStanzaAdiacente(DIREZIONI[0]));
+		this.tutteAdiacenti.impostaStanzaAdiacente(NORD, stanzaOverflow);
+		assertEquals(this.stanzaOverflow, this.tutteAdiacenti.getStanzaAdiacente(NORD));
 	}
 	
 	@Test
 	public void testSeStessaComeAdiacente() {
 		Stanza seStessa = new Stanza("seStessa");
-		seStessa.impostaStanzaAdiacente("sud", seStessa);
+		seStessa.impostaStanzaAdiacente(SUD, seStessa);
 		assertEquals(0, seStessa.getAdiacenze().size());
 	}
 	
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testImpostaAdiacenteParametroErrato() {
 		Stanza centrale = new Stanza("centrale");
 		Stanza adiacente = new Stanza("adiacente");
-		String direzione = "sud-ovest";
+		Direzione direzione = Direzione.valueOf("sud-ovest");
 		centrale.impostaStanzaAdiacente(direzione, adiacente);
 		
 		assertNull(centrale.getStanzaAdiacente(direzione));
@@ -92,19 +89,19 @@ public class StanzaTest {
 		this.noAttrezzi = new Stanza("noAttrezzi");
 		this.tuttiAttrezzi = new Stanza("tuttiAttrezzi");
 		this.unSoloAttrezzo = new Stanza("unSoloAttrezzo");
-		this.attrezzi = new Attrezzo[NUMERO_MAX_ATTREZZI];
+		this.attrezzi = new ArrayList<>();
 		this.attrezzoOverflow = new Attrezzo("Attrezzo10", 10);
 		this.noDoppioni = new Stanza("noDoppioni");
 
-		for (int i = 0; i < NUMERO_MAX_ATTREZZI; i++)
-			this.attrezzi[i] = new Attrezzo("Attrezzo" + i, i);
+		for (int i = 0; i < Stanza.NUMERO_MASSIMO_ATTREZZI; i++)
+			this.attrezzi.add(new Attrezzo("Attrezzo"+i, i));
 
 		/* Nella stanza "tutteAdiacenti" sono presenti 10 attrezzi */
-		for (Attrezzo attrezzo : this.attrezzi)
-			this.tuttiAttrezzi.addAttrezzo(attrezzo);
+		for (Attrezzo a : this.attrezzi)
+			this.tuttiAttrezzi.addAttrezzo(a);
 
 		/* aggiungo un attrezzo alla stanza con un solo attrezzo */
-		this.unSoloAttrezzo.addAttrezzo(this.attrezzi[0]);
+		this.unSoloAttrezzo.addAttrezzo(this.attrezzi.get(0));
 
 	}
 
@@ -133,7 +130,7 @@ public class StanzaTest {
 	 * l'attrezzo cercato
 	 */
 	public void testGetAttrezzo1() {
-		assertEquals(this.attrezzi[0], this.tuttiAttrezzi.getAttrezzo("Attrezzo0"));
+		assertEquals(this.attrezzi.get(0), this.tuttiAttrezzi.getAttrezzo("Attrezzo0"));
 	}
 
 	/*
@@ -149,9 +146,7 @@ public class StanzaTest {
 	 */
 	@Test
 	public void testGetAdiacenzeSenzaStanzeAdiacenti() {
-		Stanza[] a = new Stanza[4];
-		this.noAdiacenti.getAdiacenze().toArray(a);
-		assertArrayEquals(direzioniVuoto, a);
+		assertTrue(this.noAdiacenti.getAdiacenze().isEmpty());
 	}
 
 	/*
@@ -160,9 +155,7 @@ public class StanzaTest {
 	 */
 	@Test
 	public void testGetAdiacenzeCon4StanzeAdiacenti() {
-		Stanza[] a = new Stanza[4];
-		this.tutteAdiacenti.getAdiacenze().toArray(a);
-		assertArrayEquals(this.stanzeDirezioni, a);
+		assertEquals(4, this.tutteAdiacenti.getAdiacenze().size());
 	}
 
 	/*
@@ -194,8 +187,8 @@ public class StanzaTest {
 	
 	@Test
 	public void testNoAttrezziDuplicati() {
-		this.noDoppioni.addAttrezzo(this.attrezzi[0]);
-		this.noDoppioni.addAttrezzo(this.attrezzi[0]);
+		this.noDoppioni.addAttrezzo(this.attrezzi.get(0));
+		this.noDoppioni.addAttrezzo(this.attrezzi.get(0));
 		
 		assertEquals(1, this.noDoppioni.getAttrezzi().size());
 	}

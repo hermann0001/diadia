@@ -1,6 +1,8 @@
 package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
+import static it.uniroma3.diadia.Direzione.*;
+
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.comando.AbstractComando;
 import it.uniroma3.diadia.comando.FabbricaDiComandiRiflessiva;
@@ -88,13 +90,22 @@ public class DiaDia {
 	}
 
 	static public Labirinto creaMappaPredefinita() {
-		return new LabirintoBuilder().addStanzaIniziale("Atrio").addAttrezzo("osso", 1).addStanzaVincente("Biblioteca")
-				.addAdiacenze("Atrio", "nord", "Biblioteca").addAdiacenze("Atrio", "est", "Aula N11")
-				.addAdiacenze("Atrio", "sud", "Aula N10").addAdiacenze("Atrio", "ovest", "Laboratorio")
-				.addAdiacenze("Aula N11", "est", "Laboratorio").addAdiacenze("Aula N11", "ovest", "Atrio")
-				.addAdiacenze("Aula N10", "nord", "Atrio").addAdiacenze("Aula N10", "est", "Aula N11")
-				.addAdiacenze("Aula N10", "ovest", "Laboratorio").addAdiacenze("Laboratorio", "est", "Atrio")
-				.addAdiacenze("Laboratorio", "ovest", "Aula N11").addAdiacenze("Biblioteca", "sud", "Atrio")
+		return new LabirintoBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAttrezzo("osso", 1)
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenze("Atrio", NORD, "Biblioteca")
+				.addAdiacenze("Atrio", EST, "Aula N11")
+				.addAdiacenze("Atrio", SUD, "Aula N10")
+				.addAdiacenze("Atrio", OVEST, "Laboratorio")
+				.addAdiacenze("Aula N11", EST, "Laboratorio")
+				.addAdiacenze("Aula N11", OVEST, "Atrio")
+				.addAdiacenze("Aula N10", NORD, "Atrio")
+				.addAdiacenze("Aula N10", EST, "Aula N11")
+				.addAdiacenze("Aula N10", OVEST, "Laboratorio")
+				.addAdiacenze("Laboratorio", EST, "Atrio")
+				.addAdiacenze("Laboratorio", OVEST, "Aula N11")
+				.addAdiacenze("Biblioteca", SUD, "Atrio")
 				.getLabirinto();
 	}
 }
