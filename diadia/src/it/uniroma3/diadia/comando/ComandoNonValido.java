@@ -11,7 +11,7 @@ import it.uniroma3.diadia.Partita;
  */
 public class ComandoNonValido extends AbstractComando {
 	
-	private ReflectiveOperationException exception;
+	private Exception exception;
 	public static final String COMANDO_NON_VALIDO = "Comando non valido";
 	
 	public ComandoNonValido(ReflectiveOperationException e) {
@@ -20,7 +20,13 @@ public class ComandoNonValido extends AbstractComando {
 	}
 
 	
-	public ReflectiveOperationException getException() {
+	public ComandoNonValido(IllegalArgumentException e) {
+		super("nonValido");
+		this.exception = e;
+	}
+
+
+	public Exception getException() {
 		return this.exception;
 	}
 	
