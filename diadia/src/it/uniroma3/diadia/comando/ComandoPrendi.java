@@ -46,12 +46,13 @@ public class ComandoPrendi extends AbstractComando {
 
 		Borsa borsa = partita.getGiocatore().getBorsa();
 		Attrezzo a = stanzaCorrente.getAttrezzo(this.nomeAttrezzo);
-		stanzaCorrente.removeAttrezzo(this.nomeAttrezzo);
-		if (borsa.addAttrezzo(a) == false) {
-			this.io.mostraMessaggio("Qualcosa è andato storto!");
+		if(borsa.addAttrezzo(a) == false) {
+			this.io.mostraMessaggio("Probabilmente l'attrezzo è troppo pesante...");
 			return;
 		}
 		this.io.mostraMessaggio(ATTREZZO_PRESO);
+		stanzaCorrente.removeAttrezzo(this.nomeAttrezzo);
+
 		return;
 	}
 }
