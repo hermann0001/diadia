@@ -34,7 +34,7 @@ public class ComandoGuarda extends AbstractComando {
 		this.io.mostraMessaggio(borsaCorrente.toString());
 		
 		if(personaggio != null) {
-			this.io.mostraMessaggio(personaggio.getClass().toString() + " " + personaggio.getNome());
+			this.io.mostraMessaggio(personaggio.getClass().getSimpleName() + " " + personaggio.getNome());
 		}
 		
 		this.io.mostraMessaggio("Mappa:" + partita.getLabirinto().getNome());
