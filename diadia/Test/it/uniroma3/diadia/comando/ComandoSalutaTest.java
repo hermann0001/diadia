@@ -9,7 +9,6 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 import it.uniroma3.diadia.personaggi.Strega;
 
@@ -24,7 +23,7 @@ public class ComandoSalutaTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Labirinto labirinto = new LabirintoBuilder().addStanzaIniziale("partenza").getLabirinto();
+		Labirinto labirinto = Labirinto.newBuilder().addStanzaIniziale("partenza").getLabirinto();
 		this.comandoSaluta = new ComandoSaluta();
 		this.io = new IOConsole();
 		this.partita = new Partita(this.io, labirinto);
