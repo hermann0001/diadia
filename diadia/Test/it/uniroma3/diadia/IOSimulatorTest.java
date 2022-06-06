@@ -2,6 +2,7 @@ package it.uniroma3.diadia;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,6 +43,7 @@ public class IOSimulatorTest {
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(ComandoFine.MESSAGGIO_FINE, io.nextMessaggio());
 		assertFalse(io.hasNextMessaggio());
+
 	}
 
 	@Test
@@ -59,6 +61,7 @@ public class IOSimulatorTest {
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(ComandoFine.MESSAGGIO_FINE, io.nextMessaggio());
 		assertFalse(io.hasNextMessaggio());
+
 	}
 
 	@Test
@@ -74,6 +77,7 @@ public class IOSimulatorTest {
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(ComandoFine.MESSAGGIO_FINE, io.nextMessaggio());
 		assertFalse(io.hasNextMessaggio());
+
 	}
 
 	@Test
@@ -104,6 +108,7 @@ public class IOSimulatorTest {
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(ComandoFine.MESSAGGIO_FINE, io.nextMessaggio());
 		assertFalse(io.hasNextMessaggio());
+
 	}
 
 	@Test
@@ -228,7 +233,7 @@ public class IOSimulatorTest {
 		assertEquals(ComandoFine.MESSAGGIO_FINE, io.nextMessaggio());
 		assertFalse(io.hasNextMessaggio());
 	}
-	
+
 	@Test
 	public void testSimulazioneComandoVaiSenzaParametro() {
 		String righeDaLeggere[] = { "vai", "fine" };
@@ -243,7 +248,7 @@ public class IOSimulatorTest {
 		assertEquals(ComandoFine.MESSAGGIO_FINE, io.nextMessaggio());
 		assertFalse(io.hasNextMessaggio());
 	}
-	
+
 	@Test
 	public void testSimulazioneDoppioComandoVai() {
 		String righeDaLeggere[] = { "vai sud", "vai est", "fine" };

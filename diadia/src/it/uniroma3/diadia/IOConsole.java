@@ -11,6 +11,20 @@ import java.util.Scanner;
  */
 
 public class IOConsole implements IO {
+	private Scanner scannerDiLinee;
+	private static int numeroIstanziamenti = 0;
+	
+	public IOConsole(Scanner scannerDiLinee) {
+		this.scannerDiLinee = scannerDiLinee;
+		numeroIstanziamenti++;
+		this.mostraMessaggio("[Classe " + getClass().getName() + " - Numero istanziamenti:" + numeroIstanziamenti + "]");
+	}
+	
+	public IOConsole() {
+		this.scannerDiLinee = new Scanner(System.in);
+		numeroIstanziamenti++;
+		this.mostraMessaggio("[Classe " + getClass().getName() + " - Numero istanziamenti:" + numeroIstanziamenti + "]");
+	}
 
 	@Override
 	public void mostraMessaggio(String msg) {
@@ -19,9 +33,8 @@ public class IOConsole implements IO {
 
 	@Override
 	public String leggiRiga() {
-		Scanner scannerDiLinee = new Scanner(System.in);
 		String riga = scannerDiLinee.nextLine();
-		//scannerDiLinee.close();
 		return riga;
 	}
+
 }
