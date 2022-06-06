@@ -40,7 +40,7 @@ public abstract class AbstractPersonaggio {
 		StringBuilder risposta = new StringBuilder("Ciao, io sono ");
 		risposta.append(this.getNome() + ".");
 		if (!haSalutato)
-			risposta.append(this.presentazione);
+			risposta.append("\n" + this.presentazione);
 		else
 			risposta.append("Ci siamo gia' presentati!");
 		this.haSalutato = true;
