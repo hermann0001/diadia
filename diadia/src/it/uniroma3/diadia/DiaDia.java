@@ -1,11 +1,16 @@
 package it.uniroma3.diadia;
 
+import it.uniroma3.diadia.ambienti.CaricatoreLabirinto;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import static it.uniroma3.diadia.Direzione.*;
 
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import it.uniroma3.diadia.comando.AbstractComando;
+import it.uniroma3.diadia.comando.ComandoNonValido;
 import it.uniroma3.diadia.comando.FabbricaDiComandiRiflessiva;
+import it.uniroma3.diadia.eccezioni.FormatoFileNonValidoException;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -59,7 +64,14 @@ public class DiaDia {
 	private boolean processaIstruzione(String istruzione) {
 		AbstractComando comandoDaEseguire;
 		FabbricaDiComandiRiflessiva factory = new FabbricaDiComandiRiflessiva();
-		comandoDaEseguire = factory.costruisciComando(istruzione);
+		try {
+			comandoDaEseguire = factory.costruisciComando(istruzione);	
+		}catch(IllegalArgumentException e) {
+			comandoDaEseguire = new ComandoNonValido(e);
+		}catch(RuntimeException e) {
+			throw new RuntimeException();
+		}
+		
 		comandoDaEseguire.esegui(this.partita);
 		if (this.partita.vinta())
 			this.io.mostraMessaggio(VITTORIA);
@@ -69,14 +81,22 @@ public class DiaDia {
 	}
 
 	public static void main(String[] argc) {
-		IO console = new IOConsole();
-		Labirinto labirinto = creaMappaPredefinita();
-		labirinto.setNome("Predefinito");
-		DiaDia gioco = new DiaDia(console, labirinto);
-		try {
+		Scanner scannerDiLinee = new Scanner(System.in);
+		IO console = new IOConsole(scannerDiLinee);
+
+		try{
+			Labirinto labirinto = creaMappaDaFile("testLabirinto.txt");
+			DiaDia gioco = new DiaDia(console, labirinto);
 			gioco.gioca();
+			
+		} catch(FileNotFoundException e) {
+			console.mostraMessaggio("Errore nel caricamento del file del labirinto... non esiste!");
+		} catch(FormatoFileNonValidoException e) {
+			console.mostraMessaggio("Errore nel caricamento del file, il formato è errato!");
 		} catch(Exception e) {
-			console.mostraMessaggio("Errore inaspettato...");
+			console.mostraMessaggio("qualcosa è andato storto...");
+		} finally {
+			scannerDiLinee.close();
 		}
 	}
 
@@ -90,7 +110,7 @@ public class DiaDia {
 	}
 
 	static public Labirinto creaMappaPredefinita() {
-		return new LabirintoBuilder()
+		Labirinto lab =  Labirinto.newBuilder()
 				.addStanzaIniziale("Atrio")
 				.addAttrezzo("osso", 1)
 				.addStanzaVincente("Biblioteca")
@@ -107,5 +127,16 @@ public class DiaDia {
 				.addAdiacenze("Laboratorio", OVEST, "Aula N11")
 				.addAdiacenze("Biblioteca", SUD, "Atrio")
 				.getLabirinto();
+		
+		lab.setNome("Predefinito");
+		return lab;
+	}
+	
+	static public Labirinto creaMappaDaFile(String nomeFile) throws FormatoFileNonValidoException, FileNotFoundException {
+		final CaricatoreLabirinto caricatoreLabirinto = new CaricatoreLabirinto(nomeFile);
+		caricatoreLabirinto.carica();
+		final Labirinto lab = caricatoreLabirinto.getLabirinto();
+		lab.setNome(nomeFile);
+		return lab;
 	}
 }
