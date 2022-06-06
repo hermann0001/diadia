@@ -9,11 +9,11 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public AbstractComando costruisciComando(String istruzione){
+	public AbstractComando costruisciComando(String istruzione)
+											throws IllegalArgumentException, RuntimeException{
+		if(istruzione.equals(""))
+			throw new IllegalArgumentException();
 		try {
-			if(istruzione == null)
-				throw new IllegalArgumentException();
-			
 			Scanner scannerDiParole = new Scanner(istruzione);
 			String nomeComando = null;
 			String parametro = null;

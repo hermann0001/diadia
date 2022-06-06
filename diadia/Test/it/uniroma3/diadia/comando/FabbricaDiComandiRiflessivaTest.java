@@ -75,5 +75,10 @@ public class FabbricaDiComandiRiflessivaTest {
 		this.factory.costruisciComando(null);
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void testCostruisciComando_vuoto() {
+		this.factory.costruisciComando("");
+	}
+	
 
 }
