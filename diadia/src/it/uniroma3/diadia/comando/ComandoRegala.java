@@ -1,6 +1,7 @@
 
 package it.uniroma3.diadia.comando;
 
+import java.util.Iterator;
 import java.util.List;
 
 import it.uniroma3.diadia.IO;
@@ -23,18 +24,22 @@ public class ComandoRegala extends AbstractComando {
 	public void esegui(Partita partita) {
 		final IO io = partita.getIoconsole();
 		String msg = null;
+		String attrezzoScelto = super.getParametro();
 
 		final AbstractPersonaggio personaggio = partita.getStanzaCorrente().getPersonaggio();
-		io.mostraMessaggio("Quale attrezzo vuoi regalare a " + personaggio.getNome());
 		List<Attrezzo> listAttrezziBorsa = partita.getGiocatore().getBorsa().getAttrezzi();
-		stampaListaAttrezzi(listAttrezziBorsa, io);
-		boolean regalato = false;
 
-		String attrezzoScelto = getAttrezzo(io);
-		for (Attrezzo a : listAttrezziBorsa) {
+		if(attrezzoScelto == null || attrezzoScelto.equals("")) {
+			io.mostraMessaggio("Quale attrezzo vuoi regalare a " + personaggio.getNome());
+			stampaListaAttrezzi(listAttrezziBorsa, io);
+			return;
+		}
+		
+		for (Iterator<Attrezzo> iterator = listAttrezziBorsa.iterator(); iterator.hasNext();) {
+			Attrezzo a = iterator.next();
 			if (attrezzoScelto.equals(a.getNome())) {
-				regalato = true;
 				msg = personaggio.riceviRegalo(a, partita);
+				iterator.remove();
 			} else
 				msg = ATTREZZO_NON_TROVATO;
 		}
@@ -48,26 +53,4 @@ public class ComandoRegala extends AbstractComando {
 		for (Attrezzo a : listAttrezziBorsa)
 			io.mostraMessaggio(i++ + ")" + " " + a.getNome());
 	}
-
-	/**
-	 * prende attrezzo da tastiera
-	 * 
-	 * @param io
-	 * @return
-	 */
-	private String getAttrezzo(IO io) {
-		return io.leggiRiga();
-	}
-
-	/**
-	 * overload prende il primo attrezzo della borsa
-	 * 
-	 * @param partita
-	 * @return
-	 */
-	private String getAttrezzo(Partita partita) {
-		return partita.getGiocatore().getBorsa().getAttrezzi().get(0).getNome();
-
-	}
-
 }
