@@ -15,71 +15,79 @@ public class CaricatoreLabirintoTest {
 	private CaricatoreLabirinto caricatoreLabirinto;
 	private Labirinto labirinto;
 	private final static String MONOLOCALE = 
-			"Stanze: biblioteca\n"+
-			"Inizio: biblioteca\n"+
-			"Vincente: biblioteca";
+			 "Stanze: biblioteca\n"
+			+ "Inizio: biblioteca\n"
+			+ "Vincente: biblioteca";
 
 	private final static String BILOCALE = 
-			"Stanze: biblioteca, atrio\n"+
-			"Inizio: biblioteca\n"+
-			"Vincente: atrio\n"+
-			"Attrezzi: \n"+
-			"Uscite: biblioteca est atrio, atrio ovest biblioteca";
+			 "Stanze: biblioteca, atrio\n"
+			+ "Inizio: biblioteca\n"
+			+ "Vincente: atrio\n"
+			+ "Magiche: \n"
+			+ "Buie: \n"
+			+ "Bloccate: \n"
+			+ "Attrezzi: \n"
+			+ "Uscite: biblioteca est atrio, atrio ovest biblioteca";
 	
 	private final static String TRILOCALE_CON_ATTREZZI = 
-			"Stanze: biblioteca, atrio, N11\n"+
-			"Inizio: biblioteca\n"+
-			"Vincente: atrio\n"+
-			"Attrezzi: osso 3 atrio\n"+
-			"Uscite: biblioteca sud atrio, atrio nord biblioteca";
+			 "Stanze: biblioteca, atrio, N11\n"
+			+ "Inizio: biblioteca\n"
+			+ "Vincente: atrio\n"
+			+ "Magiche: \n"
+			+ "Buie: \n"
+			+ "Bloccate: \n"
+			+ "Attrezzi: osso 3 atrio\n"
+			+ "Uscite: biblioteca sud atrio, atrio nord biblioteca";
 	
 	private final static String MONOLOCALE_MAGICO = 
 			  "Stanze: N18\n"
 			+ "Inizio: N18\n"
 			+ "Vincente: N18\n"
+			+ "Magiche: N18 2\n"
+			+ "Buie: \n"
+			+ "Bloccate: \n"
 			+ "Attrezzi: \n"
-			+ "Uscite: \n"
-			+ "Magiche: N18 2";
+			+ "Uscite: \n";
 	
 	private final static String MONOLOCALE_BUIO = 
 			  "Stanze: N18\n"
 			+ "Inizio: N18\n"
 			+ "Vincente: N18\n"
-			+ "Attrezzi: \n"
-			+ "Uscite: \n"
 			+ "Magiche: \n"
-			+ "Buie: N18 lampada";
-	
+			+ "Buie: N18 lampada\n"
+			+ "Bloccate: \n"
+			+ "Attrezzi: \n"
+			+ "Uscite: \n";	
 	private final static String MONOLOCALE_BLOCCATO = 
 			  "Stanze: N18\n"
 			+ "Inizio: N18\n"
 			+ "Vincente: N18\n"
-			+ "Attrezzi: \n"
-			+ "Uscite: \n"
 			+ "Magiche: \n"
 			+ "Buie: \n"
-			+ "Bloccate: N18 nord chiave";
-	
+			+ "Bloccate: N18 nord chiave\n"	
+			+ "Attrezzi: \n"
+			+ "Uscite: \n";
+			
 	private final static String MONOLOCALE_MAGO = 
 			  "Stanze: N18\n"
 			+ "Inizio: N18\n"
 			+ "Vincente: N18\n"
-			+ "Attrezzi: \n"
-			+ "Uscite: \n"
 			+ "Magiche: \n"
 			+ "Buie: \n"
 			+ "Bloccate: \n"
+			+ "Attrezzi: \n"
+			+ "Uscite: \n"
 			+ "Maghi: Pancione Ciao-sono-il-mago-pancione bastone 3 N18\n";
 	
 	private final static String MONOLOCALE_STREGA = 
 			  "Stanze: N18\n"
 			+ "Inizio: N18\n"
 			+ "Vincente: N18\n"
-			+ "Attrezzi: \n"
-			+ "Uscite: \n"
 			+ "Magiche: \n"
 			+ "Buie: \n"
 			+ "Bloccate: \n"
+			+ "Attrezzi: \n"
+			+ "Uscite: \n"
 			+ "Maghi: \n"
 			+ "Streghe: Varana Ciao-sono-la-strega-varana N18";
 	
@@ -87,11 +95,11 @@ public class CaricatoreLabirintoTest {
 			  "Stanze: N18\n"
 			+ "Inizio: N18\n"
 			+ "Vincente: N18\n"
-			+ "Attrezzi: \n"
-			+ "Uscite: \n"
 			+ "Magiche: \n"
 			+ "Buie: \n"
 			+ "Bloccate: \n"
+			+ "Attrezzi: \n"
+			+ "Uscite: \n"
 			+ "Maghi: \n"
 			+ "Streghe: \n"
 			+ "Cani: Bobby Wof-wof-bark-bork carne N18";

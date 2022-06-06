@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import it.uniroma3.diadia.Direzione;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.eccezioni.FormatoFileNonValidoException;
 
 public class CaricatoreLabirinto {
@@ -64,11 +65,11 @@ public class CaricatoreLabirinto {
 	 * Stanze: biblioteca, N10, N11 
 	 * Inizio: N10 
 	 * Vincente: N11 
-	 * Attrezzi: martello 10 biblioteca, pinza 2 N10
-	 * Uscite: biblioteca nord N10, biblioteca sud N11
 	 * Magiche: atrio 3
 	 * Buie: N12 lampada
 	 * Bloccate: N18 sud chiave
+	 * Attrezzi: martello 10 biblioteca, pinza 2 N10
+	 * Uscite: biblioteca nord N10, biblioteca sud N11
 	 * Maghi: Pancione Ciao-sono-il-mago-pancione bastone 5 N11
 	 * Streghe: Peppina Ciao-sono-la-strega-peppina N12
 	 * Cani: Fido Wof-bark-bork carne N18
@@ -83,24 +84,24 @@ public class CaricatoreLabirinto {
 	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
 		String filePath = new File("").getAbsolutePath();
 		this.reader = new LineNumberReader(new FileReader(filePath + "/resources/testLabirinto.txt"));
-		this.builder = new LabirintoBuilder();
+		this.builder = Labirinto.newBuilder();
 	}
 
 	public CaricatoreLabirinto(Reader reader) throws FileNotFoundException {
 		// this.nome2stanza = new HashMap<String,Stanza>();
 		this.reader = new LineNumberReader(reader);
-		this.builder = new LabirintoBuilder();
+		this.builder = Labirinto.newBuilder();
 	}
 
 	public void carica() throws FormatoFileNonValidoException {
 		try {
 			this.leggiECreaStanze();
 			this.leggiInizialeEvincente();
-			this.leggiECollocaAttrezzi();
-			this.leggiEImpostaUscite();
 			this.leggiECreaStanzeMagiche();
 			this.leggiECreaStanzeBuie();
 			this.leggiECreaStanzeBloccate();
+			this.leggiECollocaAttrezzi();
+			this.leggiEImpostaUscite();
 			this.leggiECollocaMaghi();
 			this.leggiECollocaStreghe();
 			this.leggiECollocaCani();
@@ -201,20 +202,22 @@ public class CaricatoreLabirinto {
 
 	private List<String> separaStringheAlleVirgole(String string) {
 		List<String> result = new LinkedList<>();
-		Scanner scanner = new Scanner(string);
-		Scanner scannerDiParole = scanner.useDelimiter(", ");
-		while (scannerDiParole.hasNext()) {
-			result.add(scannerDiParole.next());
+		try (Scanner scanner = new Scanner(string)) {
+			Scanner scannerDiParole = scanner.useDelimiter(", ");
+			while (scannerDiParole.hasNext()) {
+				result.add(scannerDiParole.next());
+			}
 		}
 		return result;
 	}
 	
 	private List<String> separaStringheAiTrattini(String string) {
 		List<String> result = new LinkedList<>();
-		Scanner scanner = new Scanner(string);
-		Scanner scannerDiParole = scanner.useDelimiter("-");
-		while (scannerDiParole.hasNext()) {
-			result.add(scannerDiParole.next());
+		try (Scanner scanner = new Scanner(string)) {
+			Scanner scannerDiParole = scanner.useDelimiter("-");
+			while (scannerDiParole.hasNext()) {
+				result.add(scannerDiParole.next());
+			}
 		}
 		return result;
 	}
