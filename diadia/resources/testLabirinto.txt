@@ -1,5 +1,11 @@
-Stanze: biblioteca, N10, N11
+Stanze: biblioteca, N10, N11, atrio, campus, bagni
 Inizio: N10
 Vincente: N11
-Attrezzi: martello 5 biblioteca, pinza 2 N10
-Uscite: biblioteca nord N10, biblioteca sud N11, N10 sud biblioteca
+Magiche: campus 3
+Buie: bagni lanterna
+Bloccate: N11 ovest chiave
+Attrezzi: martello 5 biblioteca, pinza 2 N10, lanterna 1 biblioteca, chiave 2 bagni
+Uscite: biblioteca nord N10, N10 ovest N11, atrio sud campus, campus nord biblioteca, atrio sud N10, bagni est N10, N11 sud campus
+Maghi: Merlino Ciao-sono-il-mago-merlino bastone 4 campus
+Streghe: Elisa ciao-sono-la-strega-elisa bagni
+Cani: Bob wof-wof-bark carne biblioteca
