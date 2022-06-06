@@ -5,6 +5,8 @@ import static it.uniroma3.diadia.Direzione.*;
 
 import org.junit.Test;
 
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
+
 public class LabirintoTest {
 
 	private Labirinto labirintoTest;
@@ -17,7 +19,7 @@ public class LabirintoTest {
 	 */
 	@Test
 	public void testGetStanzaVincente() {
-		this.labirintoTest = new LabirintoBuilder()
+		this.labirintoTest = Labirinto.newBuilder()
 				.addStanzaVincente("Test1")
 				.getLabirinto();
 		assertEquals("Test1", this.labirintoTest.getStanzaVincente().getNome());
@@ -29,7 +31,7 @@ public class LabirintoTest {
 	 */
 	@Test
 	public void testGetStanzaIniziale() {
-		this.labirintoTest = new LabirintoBuilder()
+		this.labirintoTest = Labirinto.newBuilder()
 				.addStanzaIniziale("Test1")
 				.getLabirinto();
 		assertEquals("Test1", this.labirintoTest.getStanzaIniziale().getNome());
@@ -37,7 +39,7 @@ public class LabirintoTest {
 
 	@Test
 	public void testMonolocale() {
-		LabirintoBuilder costruttore = new LabirintoBuilder();
+		LabirintoBuilder costruttore = Labirinto.newBuilder();
 		this.labirintoTest = costruttore
 				.addStanzaIniziale("ingresso")
 				.addStanzaVincente("ingresso")

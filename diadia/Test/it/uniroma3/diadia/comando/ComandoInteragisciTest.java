@@ -9,7 +9,6 @@ import org.junit.Test;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 import it.uniroma3.diadia.personaggi.Cane;
@@ -115,7 +114,7 @@ public class ComandoInteragisciTest {
 	}
 	
 	private Partita creaPartitaTrilocale() {
-		Labirinto trilocale = new LabirintoBuilder()
+		Labirinto trilocale = Labirinto.newBuilder()
 				.addStanzaIniziale("atrio")
 				.addStanza("N18")
 				.addAttrezzo("bastone", 3)
@@ -131,7 +130,7 @@ public class ComandoInteragisciTest {
 	}
 	
 	private Partita creaPartitaMonolocale() {
-		Labirinto monolocale = new LabirintoBuilder().addStanzaIniziale("atrio").getLabirinto();
+		Labirinto monolocale = Labirinto.newBuilder().addStanzaIniziale("atrio").getLabirinto();
 		return new Partita(new IOConsole(), monolocale); 
 	}
 

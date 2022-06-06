@@ -6,13 +6,15 @@ import static it.uniroma3.diadia.Direzione.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
+
 public class LabirintoBuilderTest {
 	private LabirintoBuilder costruttore;
 	private Labirinto labCostruito;
 
 	@Before
 	public void setUp() {
-		this.costruttore = new LabirintoBuilder();
+		this.costruttore = Labirinto.newBuilder();
 	}
 
 	/*
@@ -109,6 +111,22 @@ public class LabirintoBuilderTest {
 		this.labCostruito = this.costruttore.getLabirinto();
 		
 		assertEquals(nomeStanzaAdiacente, this.costruttore.getStanza(nomeStanza1).getStanzaAdiacente(NORD).getNome());
+		assertEquals(nomeStanza1, this.costruttore.getStanza(nomeStanzaAdiacente).getStanzaAdiacente(NORD.opposta()).getNome());
+	}
+	
+	@Test
+	public void testAddAdiacenzeSovrascritto() {
+		String nomeStanza1 = "s1";
+		String nomeStanza2 = "s2";
+		String nomeStanza3 = "s3";
+		
+		this.costruttore.addAdiacenze(nomeStanza1, SUD, nomeStanza2);
+		this.costruttore.addAdiacenze(nomeStanza2, NORD, nomeStanza3);
+		this.labCostruito = this.costruttore.getLabirinto();
+		
+		assertEquals(nomeStanza2, this.costruttore.getStanza(nomeStanza1).getStanzaAdiacente(SUD).getNome());
+		assertEquals(nomeStanza3, this.costruttore.getStanza(nomeStanza2).getStanzaAdiacente(NORD).getNome());
+		assertEquals(nomeStanza2, this.costruttore.getStanza(nomeStanza3).getStanzaAdiacente(SUD).getNome());
 	}
 
 	/*
