@@ -43,11 +43,6 @@ public class ComandoVai extends AbstractComando {
 		
 		Stanza prossimaStanza = null;
 
-//		if (!direzioneIsCorretta()) {
-//			this.io.mostraMessaggio(DIREZIONE_INESISTENTE);
-//			return;
-//		}
-
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		prossimaStanza = stanzaCorrente.getStanzaAdiacente(direzione);
 		if (prossimaStanza == null) {

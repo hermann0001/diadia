@@ -2,6 +2,9 @@ package it.uniroma3.diadia.comando;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +21,7 @@ public class ComandoPrendiTest {
 	 */
 	static final private int MAX_NUM_ATTREZZI = 10; 
 	private Stanza stanza;
-	private Attrezzo attrezzi[];
+	private Map <String, Attrezzo> nome2attrezzi;
 	private Borsa borsa;
 	private AbstractComando comando;
 	private Partita partita;
@@ -29,7 +32,7 @@ public class ComandoPrendiTest {
 		this.io = new IOConsole();
 		this.comando = new ComandoPrendi();
 		this.stanza = new Stanza("Test");
-		this.attrezzi = new Attrezzo[MAX_NUM_ATTREZZI];
+		this.nome2attrezzi = new HashMap<>();
 		this.partita = new Partita(this.io);
 		this.partita.setStanzaCorrente(this.stanza);
 		this.borsa = this.partita.getGiocatore().getBorsa();
@@ -37,8 +40,8 @@ public class ComandoPrendiTest {
 
 	@Test
 	public void testPrendiUnSoloAttrezzo() {
-		this.attrezzi[0] = new Attrezzo("spada", 2);
-		this.stanza.addAttrezzo(this.attrezzi[0]);
+		Attrezzo spada = new Attrezzo("spada", 2);
+		this.stanza.addAttrezzo(spada);
 		this.comando.setParametro("spada");
 		this.comando.esegui(this.partita);
 		assertTrue(this.partita.getGiocatore().getBorsa().hasAttrezzo("spada"));
@@ -47,27 +50,30 @@ public class ComandoPrendiTest {
 
 	@Test
 	public void testPrendiAttrezzoNullo() {
-		this.attrezzi[0] = null;
+		Attrezzo a = null;
 		this.partita.setStanzaCorrente(this.stanza);
 		this.comando.setParametro("spada");
 		this.comando.esegui(this.partita);
-		this.stanza.addAttrezzo(this.attrezzi[0]);
+		this.stanza.addAttrezzo(a);
 		assertFalse(this.partita.getGiocatore().getBorsa().hasAttrezzo("spada"));
 		assertFalse(this.partita.getStanzaCorrente().hasAttrezzo("spada"));
 	}
 
 	@Test
 	public void testPrendiAttrezzoBorsaPesante() {
-		for (int i = 0; i < MAX_NUM_ATTREZZI; i++) {
-			this.attrezzi[i] = new Attrezzo("Attrezzo" + (i + 1), 1);
-			this.borsa.addAttrezzo(this.attrezzi[i]);
-		}
-		Attrezzo overflow = new Attrezzo("overflow", 10);
+		Attrezzo pesante = new Attrezzo("pesante", this.borsa.getPesoMax());
+		assertEquals(0, this.borsa.getPeso());
+		
+		this.borsa.addAttrezzo(pesante);
+		assertEquals(10, this.borsa.getPeso());
+		
+		Attrezzo overflow = new Attrezzo("overflow", 1);
 		this.partita.setStanzaCorrente(this.stanza);
+		this.stanza.addAttrezzo(overflow);
+		
 		this.comando.setParametro("overflow");
-		this.borsa.addAttrezzo(overflow);
 		this.comando.esegui(this.partita);
 		assertFalse(this.partita.getGiocatore().getBorsa().hasAttrezzo("overflow"));
-		assertFalse(this.partita.getStanzaCorrente().hasAttrezzo("overflow"));
+		assertTrue(this.partita.getStanzaCorrente().hasAttrezzo("overflow"));
 	}
 }

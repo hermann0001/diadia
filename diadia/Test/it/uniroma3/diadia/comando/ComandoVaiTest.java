@@ -10,7 +10,6 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 
 public class ComandoVaiTest {
 
@@ -20,7 +19,7 @@ public class ComandoVaiTest {
 
 	@Before
 	public void setUp() {
-		Labirinto labirinto = new LabirintoBuilder().addStanzaIniziale("partenza")
+		Labirinto labirinto = Labirinto.newBuilder().addStanzaIniziale("partenza")
 				.addAdiacenze("partenza", NORD, "destinazione").getLabirinto();
 		this.vai = new ComandoVai();
 		this.io = new IOConsole();
@@ -40,17 +39,4 @@ public class ComandoVaiTest {
 		this.vai.esegui(this.partita);
 		assertEquals("destinazione", this.partita.getStanzaCorrente().getNome());
 	}
-
-//	@Test
-//	public void testDirezioneSbagliata() {
-//		this.vai.setParametro("sinistra");
-//		this.vai.esegui(this.partita);
-//	}
-//
-//	@Test
-//	public void testDirezioneIsCorretta() {
-//		this.vai.setParametro("est");
-//		this.vai.esegui(this.partita);
-//		assertTrue(this.vai.direzioneIsCorretta());
-//	}
 }
