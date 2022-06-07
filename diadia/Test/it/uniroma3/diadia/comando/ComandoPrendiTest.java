@@ -2,9 +2,6 @@ package it.uniroma3.diadia.comando;
 
 import static org.junit.Assert.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,12 +13,8 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPrendiTest {
-	/*Aggiornamento hw3: non c'è più il vincolo di 10 attrezzi sulla borsa
-	 * ma mantengo comunque la costante MAX_NUM_ATTREZZI per comodità
-	 */
-	static final private int MAX_NUM_ATTREZZI = 10; 
+	
 	private Stanza stanza;
-	private Map <String, Attrezzo> nome2attrezzi;
 	private Borsa borsa;
 	private AbstractComando comando;
 	private Partita partita;
@@ -32,7 +25,6 @@ public class ComandoPrendiTest {
 		this.io = new IOConsole();
 		this.comando = new ComandoPrendi();
 		this.stanza = new Stanza("Test");
-		this.nome2attrezzi = new HashMap<>();
 		this.partita = new Partita(this.io);
 		this.partita.setStanzaCorrente(this.stanza);
 		this.borsa = this.partita.getGiocatore().getBorsa();
