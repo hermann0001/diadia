@@ -77,18 +77,15 @@ public class CaricatoreLabirinto {
 	private LineNumberReader reader;
 
 	private LabirintoBuilder builder;
-	// private Map<String, Stanza> nome2stanza;
-//	private Stanza stanzaIniziale;
-//	private Stanza stanzaVincente;
+
 
 	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
-		String filePath = new File("").getAbsolutePath();
-		this.reader = new LineNumberReader(new FileReader(filePath + "/resources/testLabirinto.txt"));
+		InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(nomeFile);
+		this.reader = new LineNumberReader(new BufferedReader(new InputStreamReader(resourceAsStream)));
 		this.builder = Labirinto.newBuilder();
 	}
 
 	public CaricatoreLabirinto(Reader reader) throws FileNotFoundException {
-		// this.nome2stanza = new HashMap<String,Stanza>();
 		this.reader = new LineNumberReader(reader);
 		this.builder = Labirinto.newBuilder();
 	}
